@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jacob Gilliam — Email &amp; Lifecycle Marketing</title>
+<meta name="description" content="Lifecycle email work by Jacob Gilliam. Klaviyo certified in Practitioner, Strategist, and Deliverability.">
+<style>
+  :root { --ink:#1a1a1a; --mute:#5a5a5a; --rule:#1a1a1a; --bg:#fff; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; }
+  .wrap { max-width:1080px; margin:0 auto; padding:56px 24px 96px; }
+  h1 { font-family:Georgia,serif; font-size:38px; margin:0 0 6px; letter-spacing:.2px; }
+  .sub { color:var(--mute); font-size:15px; margin:0 0 4px; }
+  h2 { font-family:Georgia,serif; font-size:13px; letter-spacing:.14em; text-transform:uppercase;
+       margin:64px 0 8px; padding-bottom:6px; border-bottom:2px solid var(--rule); }
+  h3 { font-size:19px; margin:28px 0 2px; }
+  .meta { color:var(--mute); font-size:14px; margin:0 0 14px; }
+  p { max-width:66ch; }
+  .lede { font-size:17px; }
+  ul { max-width:66ch; padding-left:20px; }
+  li { margin-bottom:7px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:34px; margin-top:26px; }
+  .mail { margin:0; }
+  .mail img { width:100%; border:1px solid #e2e2e2; border-radius:3px; display:block; }
+  .mail figcaption { font-size:14px; color:var(--mute); margin-top:10px; }
+  .mail figcaption strong { display:block; color:var(--ink); font-size:15px; margin-bottom:2px; }
+  .note { background:#f6f5f2; border-left:3px solid var(--ink); padding:14px 18px; font-size:15px; max-width:66ch; }
+  a { color:var(--ink); }
+  footer { margin-top:72px; padding-top:20px; border-top:2px solid var(--rule); color:var(--mute); font-size:15px; }
+  @media (max-width:600px){ .wrap{padding:36px 18px 64px;} h1{font-size:30px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Jacob Gilliam</h1>
+  <p class="sub">Email &amp; lifecycle marketing · Cincinnati, OH</p>
+  <p class="sub">Klaviyo certified — Practitioner · Strategist · Deliverability</p>
+
+  <h2>myReturners</h2>
+  <h3>A 14-template lifecycle program, running in production</h3>
+  <p class="meta">Co-founded 2026 · I designed and built the product · <a href="https://myreturners.com">myreturners.com</a></p>
+
+  <p class="lede">A retention platform for independent coffee shops. Every shop runs its own
+  branded email program out of one multi-tenant system, on its own authenticated sending domain.
+  I built the templates, the trigger logic, the consent and suppression layer, and the
+  infrastructure underneath.</p>
+
+  <p>The emails below are live renders from the system, pulled from a demo account. Every one is
+  live text, not sliced images, so they survive images-off and dark mode. Each renders the
+  customer's actual card state at send time.</p>
+
+  <div class="grid">
+    <figure class="mail">
+      <img src="welcome.jpg" alt="Welcome email" loading="lazy">
+      <figcaption><strong>Welcome</strong>Fires the moment someone signs up. Starts their card at 2 of 12 so the first visit already feels like progress.</figcaption>
+    </figure>
+    <figure class="mail">
+      <img src="secondvisit.jpg" alt="Second visit email" loading="lazy">
+      <figcaption><strong>Second visit</strong>The visit that predicts everything. Retention is decided here, so this one gets its own moment.</figcaption>
+    </figure>
+    <figure class="mail">
+      <img src="oneaway.jpg" alt="One away email" loading="lazy">
+      <figcaption><strong>One away</strong>Triggered at 11 of 12. The single highest-intent send in the program.</figcaption>
+    </figure>
+    <figure class="mail">
+      <img src="reward.jpg" alt="Reward ready email" loading="lazy">
+      <figcaption><strong>Reward ready</strong>Card complete. Plain, short, and gets out of the way.</figcaption>
+    </figure>
+    <figure class="mail">
+      <img src="nextcard.jpg" alt="Next card email" loading="lazy">
+      <figcaption><strong>Next card</strong>Resets the loop right after a reward is claimed, so momentum carries.</figcaption>
+    </figure>
+    <figure class="mail">
+      <img src="winback.jpg" alt="Win-back email" loading="lazy">
+      <figcaption><strong>Win-back</strong>Lapsed after a set window. Shows exactly where they left off.</figcaption>
+    </figure>
+    <figure class="mail">
+      <img src="reengage.jpg" alt="Re-engagement email" loading="lazy">
+      <figcaption><strong>Re-engagement</strong>Sent in daily slices of 40 to imported lists, never blasted, to protect sending reputation.</figcaption>
+    </figure>
+    <figure class="mail">
+      <img src="birthday.jpg" alt="Birthday email" loading="lazy">
+      <figcaption><strong>Birthday</strong>Beats win-back in the daily sweep so nobody gets both.</figcaption>
+    </figure>
+    <figure class="mail">
+      <img src="review.jpg" alt="Review invite email" loading="lazy">
+      <figcaption><strong>Review invite</strong>Targets the location the customer actually visits most, and stays even-handed about the ask.</figcaption>
+    </figure>
+    <figure class="mail">
+      <img src="reviewfollowup.jpg" alt="Review follow-up email" loading="lazy">
+      <figcaption><strong>Review follow-up</strong>One reminder, ever. Only if the invite was delivered and never opened.</figcaption>
+    </figure>
+    <figure class="mail">
+      <img src="campaign.jpg" alt="Monthly campaign email" loading="lazy">
+      <figcaption><strong>Monthly campaign</strong>Owner-approved, one a month, capped by a 48-hour per-contact frequency rule.</figcaption>
+    </figure>
+  </div>
+
+  <h2>What sits underneath</h2>
+  <ul>
+    <li><strong>Per-client sending domains</strong> with SPF, DKIM, and DMARC, plus live DNS verification before a shop goes live.</li>
+    <li><strong>Automated deliverability alerting</strong> against 2% bounce and 0.1% complaint thresholds, with a small-sample floor so it never guesses a verdict.</li>
+    <li><strong>Consent capture at signup</strong>, one-click unsubscribe, and a single central suppression list that bounce and complaint records can never be lifted from.</li>
+    <li><strong>A 48-hour per-contact frequency cap</strong> on marketing sends, so no customer ever gets two in a day.</li>
+    <li><strong>Behavioral segmentation</strong> driving every trigger: visit counts, stamp position, recency, and location.</li>
+  </ul>
+
+  <h2>Aurean</h2>
+  <h3>A direct-to-consumer brand, built and run end to end</h3>
+  <p class="meta">2026 · Founder · Shopify + Klaviyo</p>
+
+  <p class="lede">A sterling silver DTC jewelry brand. I ran the whole thing: the storefront in Liquid,
+  the Klaviyo program, the copy, the photography direction, manufacturing, and fulfillment.</p>
+
+  <ul>
+    <li><strong>Grew the pre-launch list from zero to 412 subscribers with no ad spend</strong> and no existing
+    audience, using organic Reddit and Facebook community posts that drew over 200,000 views. One post
+    reached 120,000 on its own.</li>
+    <li><strong>Built the full Klaviyo program:</strong> welcome, abandoned cart, browse abandonment,
+    post-purchase, and win-back flows, with segmentation and personalization by browse and purchase behavior.</li>
+    <li><strong>Authenticated the sending domain</strong> via DNS with SPF, DKIM, and DMARC before the first send.</li>
+    <li><strong>Wrote every campaign, flow, and product page</strong>, and directed all photography.</li>
+  </ul>
+
+  <p class="note">Aurean wound down in 2026. Screenshots of the Klaviyo flow builder and campaign
+  performance are available on request.</p>
+
+  <footer>
+    <p>jacogilliam@gmail.com · (812) 343-3262 ·
+    <a href="https://linkedin.com/in/jacogilliam">linkedin.com/in/jacogilliam</a></p>
+  </footer>
+
+</div>
+</body>
+</html>
