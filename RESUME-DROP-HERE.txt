@@ -1,0 +1,18 @@
+Export your resume from Pages as PDF and save it INTO THIS FOLDER as exactly:
+
+    jacob-gilliam-resume.pdf
+
+Then run, from this folder:
+
+    git add -A && git commit -m "Add resume" && git push
+
+It goes live in about a minute at:
+
+    https://jacogilliam-ai.github.io/email-portfolio/jacob-gilliam-resume.pdf
+
+That is your permanent resume link for any application that asks for a URL
+instead of an upload. Re-export over the same filename and push again whenever
+the resume changes, and the link never breaks.
+
+Use the MASTER resume here (Jacob Gilliam Resume - Agency.docx), not a
+company-tailored one, since this URL gets reused everywhere.
