@@ -10,25 +10,52 @@
   * { box-sizing:border-box; }
   body { margin:0; background:#fff; color:var(--ink);
          font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; }
-  .wrap { max-width:820px; margin:0 auto; padding:60px 24px 100px; }
+  .wrap { max-width:900px; margin:0 auto; padding:60px 24px 100px; }
   h1 { font-family:Georgia,serif; font-size:40px; margin:0 0 8px; }
   .sub { color:var(--mute); font-size:15px; margin:0 0 4px; }
   h2 { font-family:Georgia,serif; font-size:13px; letter-spacing:.14em; text-transform:uppercase;
        margin:76px 0 10px; padding-bottom:6px; border-bottom:2px solid var(--ink); }
-  h3 { font-size:24px; margin:0 0 3px; }
-  .meta { color:var(--mute); font-size:14px; margin:0 0 18px; }
+  h3 { font-size:23px; margin:0 0 3px; }
+  .meta { color:var(--mute); font-size:14px; margin:0 0 16px; }
   .tag { display:inline-block; font-size:11px; letter-spacing:.09em; text-transform:uppercase;
          border:1px solid var(--mute); color:var(--mute); border-radius:2px; padding:2px 7px;
          margin-left:10px; vertical-align:5px; }
   p { max-width:68ch; } .lede { font-size:17px; }
   ul { max-width:68ch; padding-left:20px; } li { margin-bottom:8px; }
-  .piece { margin-top:64px; }
-  .piece .copy { margin-bottom:26px; }
-  .piece img { width:100%; display:block; border:1px solid #e4e4e4; border-radius:3px; }
+
+  .piece { margin-top:62px; display:grid; grid-template-columns:360px 1fr; gap:38px; align-items:start; }
+  .piece .head { grid-column:1 / -1; }
+  .thumb { appearance:none; background:none; border:0; padding:0; cursor:zoom-in;
+           display:block; width:100%; text-align:left; }
+  .frame { position:relative; height:520px; overflow:hidden;
+           border:1px solid #e0e0e0; border-radius:4px; background:#fafafa; }
+  .frame img { width:100%; display:block; }
+  .frame:after { content:""; position:absolute; left:0; right:0; bottom:0; height:120px;
+                 background:linear-gradient(rgba(255,255,255,0),#fff); }
+  .expand { display:block; margin-top:9px; font-size:13px; color:var(--mute); }
+  .thumb:hover .frame { border-color:var(--ink); }
+  .thumb:hover .expand { color:var(--ink); }
+  .thumb:focus-visible .frame { outline:2px solid var(--ink); outline-offset:3px; }
+
   .note { background:#f6f5f2; border-left:3px solid var(--ink); padding:14px 18px; font-size:15px; max-width:68ch; }
   a { color:var(--ink); }
   footer { margin-top:84px; padding-top:20px; border-top:2px solid var(--ink); color:var(--mute); font-size:15px; }
-  @media (max-width:600px){ .wrap{padding:36px 18px 64px;} h1{font-size:31px;} h3{font-size:20px;} }
+
+  /* lightbox */
+  #lb[hidden] { display:none; }
+  #lb { position:fixed; inset:0; z-index:50; background:rgba(20,20,20,.94);
+        overflow-y:auto; padding:40px 20px 80px; }
+  #lb img { display:block; margin:0 auto; width:100%; max-width:720px;
+            border-radius:4px; background:#fff; }
+  #lbClose { position:fixed; top:16px; right:20px; z-index:51;
+             background:#fff; color:var(--ink); border:0; border-radius:4px;
+             font:15px/1 -apple-system,sans-serif; padding:11px 15px; cursor:pointer; }
+  body.locked { overflow:hidden; }
+
+  @media (max-width:760px){
+    .piece { grid-template-columns:1fr; gap:22px; }
+    .wrap { padding:36px 18px 64px; } h1{font-size:31px;} h3{font-size:20px;}
+  }
 </style>
 </head>
 <body>
@@ -41,32 +68,61 @@
   <h2>Selected email work</h2>
 
   <section class="piece">
-    <h3>Aurean — abandoned cart</h3>
-    <p class="meta">My own direct-to-consumer brand · Shopify + Klaviyo</p>
-    <div class="copy">
-      <p>A sterling silver and gold-plated cover for the Oura Ring. The cart email had to do the job a product page normally does, because the object needs explaining before it makes sense.</p>
-      <p>The headline opens on a joke that only works if you own the product. Under it, a four-up grid answers the four objections that actually stall the purchase: how it is made, how it fits, what it is made of, and where you can wear it. A trust bar carries returns, finishing, and compatibility. The close is the only place urgency appears.</p>
+    <div class="head">
+      <h3>Aurean — abandoned cart</h3>
+      <p class="meta">My own direct-to-consumer brand · Shopify + Klaviyo</p>
+    </div>
+    <button class="thumb" data-src="aurean.jpg" data-alt="Aurean abandoned cart email, full">
+      <span class="frame"><img src="aurean.jpg" alt="Aurean abandoned cart email"></span>
+      <span class="expand">Click to view full email →</span>
+    </button>
+    <div>
+      <p>A sterling silver and gold-plated cover for the Oura Ring. The cart email had to do the job
+      a product page normally does, because the object needs explaining before it makes sense.</p>
+      <p>The headline opens on a joke that only works if you own the product. Under it, a four-up grid
+      answers the four objections that actually stall the purchase: how it is made, how it fits, what
+      it is made of, and where you can wear it. A trust bar carries returns, finishing, and
+      compatibility. The close is the only place urgency appears.</p>
       <p>Written, designed, and built by me, along with the rest of the brand.</p>
     </div>
-    <img src="aurean.jpg" alt="Aurean — abandoned cart">
   </section>
+
   <section class="piece">
-    <h3>Creamalicious — welcome<span class="tag">Concept</span></h3>
-    <p class="meta">Concept work, not a client engagement · Chef-founded ice cream brand</p>
-    <div class="copy">
-      <p>A welcome email built around the founder rather than the product, because the founder <em>is</em> the product in a chef-led food brand. Her story runs before any offer appears.</p>
-      <p>The discount is framed as a gift from her kitchen rather than a promotion, and the code reads as a sentence instead of a string. Founding flavors sit below the offer with prices visible, so nobody has to click to find out what things cost. It closes on a forward-look line that gives the next email a reason to be opened.</p>
+    <div class="head">
+      <h3>Creamalicious — welcome<span class="tag">Concept</span></h3>
+      <p class="meta">Concept work, not a client engagement · Chef-founded ice cream brand</p>
     </div>
-    <img src="creamalicious.jpg" alt="Creamalicious — welcome">
+    <button class="thumb" data-src="creamalicious.jpg" data-alt="Creamalicious welcome email, full">
+      <span class="frame"><img src="creamalicious.jpg" alt="Creamalicious welcome email"></span>
+      <span class="expand">Click to view full email →</span>
+    </button>
+    <div>
+      <p>A welcome email built around the founder rather than the product, because the founder
+      <em>is</em> the product in a chef-led food brand. Her story runs before any offer appears.</p>
+      <p>The discount is framed as a gift from her kitchen rather than a promotion, and the code reads
+      as a sentence instead of a string. Founding flavors sit below the offer with prices visible, so
+      nobody has to click to find out what things cost. It closes on a forward-look line that gives
+      the next email a reason to be opened.</p>
+    </div>
   </section>
+
   <section class="piece">
-    <h3>Windy Weatherfoot — welcome<span class="tag">Concept</span></h3>
-    <p class="meta">Concept work, not a client engagement · Animated children&rsquo;s series</p>
-    <div class="copy">
-      <p>Kids media has two readers: the child it is about and the parent who actually opens the inbox. This one is written in the character&rsquo;s voice to the child, while every practical instruction is aimed at the adult.</p>
-      <p>Instead of a discount, the welcome gift is a printable pledge the kid signs and hangs up, which gives the parent a reason to keep the email and puts the brand on a wall. The palette and hand-drawn type come from the show itself rather than from an email template.</p>
+    <div class="head">
+      <h3>Windy Weatherfoot — welcome<span class="tag">Concept</span></h3>
+      <p class="meta">Concept work, not a client engagement · Animated children&rsquo;s series</p>
     </div>
-    <img src="windy.jpg" alt="Windy Weatherfoot — welcome">
+    <button class="thumb" data-src="windy.jpg" data-alt="Windy Weatherfoot welcome email, full">
+      <span class="frame"><img src="windy.jpg" alt="Windy Weatherfoot welcome email"></span>
+      <span class="expand">Click to view full email →</span>
+    </button>
+    <div>
+      <p>Kids media has two readers: the child it is about and the parent who actually opens the
+      inbox. This one is written in the character&rsquo;s voice to the child, while every practical
+      instruction is aimed at the adult.</p>
+      <p>Instead of a discount, the welcome gift is a printable pledge the kid signs and hangs up,
+      which gives the parent a reason to keep the email and puts the brand on a wall. The palette and
+      hand-drawn type come from the show itself rather than from an email template.</p>
+    </div>
   </section>
 
   <h2>myReturners</h2>
@@ -79,8 +135,8 @@
 
   <p>Fourteen templates cover welcome, second visit, stamp milestones, reward ready, next card,
   win-back, re-engagement, birthday, review invites, review follow-up, and a monthly owner-approved
-  campaign. Every one renders live text rather than sliced images, so they survive images-off and
-  dark mode, and each shows the customer&rsquo;s real card state at send time.</p>
+  campaign. Every one renders live text rather than sliced images, so they survive images-off and dark
+  mode, and each shows the customer&rsquo;s real card state at send time.</p>
 
   <h2>The infrastructure underneath</h2>
   <ul>
@@ -94,9 +150,9 @@
   <h2>Aurean, the whole program</h2>
   <p class="meta">2026 · Founder · Shopify + Klaviyo</p>
   <ul>
-    <li><strong>Grew the pre-launch list from zero to 412 subscribers with no ad spend</strong> and no existing
-    audience, through organic Reddit and Facebook community posts that drew over 200,000 views. One post
-    reached 120,000 on its own.</li>
+    <li><strong>Grew the pre-launch list from zero to 412 subscribers with no ad spend</strong> and no
+    existing audience, through organic Reddit and Facebook community posts that drew over 200,000
+    views. One post reached 120,000 on its own.</li>
     <li><strong>Built the full Klaviyo program:</strong> welcome, abandoned cart, browse abandonment,
     post-purchase, and win-back, with segmentation and personalization by browse and purchase behavior.</li>
     <li><strong>Authenticated the sending domain</strong> via DNS with SPF, DKIM, and DMARC before the first send.</li>
@@ -111,5 +167,39 @@
   </footer>
 
 </div>
+
+<div id="lb" hidden>
+  <button id="lbClose" type="button">Close ✕</button>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<script>
+  var lb = document.getElementById('lb'),
+      lbImg = document.getElementById('lbImg'),
+      lbClose = document.getElementById('lbClose'),
+      last = null;
+
+  function open(src, alt, btn) {
+    last = btn;
+    lbImg.src = src; lbImg.alt = alt;
+    lb.hidden = false; lb.scrollTop = 0;
+    document.body.classList.add('locked');
+    lbClose.focus();
+  }
+  function close() {
+    lb.hidden = true; lbImg.src = '';
+    document.body.classList.remove('locked');
+    if (last) last.focus();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.thumb'), function (b) {
+    b.addEventListener('click', function () {
+      open(b.getAttribute('data-src'), b.getAttribute('data-alt'), b);
+    });
+  });
+  lbClose.addEventListener('click', close);
+  lb.addEventListener('click', function (e) { if (e.target !== lbImg) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) close(); });
+</script>
 </body>
 </html>
