@@ -23,11 +23,11 @@
   p { max-width:68ch; } .lede { font-size:17px; }
   ul { max-width:68ch; padding-left:20px; } li { margin-bottom:8px; }
 
-  .piece { margin-top:62px; display:grid; grid-template-columns:360px 1fr; gap:38px; align-items:start; }
+  .piece { margin-top:62px; display:grid; grid-template-columns:340px 1fr; gap:38px; align-items:stretch; }
   .piece .head { grid-column:1 / -1; }
   .thumb { appearance:none; background:none; border:0; padding:0; cursor:zoom-in;
-           display:block; width:100%; text-align:left; }
-  .frame { position:relative; height:520px; overflow:hidden;
+           display:flex; flex-direction:column; width:100%; text-align:left; height:100%; }
+  .frame { position:relative; height:100%; min-height:300px; overflow:hidden;
            border:1px solid #e0e0e0; border-radius:4px; background:#fafafa; }
   .frame img { width:100%; display:block; }
   .frame:after { content:""; position:absolute; left:0; right:0; bottom:0; height:120px;
@@ -125,8 +125,9 @@
     </div>
   </section>
 
-  <h2>myReturners</h2>
-  <h3 style="font-size:21px;">A 14-template lifecycle program running in production</h3>
+  <h2>Programs I have built</h2>
+
+  <h3 style="margin-top:34px;">myReturners — a 14-template lifecycle program, live in production</h3>
   <p class="meta">Co-founded 2026 · I designed and built the product · <a href="https://myreturners.com">myreturners.com</a></p>
 
   <p class="lede">A retention platform for independent coffee shops. Every shop runs its own branded
@@ -138,7 +139,7 @@
   campaign. Every one renders live text rather than sliced images, so they survive images-off and dark
   mode, and each shows the customer&rsquo;s real card state at send time.</p>
 
-  <h2>The infrastructure underneath</h2>
+  <p><strong>What sits underneath the sending:</strong></p>
   <ul>
     <li><strong>Per-client sending domains</strong> with SPF, DKIM, and DMARC, plus live DNS verification before a shop goes live.</li>
     <li><strong>Automated deliverability alerting</strong> against 2% bounce and 0.1% complaint thresholds, with a small-sample floor so it never guesses a verdict.</li>
@@ -147,14 +148,18 @@
     <li><strong>Behavioral segmentation</strong> behind every trigger: visit count, stamp position, recency, and location.</li>
   </ul>
 
-  <h2>Aurean, the whole program</h2>
+  <h3 style="margin-top:54px;">Aurean — a full Klaviyo program, built from zero</h3>
   <p class="meta">2026 · Founder · Shopify + Klaviyo</p>
+
+  <p class="lede">My own direct-to-consumer jewelry brand. The abandoned cart email at the top of this
+  page came out of this program.</p>
+
   <ul>
     <li><strong>Grew the pre-launch list from zero to 412 subscribers with no ad spend</strong> and no
     existing audience, through organic Reddit and Facebook community posts that drew over 200,000
     views. One post reached 120,000 on its own.</li>
-    <li><strong>Built the full Klaviyo program:</strong> welcome, abandoned cart, browse abandonment,
-    post-purchase, and win-back, with segmentation and personalization by browse and purchase behavior.</li>
+    <li><strong>Built five flows:</strong> welcome, abandoned cart, browse abandonment, post-purchase,
+    and win-back, with segmentation and personalization by browse and purchase behavior.</li>
     <li><strong>Authenticated the sending domain</strong> via DNS with SPF, DKIM, and DMARC before the first send.</li>
     <li><strong>Wrote every campaign, flow, and product page</strong>, and directed all photography.</li>
   </ul>
