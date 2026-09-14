@@ -1,7 +1,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Latte Art Throwdown — campaign</title>
 <style>
- :root{--bg:#FBF5E3;--ink:#3D3226;--mut:#8A8068;--maroon:#7C1512;--red:#E5281C;--navline:#E2D7BC;--navmut:#8A8068;--navink:#7C1512}
+ :root{--bg:#FBF5E3;--ink:#3D3226;--mut:#8A8068;--maroon:#7C1512;--red:#E5281C;--navbg:rgba(251,245,227,.93);--navhov:rgba(124,21,18,.09);--navline:#E2D7BC;--navmut:#8A8068;--navink:#7C1512}
  *{box-sizing:border-box}
  body{margin:0;background:var(--bg);color:var(--ink);
       font:16px/1.65 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
@@ -61,16 +61,23 @@
    .phone{width:300px;height:640px;border-radius:40px}
  }
 
- .topnav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(8px);
-   -webkit-backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--navline)}
- .topnav .inner{max-width:1080px;margin:0 auto;padding:13px 32px;display:flex;
-   justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
- .topnav a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;
-   color:var(--navmut);border-bottom:1px solid transparent;padding-bottom:2px}
- .topnav a:hover{color:var(--navink);border-bottom-color:var(--navink)}
- .topnav .home{color:var(--navink);font-weight:600}
- .topnav nav{display:flex;gap:22px;flex-wrap:wrap}
- @media(max-width:560px){.topnav .inner{padding:11px 20px}.topnav nav{gap:14px}}
+ .topnav{position:sticky;top:0;z-index:50;background:var(--navbg);
+   backdrop-filter:saturate(150%) blur(10px);-webkit-backdrop-filter:saturate(150%) blur(10px);
+   border-bottom:1px solid var(--navline)}
+ .topnav .inner{max-width:1080px;margin:0 auto;padding:6px 30px;display:flex;
+   justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+ /* 44px minimum touch target, per the responsive rules */
+ .topnav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;
+   font-size:13px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+   color:var(--navink);font-weight:600;border-radius:3px;line-height:1}
+ .topnav a:hover{background:var(--navhov)}
+ .topnav .home{margin-left:-12px}
+ .topnav nav{display:flex;gap:2px;flex-wrap:wrap;margin-right:-12px}
+ @media(max-width:620px){
+   .topnav .inner{padding:4px 14px;gap:0}
+   .topnav a{font-size:12px;padding:0 9px;letter-spacing:.06em}
+   .topnav .home{margin-left:-9px}
+ }
 </style>
 <body>
 <div class="topnav"><div class="inner">
