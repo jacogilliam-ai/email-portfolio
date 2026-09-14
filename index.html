@@ -1,210 +1,154 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jacob Gilliam — Email &amp; Lifecycle Marketing</title>
-<meta name="description" content="Email and lifecycle marketing work by Jacob Gilliam. Klaviyo certified in Practitioner, Strategist, and Deliverability.">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jacob Gilliam — email &amp; lifecycle marketing</title>
+<meta name="description" content="Email and lifecycle marketer in Cincinnati. Klaviyo certified in Practitioner, Strategist and Deliverability.">
 <style>
-  :root { --ink:#1a1a1a; --mute:#5a5a5a; }
-  * { box-sizing:border-box; }
-  body { margin:0; background:#fff; color:var(--ink);
-         font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; }
-  .wrap { max-width:900px; margin:0 auto; padding:60px 24px 100px; }
-  h1 { font-family:Georgia,serif; font-size:40px; margin:0 0 8px; }
-  .sub { color:var(--mute); font-size:15px; margin:0 0 4px; }
-  h2 { font-family:Georgia,serif; font-size:13px; letter-spacing:.14em; text-transform:uppercase;
-       margin:76px 0 10px; padding-bottom:6px; border-bottom:2px solid var(--ink); }
-  h3 { font-size:23px; margin:0 0 3px; }
-  .meta { color:var(--mute); font-size:14px; margin:0 0 16px; }
-  .tag { display:inline-block; font-size:11px; letter-spacing:.09em; text-transform:uppercase;
-         border:1px solid var(--mute); color:var(--mute); border-radius:2px; padding:2px 7px;
-         margin-left:10px; vertical-align:5px; }
-  p { max-width:68ch; } .lede { font-size:17px; }
-  ul { max-width:68ch; padding-left:20px; } li { margin-bottom:8px; }
+ :root{--bg:#FAFAF8;--ink:#141312;--mut:#767067;--line:#DFDCD5;--panel:#F1EFEA}
+ *{box-sizing:border-box}
+ body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.68 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+ .w{max-width:1100px;margin:0 auto;padding-left:34px;padding-right:34px}
+ a{color:inherit;text-decoration:none}
+ img{display:block;width:100%}
 
-  .piece { margin-top:62px; display:grid; grid-template-columns:340px 1fr; gap:38px; align-items:stretch; }
-  .piece .head { grid-column:1 / -1; }
-  .thumb { appearance:none; background:none; border:0; padding:0; cursor:zoom-in;
-           display:flex; flex-direction:column; width:100%; text-align:left; height:100%; }
-  .frame { position:relative; height:100%; min-height:300px; overflow:hidden;
-           border:1px solid #e0e0e0; border-radius:4px; background:#fafafa; }
-  .frame img { width:100%; display:block; }
-  .frame:after { content:""; position:absolute; left:0; right:0; bottom:0; height:120px;
-                 background:linear-gradient(rgba(255,255,255,0),#fff); }
-  .expand { display:block; margin-top:9px; font-size:13px; color:var(--mute); }
-  .thumb:hover .frame { border-color:var(--ink); }
-  .thumb:hover .expand { color:var(--ink); }
-  .thumb:focus-visible .frame { outline:2px solid var(--ink); outline-offset:3px; }
+ /* masthead */
+ header{padding-top:56px;padding-bottom:0}
+ .bar{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;
+      font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mut)}
+ .bar a{border-bottom:1px solid transparent}
+ .bar a:hover{border-bottom-color:var(--mut)}
+ .statement{font:400 clamp(34px,5.6vw,68px)/1.12 Georgia,'Times New Roman',serif;letter-spacing:-.032em;
+            margin:clamp(72px,11vw,132px) 0 0;max-width:16ch}
+ .statement em{font-style:normal;color:var(--mut)}
+ .under{margin-top:38px;max-width:56ch;font-size:18px;color:var(--mut)}
+ .creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:40px}
+ .creds span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);
+             border:1px solid var(--line);padding:8px 13px}
 
-  .note { background:#f6f5f2; border-left:3px solid var(--ink); padding:14px 18px; font-size:15px; max-width:68ch; }
-  a { color:var(--ink); }
-  footer { margin-top:84px; padding-top:20px; border-top:2px solid var(--ink); color:var(--mute); font-size:15px; }
+ /* work */
+ .sect{padding-top:clamp(96px,13vw,150px)}
+ .lbl{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--mut);
+      border-top:1px solid var(--line);padding-top:20px;margin-bottom:6px}
 
-  /* lightbox */
-  #lb[hidden] { display:none; }
-  #lb { position:fixed; inset:0; z-index:50; background:rgba(20,20,20,.94);
-        overflow-y:auto; padding:40px 20px 80px; }
-  #lb img { display:block; margin:0 auto; width:100%; max-width:720px;
-            border-radius:4px; background:#fff; }
-  #lbClose { position:fixed; top:16px; right:20px; z-index:51;
-             background:#fff; color:var(--ink); border:0; border-radius:4px;
-             font:15px/1 -apple-system,sans-serif; padding:11px 15px; cursor:pointer; }
-  body.locked { overflow:hidden; }
+ .proj{display:grid;grid-template-columns:56px 1fr 300px;gap:0 40px;align-items:start;
+       padding:44px 0;border-bottom:1px solid var(--line)}
+ .proj:hover .ttl{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+ .proj:hover .shot img{transform:scale(1.03)}
+ .no{font-size:11px;letter-spacing:.2em;color:var(--mut);padding-top:9px}
+ .ttl{font:400 clamp(30px,4.4vw,46px)/1.06 Georgia,serif;letter-spacing:-.028em;margin:0}
+ .role{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--mut);margin-top:14px}
+ .desc{margin:16px 0 0;max-width:46ch;color:var(--ink)}
+ .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px}
+ .tags b{font-weight:400;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);
+         background:var(--panel);padding:6px 11px}
+ .go{display:inline-block;margin-top:24px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+     border-bottom:1px solid var(--ink);padding-bottom:3px}
+ .shot{overflow:hidden;background:var(--panel)}
+ .shot img{aspect-ratio:4/3;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.3,1)}
+ .shot.tall img{aspect-ratio:3/4;object-position:center 30%}
+ .shot.ui img{aspect-ratio:4/3;object-position:center top}
 
-  @media (max-width:760px){
-    .piece { grid-template-columns:1fr; gap:22px; }
-    .wrap { padding:36px 18px 64px; } h1{font-size:31px;} h3{font-size:20px;}
-  }
+ /* capability */
+ .cap{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--line);
+      border:1px solid var(--line);margin-top:34px}
+ .cap div{background:var(--bg);padding:28px 26px}
+ .cap h4{margin:0 0 10px;font:400 19px/1.2 Georgia,serif}
+ .cap p{margin:0;font-size:14.5px;line-height:1.62;color:var(--mut)}
+
+ /* contact */
+ .contact{font:400 clamp(28px,4.6vw,50px)/1.14 Georgia,serif;letter-spacing:-.03em;margin:34px 0 0}
+ .contact a{border-bottom:1px solid var(--line)}
+ .contact a:hover{border-bottom-color:var(--ink)}
+ footer{padding-top:96px;padding-bottom:110px;margin-top:clamp(96px,13vw,150px);
+        border-top:1px solid var(--line);font-size:13px;color:var(--mut);letter-spacing:.04em;
+        display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+
+ @media(max-width:820px){
+   .proj{grid-template-columns:40px 1fr;gap:0 22px}
+   .shot{grid-column:2;margin-top:26px}
+   .shot img,.shot.tall img{aspect-ratio:16/9;object-position:center 40%}
+ }
+ @media(max-width:560px){
+   .w{padding-left:22px;padding-right:22px}
+   header{padding-top:40px}
+   .proj{grid-template-columns:1fr;gap:0}
+   .no{padding-top:0;margin-bottom:12px}
+   .shot{grid-column:1}
+ }
 </style>
-</head>
 <body>
-<div class="wrap">
 
-  <h1>Jacob Gilliam</h1>
-  <p class="sub">Email &amp; lifecycle marketing · Cincinnati, OH</p>
-  <p class="sub">Klaviyo certified — Practitioner · Strategist · Deliverability</p>
+<header class="w">
+  <div class="bar">
+    <span>Jacob Gilliam</span>
+    <span><a href="#work">Work</a> &nbsp;·&nbsp; <a href="#contact">Contact</a> &nbsp;·&nbsp; <a href="jacob-gilliam-resume.pdf">Résumé</a></span>
+  </div>
 
-  <h2>Selected email work</h2>
+  <h1 class="statement">I build email programs, <em>and the plumbing underneath them.</em></h1>
 
-  <section class="piece">
-    <div class="head">
-      <h3>Aurean — abandoned cart</h3>
-      <p class="meta">My own direct-to-consumer brand · Shopify + Klaviyo</p>
-    </div>
-    <button class="thumb" data-src="aurean.jpg" data-alt="Aurean abandoned cart email, full">
-      <span class="frame"><img src="aurean.jpg" alt="Aurean abandoned cart email"></span>
-      <span class="expand">Click to view full email →</span>
-    </button>
+  <p class="under">Lifecycle and retention marketer in Cincinnati. Flows, campaigns, segmentation, conversion copy, and the authenticated sending domains that make any of it arrive.</p>
+
+  <div class="creds">
+    <span>Klaviyo Practitioner</span><span>Klaviyo Strategist</span><span>Klaviyo Deliverability</span>
+  </div>
+</header>
+
+<section class="w sect" id="work">
+  <div class="lbl">Selected work</div>
+
+  <a class="proj" href="aurean/">
+    <div class="no">01</div>
     <div>
-      <p>A sterling silver and gold-plated cover for the Oura Ring. The cart email had to do the job
-      a product page normally does, because the object needs explaining before it makes sense.</p>
-      <p>The headline opens on a joke that only works if you own the product. Under it, a four-up grid
-      answers the four objections that actually stall the purchase: how it is made, how it fits, what
-      it is made of, and where you can wear it. A trust bar carries returns, finishing, and
-      compatibility. The close is the only place urgency appears.</p>
-      <p>Written, designed, and built by me, along with the rest of the brand.</p>
+      <h2 class="ttl">Aurean</h2>
+      <div class="role">Founder · DTC jewelry · 2026</div>
+      <p class="desc">Built a pre-launch list from zero to 375 with no ad spend, then ran seventeen campaigns at a 45% average open rate and architected ten Klaviyo flows.</p>
+      <div class="tags"><b>Klaviyo</b><b>Shopify</b><b>Flow architecture</b><b>Deliverability</b></div>
+      <span class="go">Read the case study</span>
     </div>
-  </section>
+    <div class="shot"><img src="thumbs/aurean.jpg" alt="Aurean Flow Cloak in silver and gold"></div>
+  </a>
 
-  <section class="piece">
-    <div class="head">
-      <h3>Creamalicious — welcome<span class="tag">Concept</span></h3>
-      <p class="meta">Concept work, not a client engagement · Chef-founded ice cream brand</p>
-    </div>
-    <button class="thumb" data-src="creamalicious.jpg" data-alt="Creamalicious welcome email, full">
-      <span class="frame"><img src="creamalicious.jpg" alt="Creamalicious welcome email"></span>
-      <span class="expand">Click to view full email →</span>
-    </button>
+  <a class="proj" href="https://myreturners.com">
+    <div class="no">02</div>
     <div>
-      <p>A welcome email built around the founder rather than the product, because the founder
-      <em>is</em> the product in a chef-led food brand. Her story runs before any offer appears.</p>
-      <p>The discount is framed as a gift from her kitchen rather than a promotion, and the code reads
-      as a sentence instead of a string. Founding flavors sit below the offer with prices visible, so
-      nobody has to click to find out what things cost. It closes on a forward-look line that gives
-      the next email a reason to be opened.</p>
+      <h2 class="ttl">myReturners</h2>
+      <div class="role">Co-founder · Retention platform · Live in production</div>
+      <p class="desc">A multi-tenant lifecycle system that runs email for multiple coffee shops out of one codebase. Fifteen modular components, per-shop brand tokens, and a separate authenticated sending domain for every client.</p>
+      <div class="tags"><b>Multi-tenant</b><b>SPF · DKIM · DMARC</b><b>Loyalty</b><b>Design system</b></div>
+      <span class="go">Visit the product</span>
     </div>
-  </section>
+    <div class="shot ui"><img src="thumbs/returners.jpg" alt="A myReturners campaign, ready for a shop owner to approve"></div>
+  </a>
 
-  <section class="piece">
-    <div class="head">
-      <h3>Windy Weatherfoot — welcome<span class="tag">Concept</span></h3>
-      <p class="meta">Concept work, not a client engagement · Animated children&rsquo;s series</p>
-    </div>
-    <button class="thumb" data-src="windy.jpg" data-alt="Windy Weatherfoot welcome email, full">
-      <span class="frame"><img src="windy.jpg" alt="Windy Weatherfoot welcome email"></span>
-      <span class="expand">Click to view full email →</span>
-    </button>
+  <a class="proj" href="momnem/">
+    <div class="no">03</div>
     <div>
-      <p>Kids media has two readers: the child it is about and the parent who actually opens the
-      inbox. This one is written in the character&rsquo;s voice to the child, while every practical
-      instruction is aimed at the adult.</p>
-      <p>Instead of a discount, the welcome gift is a printable pledge the kid signs and hangs up,
-      which gives the parent a reason to keep the email and puts the brand on a wall. The palette and
-      hand-drawn type come from the show itself rather than from an email template.</p>
+      <h2 class="ttl">Mom 'n 'em</h2>
+      <div class="role">Concept · Cincinnati coffee roaster</div>
+      <p class="desc">An unsolicited event campaign for a local roaster's latte art throwdown. Three sends mapped against a fixed date, with the copy changing its lead by audience rather than repeating itself.</p>
+      <div class="tags"><b>Campaign</b><b>Concept work</b><b>Event sequencing</b></div>
+      <span class="go">See the campaign</span>
     </div>
-  </section>
+    <div class="shot tall"><img src="thumbs/momnem.jpg" alt="Latte Art Throwdown campaign"></div>
+  </a>
+</section>
 
-  <h2>Programs I have built</h2>
+<section class="w sect">
+  <div class="lbl">What I actually do</div>
+  <div class="cap">
+    <div><h4>Lifecycle</h4><p>Welcome, abandonment, post-purchase, win-back. Built as architecture with exit conditions and gates, not as a stack of sends.</p></div>
+    <div><h4>Campaigns</h4><p>Subject lines, preview text, body, CTAs, and the tests that decide which version survives.</p></div>
+    <div><h4>Deliverability</h4><p>Sending domains, SPF, DKIM and DMARC verified in DNS. Consent capture, suppression, frequency caps, complaint alerting.</p></div>
+    <div><h4>The system itself</h4><p>I write the templates. Modular components, brand tokens, dark mode, and email HTML that survives Outlook.</p></div>
+  </div>
+</section>
 
-  <h3 style="margin-top:34px;">myReturners — a 14-template lifecycle program, live in production</h3>
-  <p class="meta">Co-founded 2026 · I designed and built the product · <a href="https://myreturners.com">myreturners.com</a></p>
+<section class="w sect" id="contact">
+  <div class="lbl">Contact</div>
+  <p class="contact"><a href="mailto:jacogilliam@gmail.com">jacogilliam@gmail.com</a></p>
+  <p class="under" style="margin-top:26px">Open to lifecycle, retention and CRM roles. Remote, or Cincinnati.</p>
+</section>
 
-  <p class="lede">A retention platform for independent coffee shops. Every shop runs its own branded
-  email program out of one multi-tenant system, on its own authenticated sending domain. I built the
-  templates, the trigger logic, the consent and suppression layer, and the infrastructure underneath.</p>
-
-  <p>Fourteen templates cover welcome, second visit, stamp milestones, reward ready, next card,
-  win-back, re-engagement, birthday, review invites, review follow-up, and a monthly owner-approved
-  campaign. Every one renders live text rather than sliced images, so they survive images-off and dark
-  mode, and each shows the customer&rsquo;s real card state at send time.</p>
-
-  <p><strong>What sits underneath the sending:</strong></p>
-  <ul>
-    <li><strong>Per-client sending domains</strong> with SPF, DKIM, and DMARC, plus live DNS verification before a shop goes live.</li>
-    <li><strong>Automated deliverability alerting</strong> against 2% bounce and 0.1% complaint thresholds, with a small-sample floor so it never guesses a verdict.</li>
-    <li><strong>Consent capture at signup</strong>, one-click unsubscribe, and one central suppression list that bounce and complaint records can never be lifted from.</li>
-    <li><strong>A 48-hour per-contact frequency cap</strong> on marketing sends, so nobody ever gets two in a day.</li>
-    <li><strong>Behavioral segmentation</strong> behind every trigger: visit count, stamp position, recency, and location.</li>
-  </ul>
-
-  <h3 style="margin-top:54px;">Aurean — a full Klaviyo program, built from zero</h3>
-  <p class="meta">2026 · Founder · Shopify + Klaviyo</p>
-
-  <p class="lede">My own direct-to-consumer jewelry brand. The abandoned cart email at the top of this
-  page came out of this program.</p>
-
-  <ul>
-    <li><strong>Grew the pre-launch list from zero to 412 subscribers with no ad spend</strong> and no
-    existing audience, through organic Reddit and Facebook community posts that drew over 200,000
-    views. One post reached 120,000 on its own.</li>
-    <li><strong>Built five flows:</strong> welcome, abandoned cart, browse abandonment, post-purchase,
-    and win-back, with segmentation and personalization by browse and purchase behavior.</li>
-    <li><strong>Authenticated the sending domain</strong> via DNS with SPF, DKIM, and DMARC before the first send.</li>
-    <li><strong>Wrote every campaign, flow, and product page</strong>, and directed all photography.</li>
-  </ul>
-  <p class="note">Aurean wound down in 2026. Klaviyo flow-builder and campaign-performance
-  screenshots available on request.</p>
-
-  <footer>
-    <p>jacogilliam@gmail.com · (812) 343-3262 ·
-    <a href="https://linkedin.com/in/jacogilliam">linkedin.com/in/jacogilliam</a></p>
-  </footer>
-
-</div>
-
-<div id="lb" hidden>
-  <button id="lbClose" type="button">Close ✕</button>
-  <img id="lbImg" src="" alt="">
-</div>
-
-<script>
-  var lb = document.getElementById('lb'),
-      lbImg = document.getElementById('lbImg'),
-      lbClose = document.getElementById('lbClose'),
-      last = null;
-
-  function open(src, alt, btn) {
-    last = btn;
-    lbImg.src = src; lbImg.alt = alt;
-    lb.hidden = false; lb.scrollTop = 0;
-    document.body.classList.add('locked');
-    lbClose.focus();
-  }
-  function close() {
-    lb.hidden = true; lbImg.src = '';
-    document.body.classList.remove('locked');
-    if (last) last.focus();
-  }
-
-  Array.prototype.forEach.call(document.querySelectorAll('.thumb'), function (b) {
-    b.addEventListener('click', function () {
-      open(b.getAttribute('data-src'), b.getAttribute('data-alt'), b);
-    });
-  });
-  lbClose.addEventListener('click', close);
-  lb.addEventListener('click', function (e) { if (e.target !== lbImg) close(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) close(); });
-</script>
+<footer class="w">
+  <span>Jacob Gilliam · Cincinnati, OH</span>
+  <span><a href="https://linkedin.com/in/jacogilliam">LinkedIn</a> &nbsp;·&nbsp; <a href="jacob-gilliam-resume.pdf">Résumé</a></span>
+</footer>
 </body>
-</html>
