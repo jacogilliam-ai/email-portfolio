@@ -7,6 +7,7 @@
  html{scroll-behavior:smooth}
  body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.68 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
  .w{max-width:1140px;margin:0 auto;padding:0 34px}
+ .bleed img,.duo img{border-radius:2px}
  .n{max-width:640px}
  a{color:inherit}
  img{display:block;width:100%}
@@ -16,7 +17,7 @@
  h1{font:400 clamp(62px,12.5vw,152px)/0.88 Georgia,'Times New Roman',serif;margin:0;letter-spacing:-.045em}
  .meta{display:flex;flex-wrap:wrap;gap:8px 30px;margin-top:34px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
 
- .bleed{margin:56px 0 0}
+ .bleed{margin:56px auto 0;max-width:1140px;padding:0 34px}
  .lede{font:400 clamp(24px,3.3vw,34px)/1.42 Georgia,serif;letter-spacing:-.02em;margin:84px 0 0}
  .fine{font-size:14.5px;color:var(--mut);margin-top:24px;letter-spacing:.01em}
 
@@ -91,10 +92,10 @@
 </div>
 
 <div class="band"><div class="w"><div class="stats">
-  <div class="stat"><div class="v">6,089</div><div class="k">emails sent</div></div>
-  <div class="stat"><div class="v">45.4<i>%</i></div><div class="k">average open</div></div>
-  <div class="stat"><div class="v">3.15<i>%</i></div><div class="k">average click</div></div>
-  <div class="stat"><div class="v">0.07<i>%</i></div><div class="k">spam complaints</div></div>
+  <div class="stat"><div class="v" data-to="6089" data-fmt="c">0</div><div class="k">emails sent</div></div>
+  <div class="stat"><div class="v"><span data-to="45.4" data-dp="1">0</span><i>%</i></div><div class="k">average open</div></div>
+  <div class="stat"><div class="v"><span data-to="3.15" data-dp="2">0</span><i>%</i></div><div class="k">average click</div></div>
+  <div class="stat"><div class="v"><span data-to="0.07" data-dp="2">0</span><i>%</i></div><div class="k">spam complaints</div></div>
 </div></div></div>
 
 <section class="w">
@@ -102,7 +103,7 @@
   <div class="n">
     <p>No audience, no ad spend, no seeding. The list was built on organic writing: posts in Reddit and Facebook communities that earned <strong>200,000+ views</strong>, one of them reaching 120,000 alone.</p>
     <p>Readers landed on a password-protected Shopify storefront and left an email to be told when it opened.</p>
-    <p class="mut">It is a small list and it behaved like one. A hand-built organic list engages well above a paid-acquisition list of the same size, and everything below should be read in that light.</p>
+    <p class="mut">It is a small list and it behaved like one. Hand-built organic lists engage well above paid-acquisition lists of the same size. Read everything below in that light.</p>
   </div>
   <div class="duo">
     <img src="finishes.jpg" alt="Both finishes, silver and gold">
@@ -189,7 +190,7 @@
       <tr><td>Bounce rate</td><td class="num">0.3%</td></tr>
       <tr><td>Hard bounces, list lifetime</td><td class="num">1</td></tr>
     </table>
-    <p style="margin-top:26px">Two complaints across 6,089 sends. The threshold I built the alerting around was 0.1% and it never came close.</p>
+    <p style="margin-top:26px">Two complaints across 6,089 sends. I built the alerting around a 0.1% threshold and it never came close.</p>
   </div>
   <div class="bleed" style="margin-top:52px"><img src="onhand.jpg" alt="Both rings worn"></div>
 </section>
@@ -197,11 +198,37 @@
 <section class="w">
   <div class="hd"><div class="no">05</div><h2>What happened</h2></div>
   <div class="n">
-    <p>Aurean wound down in August 2026. The unit economics never worked: manufacturing cost and the price the product had to carry never reconciled, and no amount of email was going to fix that.</p>
-    <p>The program did what it was built to do. A list from nothing, mid-forties open rates held across seventeen sends, a clean sending reputation, and a flow architecture I would build the same way again.</p>
+    <p>Aurean wound down in August 2026. Manufacturing cost and the price the product had to carry never reconciled, and no amount of email was going to fix that.</p>
+    <p>The program did what it was built to do. A list from nothing, mid-forties open rates across seventeen sends, a clean sending reputation, and a flow architecture I would build the same way again.</p>
     <p class="pull">The lesson was about sequencing, not copy. I built a full lifecycle before I had validated that anyone would pay what the product required.</p>
   </div>
 </section>
 
 <footer class="w">Jacob Gilliam · Cincinnati · <a href="../">Back to portfolio</a></footer>
+
+<script>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('[data-to]'));
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.textContent=fmt(e,+e.dataset.to)});return}
+  function fmt(el,v){
+    if(el.dataset.fmt==='c') return Math.round(v).toLocaleString('en-US');
+    return v.toFixed(+(el.dataset.dp||0));
+  }
+  function run(el){
+    var to=+el.dataset.to, t0=null, D=1400;
+    function step(ts){
+      if(!t0) t0=ts;
+      var p=Math.min((ts-t0)/D,1);
+      p=1-Math.pow(1-p,3);                   // ease out
+      el.textContent=fmt(el,to*p);
+      if(p<1) requestAnimationFrame(step); else el.textContent=fmt(el,to);
+    }
+    requestAnimationFrame(step);
+  }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ run(e.target); io.unobserve(e.target);} });
+  },{threshold:.4});
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
 </body>
