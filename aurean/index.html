@@ -1,131 +1,188 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Aurean — lifecycle case study</title>
 <style>
-  :root{--ink:#15130f;--mut:#6b6459;--line:#e2ddd1;--bg:#faf8f2;--accent:#8a6d3b;--box:#fff}
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}
-  .wrap{max-width:820px;margin:0 auto;padding:64px 28px 96px}
-  h1{font:600 42px/1.1 Georgia,serif;margin:0 0 6px;letter-spacing:-.02em}
-  .sub{color:var(--mut);font-size:15px;margin:0 0 46px}
-  h2{font:600 13px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:56px 0 18px;padding-bottom:10px;border-bottom:1px solid var(--line)}
-  p{margin:0 0 16px;max-width:66ch}
-  .lede{font-size:18.5px;line-height:1.65}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:22px 0}
-  .cell{background:var(--box);padding:20px 18px}
-  .n{font:600 30px/1 Georgia,serif;letter-spacing:-.02em}
-  .l{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:7px}
-  table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px}
-  th{text-align:left;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:600;padding:0 12px 9px 0;border-bottom:1px solid var(--line)}
-  td{padding:11px 12px 11px 0;border-bottom:1px solid var(--line)}
-  td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-  /* flow diagram */
-  .flow{margin:24px 0 8px;padding:26px 22px;background:var(--box);border:1px solid var(--line)}
-  .ft{font:600 15px/1 -apple-system,sans-serif;margin-bottom:4px}
-  .fm{font-size:12.5px;color:var(--mut);margin-bottom:22px}
-  .node{border:1px solid var(--line);background:var(--bg);padding:11px 14px;font-size:14px;position:relative}
-  .node.trig{background:var(--ink);color:#faf8f2;border-color:var(--ink)}
-  .node.mail{background:#fff;border-left:3px solid var(--accent)}
-  .node.draft{background:#fff;border-left:3px dashed #c3bbab;color:var(--mut)}
-  .node .sl{display:block;font-size:12.5px;color:var(--mut);margin-top:3px}
-  .node.mail .sl{color:var(--mut)}
-  .wait{font-size:12px;color:var(--mut);padding:7px 0 7px 16px;position:relative}
-  .wait:before{content:"";position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--line)}
-  .gate{font-size:12.5px;color:var(--mut);border:1px dashed var(--line);padding:8px 12px;background:#fff}
-  .gate b{color:var(--ink);font-weight:600}
-  .branch{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
-  .day{float:right;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#a79c88}
-  .note{font-size:14px;color:var(--mut);border-left:2px solid var(--line);padding-left:16px;margin:22px 0}
-  @media(max-width:620px){.wrap{padding:40px 20px 70px}h1{font-size:33px}.branch{grid-template-columns:1fr}}
+ :root{--bg:#0B0A09;--ink:#F4EFE6;--mut:#8C8377;--gold:#C9A24A;--line:#262220;--card:#131110}
+ *{box-sizing:border-box}
+ body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+ .w{max-width:1080px;margin:0 auto;padding:0 32px}
+ .narrow{max-width:660px}
+ a{color:var(--gold)}
+
+ header{padding:88px 0 40px}
+ .eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:26px}
+ h1{font:400 clamp(56px,11vw,132px)/0.92 Georgia,'Times New Roman',serif;margin:0;letter-spacing:-.035em}
+ .meta{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:28px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+
+ .bleed{width:100%;display:block;margin:52px 0 0}
+ .bleed img{width:100%;display:block}
+
+ .lede{font:400 clamp(23px,3.1vw,31px)/1.45 Georgia,serif;letter-spacing:-.015em;margin:76px 0 0}
+
+ section{padding:96px 0 0}
+ h2{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin:0 0 34px;font-weight:600}
+ p{margin:0 0 20px}
+ .mut{color:var(--mut)}
+
+ .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:2px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+ .stat{background:var(--bg);padding:44px 8px 40px}
+ .stat .n{font:400 clamp(52px,7.6vw,86px)/1 Georgia,serif;letter-spacing:-.045em}
+ .stat .n small{font-size:.42em;letter-spacing:-.02em;color:var(--mut)}
+ .stat .l{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin-top:16px}
+
+ table{width:100%;border-collapse:collapse;font-size:15.5px;margin:8px 0 0}
+ th{text-align:left;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);font-weight:600;padding:0 14px 13px 0;border-bottom:1px solid var(--line)}
+ td{padding:15px 14px 15px 0;border-bottom:1px solid var(--line)}
+ td em{color:var(--mut);font-style:normal;font-size:14px}
+ .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+ tr.tot td{border-bottom:none;color:var(--gold);font-weight:600}
+
+ /* FLOW: the differentiated asset, so it gets to be big */
+ .flow{background:var(--card);border:1px solid var(--line);padding:clamp(28px,5vw,60px);margin:34px 0 0}
+ .flow h3{font:400 clamp(26px,3.6vw,38px)/1.15 Georgia,serif;margin:0 0 6px;letter-spacing:-.025em}
+ .flow .trig{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:40px}
+ .step{display:grid;grid-template-columns:78px 1fr;align-items:start;gap:0}
+ .tick{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);padding-top:20px}
+ .box{border-left:2px solid var(--gold);background:#191614;padding:18px 22px}
+ .box .t{font-size:17px;font-weight:600}
+ .box .s{font-size:15px;color:var(--mut);margin-top:4px;font-style:italic}
+ .box.ghost{border-left:2px dashed #4a423a;background:transparent}
+ .box.ghost .t{color:var(--mut);font-weight:400}
+ .gate{grid-column:2;border:1px dashed var(--line);padding:13px 20px;font-size:14.5px;color:var(--mut);margin:14px 0}
+ .gate b{color:var(--ink);font-weight:600}
+ .gap{grid-column:2;height:26px;border-left:1px solid var(--line);margin-left:0}
+ .gaplbl{grid-column:2;font-size:12.5px;color:var(--mut);padding:9px 0 9px 18px;border-left:1px solid var(--line)}
+ .split{grid-column:2;display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+
+ .emails{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px;margin-top:8px}
+ .emails img{width:100%;display:block;border:1px solid var(--line)}
+ .cap{font-size:12.5px;color:var(--mut);margin-top:12px;letter-spacing:.04em}
+
+ .pull{font:400 clamp(21px,2.8vw,27px)/1.5 Georgia,serif;border-left:2px solid var(--gold);padding-left:28px;margin:44px 0;color:var(--ink)}
+
+ footer{padding:110px 0 90px;margin-top:96px;border-top:1px solid var(--line);font-size:14px;color:var(--mut)}
+ @media(max-width:640px){.w{padding:0 22px}.step{grid-template-columns:56px 1fr}.split{grid-template-columns:1fr}}
 </style>
-<body><div class="wrap">
+<body>
 
-<h1>Aurean</h1>
-<p class="sub">Founder · Mar–Aug 2026 · Shopify + Klaviyo · sterling silver DTC jewelry</p>
+<header class="w">
+  <div class="eyebrow">Case study · Lifecycle &amp; retention</div>
+  <h1>Aurean</h1>
+  <div class="meta"><span>Founder</span><span>Mar – Aug 2026</span><span>Shopify · Klaviyo</span><span>Sterling silver DTC</span></div>
+</header>
 
-<p class="lede">I built and ran the entire email program for a direct-to-consumer jewelry brand I founded: the list, the campaigns, the flow architecture, and the sending infrastructure underneath all of it. Every number on this page comes from the Klaviyo account, exported before it closed.</p>
+<div class="bleed"><img src="hero.jpg" alt="Aurean sterling silver ring"></div>
 
-<h2>The program in numbers</h2>
-<div class="grid">
-  <div class="cell"><div class="n">6,089</div><div class="l">emails sent</div></div>
-  <div class="cell"><div class="n">45.4%</div><div class="l">avg open rate</div></div>
-  <div class="cell"><div class="n">3.15%</div><div class="l">avg click rate</div></div>
-  <div class="cell"><div class="n">0.07%</div><div class="l">spam complaints</div></div>
+<div class="w narrow">
+  <p class="lede">I built and ran the entire email program for a jewelry brand I founded. The list, the campaigns, the flow architecture, and the sending infrastructure underneath all of it.</p>
+  <p class="mut" style="margin-top:26px;font-size:15px">Every number here was exported from the Klaviyo account before it closed.</p>
 </div>
 
-<h2>Building the list</h2>
-<p>Aurean launched from zero. No existing audience, no ad spend, no influencer seeding. The list was built entirely on organic writing: posts in Reddit and Facebook communities that earned <strong>200,000+ views</strong>, including a single post that reached 120,000.</p>
-<p>Those readers landed on a password-protected Shopify storefront and entered an email to be notified. The list peaked at <strong>375 subscribers</strong> before launch.</p>
-<p class="note">Small list, and worth saying plainly. It behaved like one: engagement on a hand-built organic list runs well above what a large paid-acquisition list produces, and the rates below should be read in that light.</p>
-
-<h2>Campaigns</h2>
-<p>17 campaigns across the pre-launch and launch windows, all written by me: subject lines, preview text, body, and every CTA.</p>
-<table>
-  <tr><th>Campaign</th><th class="num">Sent</th><th class="num">Open</th><th class="num">Click</th></tr>
-  <tr><td>Pricing + Event + Socials <em>— "The cloak is real"</em></td><td class="num">356</td><td class="num">53.4%</td><td class="num">6.7%</td></tr>
-  <tr><td>Announcing July Pre-Order</td><td class="num">343</td><td class="num">53.6%</td><td class="num">2.0%</td></tr>
-  <tr><td>Founders List Samples Shipped</td><td class="num">362</td><td class="num">51.7%</td><td class="num">1.7%</td></tr>
-  <tr><td>Gen 5 Survey</td><td class="num">345</td><td class="num">34.2%</td><td class="num">11.3%</td></tr>
-  <tr><td>CLOAK IS LIVE <em>— launch</em></td><td class="num">359</td><td class="num">46.0%</td><td class="num">5.6%</td></tr>
-  <tr><td><strong>All 17 campaigns</strong></td><td class="num"><strong>6,089</strong></td><td class="num"><strong>45.4%</strong></td><td class="num"><strong>3.2%</strong></td></tr>
-</table>
-<p>The two outliers are the instructive ones. <strong>"The cloak is real"</strong> paired a short declarative subject with preview text carrying three concrete facts — pre-order date, event dates, and that pricing was inside — and produced the best combined open and click of the program. The <strong>Gen 5 Survey</strong> inverted it: the lowest open rate of any send and by far the highest click rate, because the people who opened it had something specific to do.</p>
-
-<h2>Flow architecture</h2>
-<p>Ten flows built in Klaviyo. Two are shown here. Both were architected before launch; the brand wound down in August, so several branches never shipped and are marked as such.</p>
-
-<div class="flow">
-  <div class="ft">Welcome — 5 emails over 9 days</div>
-  <div class="fm">Trigger: added to the Pre-Launch Waitlist</div>
-  <div class="node trig">Someone joins the Pre-Launch Waitlist</div>
-  <div class="wait">immediately</div>
-  <div class="node mail"><span class="day">Day 0</span>Email 1<span class="sl">A look inside the workshop</span></div>
-  <div class="wait">wait 2 days</div>
-  <div class="node mail"><span class="day">Day 2</span>Email 2<span class="sl">The story before the drop</span></div>
-  <div class="wait">wait 3 days</div>
-  <div class="node mail"><span class="day">Day 5</span>Email 3<span class="sl">What you're actually getting</span></div>
-  <div class="wait">wait 2 days</div>
-  <div class="node mail"><span class="day">Day 7</span>Email 4<span class="sl">Where we actually are</span></div>
-  <div class="wait">wait 2 days</div>
-  <div class="node mail"><span class="day">Day 9</span>Email 5<span class="sl">The perks of being early</span></div>
-</div>
-<p>The sequence moves craft → story → product → transparency → incentive. The offer is last on purpose: for a pre-launch list with no product to buy yet, the first job is to earn the right to sell, and email 4 exists specifically to say where the brand actually was rather than imply it was further along.</p>
-
-<div class="flow">
-  <div class="ft">Checkout abandonment — gated at every step</div>
-  <div class="fm">Trigger: Checkout Started, with profile filters</div>
-  <div class="node trig">Checkout Started</div>
-  <div class="wait">wait 1 hour</div>
-  <div class="gate"><b>Has Placed Order zero times?</b> &nbsp;→ No: exit the flow</div>
-  <div class="wait">yes</div>
-  <div class="node mail"><span class="day">Day 0</span>Abandoned Cart 01<span class="sl">"You left this on your finger"</span></div>
-  <div class="wait">wait 3 hours</div>
-  <div class="gate"><b>Has Placed Order zero times?</b> &nbsp;→ No: exit the flow</div>
-  <div class="wait">yes</div>
-  <div class="node mail"><span class="day">Day 0</span>Abandoned Cart 02 — Objections<span class="sl">"Anything I can answer?"</span></div>
-  <div class="wait">wait 1 day, then 2 days</div>
-  <div class="gate"><b>Has Placed Order zero times?</b> &nbsp;→ No: exit the flow</div>
-  <div class="wait">yes</div>
-  <div class="gate"><b>In Pre-Launch Waitlist?</b></div>
-  <div class="branch">
-    <div class="node draft"><span class="day">Day 3</span>Waitlist member<span class="sl">never shipped</span></div>
-    <div class="node draft"><span class="day">Day 3</span>Everyone else<span class="sl">never shipped</span></div>
+<section class="w">
+  <div class="stats">
+    <div class="stat"><div class="n">6,089</div><div class="l">emails sent</div></div>
+    <div class="stat"><div class="n">45.4<small>%</small></div><div class="l">average open</div></div>
+    <div class="stat"><div class="n">3.15<small>%</small></div><div class="l">average click</div></div>
+    <div class="stat"><div class="n">0.07<small>%</small></div><div class="l">spam complaints</div></div>
   </div>
-</div>
-<p>Two things in that flow are worth pointing at. The order check repeats before <em>every</em> send rather than once at the top, so somebody who buys between email one and email two stops hearing about their cart immediately. And the final branch splits on list membership: a founding waitlist member who abandons has a different reason than a stranger who abandons, so they were never going to get the same message.</p>
+</section>
 
-<h2>Deliverability</h2>
-<p>I set up the sending domain and its authentication myself — SPF, DKIM and DMARC, verified in DNS, plus consent capture at signup, one-click unsubscribe, and central suppression.</p>
-<table>
-  <tr><th>Metric</th><th class="num">Result</th></tr>
-  <tr><td>Spam complaint rate, whole program</td><td class="num">0.07% <em>(2 complaints)</em></td></tr>
-  <tr><td>Delivery rate</td><td class="num">99.7%</td></tr>
-  <tr><td>Bounce rate</td><td class="num">0.3%</td></tr>
-  <tr><td>Hard bounces, list lifetime</td><td class="num">1</td></tr>
-</table>
-<p>The complaint rate held under 0.1% across every send, which is the threshold I built the alerting around.</p>
+<section class="w narrow">
+  <h2>Zero to 375</h2>
+  <p>No audience, no ad spend, no seeding. The list was built on organic writing: posts in Reddit and Facebook communities that earned <strong>200,000+ views</strong>, one of them reaching 120,000 on its own.</p>
+  <p>Readers landed on a password-protected Shopify storefront and left an email to be told when it opened.</p>
+  <p class="mut">It's a small list and it behaved like one. Engagement on a hand-built organic list runs well above a paid-acquisition list of the same size, and everything below should be read that way.</p>
+</section>
 
-<h2>What happened</h2>
-<p>Aurean wound down in August 2026. The product didn't work on unit economics: manufacturing cost and the price it had to carry never reconciled, and no amount of email was going to fix that.</p>
-<p>The program itself did what it was built to do. A list from nothing, mid-forties open rates sustained across seventeen sends, a clean sending reputation, and a flow architecture I'd build the same way again. The lesson I took was about sequencing rather than copy: I built the full lifecycle before I had validated that anyone would pay the price the product required.</p>
+<section class="w">
+  <div class="narrow"><h2>Seventeen campaigns</h2>
+  <p>Every subject line, every word of body copy, every CTA.</p></div>
+  <table>
+    <tr><th>Campaign</th><th class="num">Sent</th><th class="num">Open</th><th class="num">Click</th></tr>
+    <tr><td>Pricing + Event + Socials <em>— "The cloak is real"</em></td><td class="num">356</td><td class="num">53.4%</td><td class="num">6.7%</td></tr>
+    <tr><td>Announcing July Pre-Order</td><td class="num">343</td><td class="num">53.6%</td><td class="num">2.0%</td></tr>
+    <tr><td>Founders List Samples Shipped</td><td class="num">362</td><td class="num">51.7%</td><td class="num">1.7%</td></tr>
+    <tr><td>Gen 5 Survey</td><td class="num">345</td><td class="num">34.2%</td><td class="num">11.3%</td></tr>
+    <tr><td>CLOAK IS LIVE <em>— launch day</em></td><td class="num">359</td><td class="num">46.0%</td><td class="num">5.6%</td></tr>
+    <tr class="tot"><td>All seventeen</td><td class="num">6,089</td><td class="num">45.4%</td><td class="num">3.2%</td></tr>
+  </table>
+  <div class="narrow">
+  <p class="pull">The two outliers taught me more than the average did.</p>
+  <p><strong>"The cloak is real"</strong> paired a four-word declarative subject with preview text carrying three hard facts: pre-order date, event dates, pricing inside. Best combined open and click of the program.</p>
+  <p>The <strong>Gen 5 Survey</strong> inverted it. Lowest open rate of anything I sent, and nearly four times the click rate, because everyone who opened it had something specific to do.</p>
+  </div>
+</section>
 
-</div></body>
+<section class="w">
+  <div class="narrow"><h2>Ten flows, architected before launch</h2>
+  <p>Two of them below. The brand wound down in August, so some branches never shipped and are drawn as outlines.</p></div>
+
+  <div class="flow">
+    <h3>Welcome</h3>
+    <div class="trig">Trigger · added to the Pre-Launch Waitlist</div>
+
+    <div class="step"><div class="tick">Day 0</div><div class="box"><div class="t">A look inside the workshop</div><div class="s">craft first, before anything is for sale</div></div></div>
+    <div class="step"><div class="tick"></div><div class="gaplbl">wait 2 days</div></div>
+    <div class="step"><div class="tick">Day 2</div><div class="box"><div class="t">The story before the drop</div><div class="s">why this exists</div></div></div>
+    <div class="step"><div class="tick"></div><div class="gaplbl">wait 3 days</div></div>
+    <div class="step"><div class="tick">Day 5</div><div class="box"><div class="t">What you're actually getting</div><div class="s">the product, concretely</div></div></div>
+    <div class="step"><div class="tick"></div><div class="gaplbl">wait 2 days</div></div>
+    <div class="step"><div class="tick">Day 7</div><div class="box"><div class="t">Where we actually are</div><div class="s">honest status, no implied progress</div></div></div>
+    <div class="step"><div class="tick"></div><div class="gaplbl">wait 2 days</div></div>
+    <div class="step"><div class="tick">Day 9</div><div class="box"><div class="t">The perks of being early</div><div class="s">the offer, last</div></div></div>
+  </div>
+
+  <div class="narrow"><p style="margin-top:30px">Craft, story, product, transparency, incentive. The offer sits last on purpose. A pre-launch list has nothing to buy yet, so the first job is earning the right to sell, and email four exists specifically to say where the brand really was instead of implying it was further along.</p></div>
+
+  <div class="flow">
+    <h3>Checkout abandonment</h3>
+    <div class="trig">Trigger · Checkout Started, with profile filters</div>
+
+    <div class="step"><div class="tick"></div><div class="gaplbl">wait 1 hour</div></div>
+    <div class="step"><div class="tick"></div><div class="gate"><b>Placed an order since?</b> → exit the flow</div></div>
+    <div class="step"><div class="tick">Hour 1</div><div class="box"><div class="t">Abandoned Cart 01</div><div class="s">"You left this on your finger"</div></div></div>
+    <div class="step"><div class="tick"></div><div class="gaplbl">wait 3 hours</div></div>
+    <div class="step"><div class="tick"></div><div class="gate"><b>Placed an order since?</b> → exit the flow</div></div>
+    <div class="step"><div class="tick">Hour 4</div><div class="box"><div class="t">Abandoned Cart 02 — Objections</div><div class="s">"Anything I can answer?"</div></div></div>
+    <div class="step"><div class="tick"></div><div class="gaplbl">wait 1 day, then 2 more</div></div>
+    <div class="step"><div class="tick"></div><div class="gate"><b>Placed an order since?</b> → exit the flow</div></div>
+    <div class="step"><div class="tick"></div><div class="gate"><b>In the Pre-Launch Waitlist?</b></div></div>
+    <div class="step"><div class="tick">Day 3</div><div class="split">
+      <div class="box ghost"><div class="t">Founding member</div><div class="s">never shipped</div></div>
+      <div class="box ghost"><div class="t">Everyone else</div><div class="s">never shipped</div></div>
+    </div></div>
+  </div>
+
+  <div class="narrow"><p style="margin-top:30px">Two decisions in there I'd make again. The order check repeats before <em>every</em> send rather than once at the top, so anyone who buys between email one and email two stops hearing about their cart immediately.</p>
+  <p>And the last branch splits on list membership. A founding waitlist member who abandons has a different reason than a stranger who abandons. They were never going to get the same email.</p></div>
+</section>
+
+<section class="w">
+  <div class="narrow"><h2>The work itself</h2></div>
+  <div class="emails">
+    <div><img src="email-1.jpg" alt="Behind the Scenes campaign"><div class="cap">Behind the Scenes</div></div>
+    <div><img src="email-2.jpg" alt="The Why campaign"><div class="cap">The Why</div></div>
+    <div><img src="email-3.jpg" alt="Founders Perks campaign"><div class="cap">Founders Perks</div></div>
+  </div>
+</section>
+
+<section class="w narrow">
+  <h2>The infrastructure underneath</h2>
+  <p>I set up the sending domain and its authentication myself. SPF, DKIM and DMARC verified in DNS, consent capture at signup, one-click unsubscribe, central suppression.</p>
+  <table>
+    <tr><td>Spam complaint rate, whole program</td><td class="num">0.07%</td></tr>
+    <tr><td>Delivery rate</td><td class="num">99.7%</td></tr>
+    <tr><td>Bounce rate</td><td class="num">0.3%</td></tr>
+    <tr><td>Hard bounces, list lifetime</td><td class="num">1</td></tr>
+  </table>
+  <p style="margin-top:26px">Two complaints across 6,089 sends. The threshold I built the alerting around was 0.1% and it never came close.</p>
+</section>
+
+<section class="w narrow">
+  <h2>What happened</h2>
+  <p>Aurean wound down in August 2026. The unit economics never worked: manufacturing cost and the price the product had to carry never reconciled, and no amount of email was going to fix that.</p>
+  <p>The program did what it was built to do. A list from nothing, mid-forties open rates held across seventeen sends, a clean sending reputation, and a flow architecture I'd build the same way again.</p>
+  <p class="pull">The lesson was about sequencing, not copy. I built a full lifecycle before I'd validated that anyone would pay what the product required.</p>
+</section>
+
+<footer class="w">Jacob Gilliam · Cincinnati · <a href="../">Back to portfolio</a></footer>
+</body>
