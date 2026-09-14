@@ -69,7 +69,7 @@ If you export those too you will have them twice.
     cd ~/job-search/portfolio/web
     git add momnem && git commit -m "Add Mom n em throwdown concept" && git push
 
-Live at **jacogilliam-ai.github.io/email-portfolio/momnem/**
+Live at **jacobgilliam.co/momnem/**
 Nothing links to it, so it is not published until they say yes.
 
 # Test before you send the link
