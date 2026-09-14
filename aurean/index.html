@@ -6,23 +6,25 @@
  *{box-sizing:border-box}
  html{scroll-behavior:smooth}
  body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.68 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
- .w{max-width:1140px;margin:0 auto;padding:0 34px}
- .bleed img,.duo img{border-radius:2px}
+ .w{max-width:1140px;margin:0 auto;padding-left:34px;padding-right:34px}
+ .bleed img{width:100%;aspect-ratio:21/9;object-fit:cover;object-position:center 42%}
+ .duo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 58%}
+ img.tall{aspect-ratio:16/9!important;object-position:center 58%!important}
  .n{max-width:640px}
  a{color:inherit}
  img{display:block;width:100%}
 
- header{padding:130px 0 56px}
+ header{padding-top:132px;padding-bottom:64px}
  .kick{font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--mut);margin-bottom:30px}
  h1{font:400 clamp(62px,12.5vw,152px)/0.88 Georgia,'Times New Roman',serif;margin:0;letter-spacing:-.045em}
  .meta{display:flex;flex-wrap:wrap;gap:8px 30px;margin-top:34px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
 
- .bleed{margin:64px auto 0;max-width:1140px;padding:0 34px}
+ .bleed{margin:64px auto 0;max-width:1140px;padding-left:34px;padding-right:34px}
  .lede{font:400 clamp(24px,3.3vw,34px)/1.42 Georgia,serif;letter-spacing:-.02em;margin:96px 0 0}
  .fine{font-size:14.5px;color:var(--mut);margin-top:24px;letter-spacing:.01em}
 
  /* numbered sections, Meuze-style rhythm */
- section{padding:124px 0 0}
+ section{padding-top:126px}
  .hd{display:grid;grid-template-columns:64px 1fr;gap:0;align-items:baseline;margin-bottom:38px;border-top:1px solid var(--line);padding-top:22px}
  .hd .no{font-size:11px;letter-spacing:.2em;color:var(--mut);padding-top:4px}
  .hd h2{font:400 clamp(27px,3.8vw,40px)/1.1 Georgia,serif;margin:0;letter-spacing:-.028em}
@@ -72,7 +74,7 @@
 
  .duo{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:34px}
  .pull{font:400 clamp(21px,2.7vw,28px)/1.48 Georgia,serif;border-left:2px solid var(--ink);padding-left:28px;margin:42px 0}
- footer{padding:120px 0 130px;margin-top:124px;border-top:1px solid var(--line);font-size:13.5px;color:var(--mut);letter-spacing:.04em}
+ footer{padding-top:110px;padding-bottom:140px;margin-top:132px;border-top:1px solid var(--line);font-size:13.5px;color:var(--mut);letter-spacing:.04em}
  @media(max-width:860px){.showcase{grid-template-columns:1fr;gap:40px;justify-items:center}.duo{grid-template-columns:1fr}}
  @media(max-width:600px){.w{padding:0 22px}.hd{grid-template-columns:44px 1fr}.step{grid-template-columns:54px 1fr}.split{grid-template-columns:1fr}.phone{width:300px;height:620px}}
 </style>
@@ -106,7 +108,7 @@
     <p class="mut">It is a small list and it behaved like one. Hand-built organic lists engage well above paid-acquisition lists of the same size. Read everything below in that light.</p>
   </div>
   <div class="duo">
-    <img src="finishes.jpg" alt="Both finishes, silver and gold">
+    <img src="finishes.jpg" alt="The Cloak worn over an Oura ring">
     <img src="pedestal.jpg" alt="Aurean on a pedestal">
   </div>
 </section>
@@ -192,7 +194,7 @@
     </table>
     <p style="margin-top:26px">Two complaints across 6,089 sends. I built the alerting around a 0.1% threshold and it never came close.</p>
   </div>
-  <div class="bleed" style="margin-top:52px"><img src="onhand.jpg" alt="Both rings worn"></div>
+  <div class="bleed" style="margin-top:56px"><img class="tall" src="onhand.jpg" alt="Both rings worn"></div>
 </section>
 
 <section class="w">
