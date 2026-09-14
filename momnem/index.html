@@ -1,13 +1,13 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Latte Art Throwdown — campaign</title>
 <style>
- :root{--bg:#FBF5E3;--ink:#3D3226;--mut:#8A8068;--maroon:#7C1512;--red:#E5281C}
+ :root{--bg:#FBF5E3;--ink:#3D3226;--mut:#8A8068;--maroon:#7C1512;--red:#E5281C;--navline:#E2D7BC;--navmut:#8A8068;--navink:#7C1512}
  *{box-sizing:border-box}
  body{margin:0;background:var(--bg);color:var(--ink);
       font:16px/1.65 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
  .w{max-width:1080px;margin:0 auto;padding-left:32px;padding-right:32px}
  a{color:var(--maroon)}
- header{padding-top:86px;padding-bottom:0}
+ header{padding-top:56px;padding-bottom:0}
  .kick{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--mut);margin-bottom:24px}
  h1{font:400 clamp(38px,6.4vw,72px)/1.04 Georgia,'Times New Roman',serif;margin:0;letter-spacing:-.032em}
  .meta{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:26px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
@@ -40,6 +40,15 @@
  .row .s a:after{content:" \2197";font-size:.82em;color:var(--mut)}
  .row:hover .s a:after{color:var(--maroon)}
  .openhint{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:0 0 12px}
+ .mx{width:100%;border-collapse:collapse;margin:18px 0 22px;font-size:15px}
+ .mx th{text-align:left;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);
+   font-weight:600;padding:0 10px 10px 0;border-bottom:1px solid #E2D7BC}
+ .mx td{padding:11px 10px 11px 0;border-bottom:1px solid #E2D7BC}
+ .mx .r{text-align:right;font-variant-numeric:tabular-nums}
+ .dl{display:inline-block;background:var(--red);color:#FBF5E3;text-decoration:none;
+   padding:14px 26px;font-size:14px;font-weight:800;letter-spacing:.04em}
+ .dl:hover{background:var(--maroon)}
+ .fine{font-size:14px;color:var(--mut)}
  .note{font-size:14px;color:var(--mut);border-left:2px solid #E2D7BC;padding-left:18px;margin-top:26px}
  footer{padding-top:44px;padding-bottom:96px;border-top:1px solid #E2D7BC;font-size:13px;color:var(--mut)}
  @media(max-width:900px){
@@ -51,8 +60,29 @@
    header{padding-top:56px}
    .phone{width:300px;height:640px;border-radius:40px}
  }
+
+ .topnav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(8px);
+   -webkit-backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--navline)}
+ .topnav .inner{max-width:1080px;margin:0 auto;padding:13px 32px;display:flex;
+   justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+ .topnav a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;
+   color:var(--navmut);border-bottom:1px solid transparent;padding-bottom:2px}
+ .topnav a:hover{color:var(--navink);border-bottom-color:var(--navink)}
+ .topnav .home{color:var(--navink);font-weight:600}
+ .topnav nav{display:flex;gap:22px;flex-wrap:wrap}
+ @media(max-width:560px){.topnav .inner{padding:11px 20px}.topnav nav{gap:14px}}
 </style>
 <body>
+<div class="topnav"><div class="inner">
+  <a class="home" href="../">&larr;&nbsp; Jacob Gilliam</a>
+  <nav>
+    <a href="../aurean/">Aurean</a>
+    <a href="https://myreturners.com" target="_blank" rel="noopener">myReturners</a>
+    <a href="../jacob-gilliam-resume.pdf" target="_blank" rel="noopener">R&eacute;sum&eacute;</a>
+    <a href="https://linkedin.com/in/jacogilliam" target="_blank" rel="noopener">LinkedIn</a>
+  </nav>
+</div></div>
+
 
 <header class="w">
   <div class="kick">Concept — unsolicited</div>
@@ -94,10 +124,33 @@
 
     <div class="blk">
       <h2>Decisions worth defending</h2>
-      <p><strong>The prize leads.</strong> A $1,500 machine is the hook for everyone who does not care about latte art, which is most of the list.</p>
-      <p><strong>Date and address stay as live text</strong> in a maroon block rather than baked into artwork, so the two facts that matter survive images-off, dark mode and a screen reader.</p>
-      <p><strong>Competing and the raffle are quiet.</strong> Small audiences, paid actions. Making them loud would invert the hierarchy against the free primary CTA.</p>
-      <p><strong>There is a path for people who cannot come.</strong> Most of the list will not attend on a Friday. Without a shop link they reach the bottom with nothing to do.</p>
+      <p><strong>The prize leads, not the competition.</strong> A $1,500 machine is the hook for everyone who does not care about latte art, which is most of the list. The bracket is the draw for maybe a tenth of them.</p>
+      <p><strong>Date and address are live text, not artwork</strong>, in the announce. Gmail blocks images by default for unknown senders, Outlook.com inverts backgrounds in dark mode, and a screen reader gets an alt tag. The two facts a reader actually needs survive all three.</p>
+      <p><strong>Competing and the raffle are quiet.</strong> Small audiences, paid actions. Making them loud would invert the hierarchy against the free primary CTA, which is what the other 95% of the list is deciding about.</p>
+      <p><strong>Every send has a path for people who cannot come.</strong> Most of a coffee shop&rsquo;s list will not give up a Friday. Without a shop link they reach the bottom with nothing to do, and a dead send is a wasted one.</p>
+      <p><strong>The raffle is the strongest mechanic in the whole event.</strong> &ldquo;You have to be there to win&rdquo; makes a $10 ticket a firmer commitment to attend than any calendar add. That is why it gets its own block rather than a line.</p>
+    </div>
+
+    <div class="blk">
+      <h2>What I measured</h2>
+      <p>Opinions are cheap in a portfolio. These are numbers off the built files.</p>
+      <table class="mx">
+        <tr><th>Send</th><th class="r">Primary CTA</th><th class="r">Total height</th></tr>
+        <tr><td>1 &middot; Announce</td><td class="r">594px</td><td class="r">3,569px</td></tr>
+        <tr><td>2 &middot; Reminder</td><td class="r">738px</td><td class="r">1,698px</td></tr>
+        <tr><td>3 &middot; Day-of</td><td class="r">737px</td><td class="r">1,277px</td></tr>
+      </table>
+      <p><strong>Every primary CTA lands above the mobile fold</strong>, which sits near 740px on an iPhone after mail-app chrome. Email 2 originally put its calendar button at 1,142px because the artwork sat between the copy and the ask. Moving the artwork below the CTA brought it to 738.</p>
+      <p><strong>Length falls as urgency rises.</strong> 3,569 to 1,698 to 1,277. By the third email a reader can tell at a glance that this one is quick, which is exactly what you want at 3pm on a Friday.</p>
+      <p><strong>Every image is under 400KB</strong> and each asset URL carries a content hash, so a replaced file can never serve stale from a CDN or browser cache.</p>
+    </div>
+
+    <div class="blk">
+      <h2>Want to run it?</h2>
+      <p>It is yours. The whole campaign packages into one download: three HTML files, every image, and a page of setup notes for Klaviyo.</p>
+      <p><a class="dl" href="latte-art-throwdown-campaign.zip">Download the campaign &darr;</a></p>
+      <p class="fine">Each email is a single HTML file. Paste it into a Klaviyo Custom HTML block, or rebuild it in the drag-and-drop editor so your team can edit it later without me. Notes for both are in the download.</p>
+    </div>
     </div>
   </div>
 </div>

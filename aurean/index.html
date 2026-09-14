@@ -2,7 +2,7 @@
 <title>Aurean — lifecycle case study</title>
 <style>
  /* Aurean's own system. Monochrome, no accent colours, per the brand rules. */
- :root{--bg:#F6F4F1;--card:#EDEAE6;--dark:#0C0B0A;--deep:#050504;--ink:#1A1918;--light:#F6F4F1;--mut:#7A756F;--line:#D6D1CB}
+ :root{--navline:#D6D1CB;--navmut:#7A756F;--navink:#1A1918;--bg:#F6F4F1;--card:#EDEAE6;--dark:#0C0B0A;--deep:#050504;--ink:#1A1918;--light:#F6F4F1;--mut:#7A756F;--line:#D6D1CB}
  *{box-sizing:border-box}
  html{scroll-behavior:smooth}
  body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.68 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
@@ -15,7 +15,7 @@
  a{color:inherit}
  img{display:block;width:100%}
 
- header{padding-top:132px;padding-bottom:64px}
+ header{padding-top:92px;padding-bottom:64px}
  .kick{font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--mut);margin-bottom:30px}
  h1{font:400 clamp(62px,12.5vw,152px)/0.88 Georgia,'Times New Roman',serif;margin:0;letter-spacing:-.045em}
  .meta{display:flex;flex-wrap:wrap;gap:8px 30px;margin-top:34px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
@@ -78,8 +78,29 @@
  footer{padding-top:110px;padding-bottom:140px;margin-top:132px;border-top:1px solid var(--line);font-size:13.5px;color:var(--mut);letter-spacing:.04em}
  @media(max-width:860px){.showcase{grid-template-columns:1fr;gap:40px;justify-items:center}.duo{grid-template-columns:1fr}}
  @media(max-width:600px){.w{padding-left:22px;padding-right:22px}.bleed{padding-left:22px;padding-right:22px}header{padding-top:96px;padding-bottom:48px}section{padding-top:92px}.hd{grid-template-columns:44px 1fr}.step{grid-template-columns:54px 1fr}.split{grid-template-columns:1fr}.phone{width:300px;height:620px}}
+
+ .topnav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(8px);
+   -webkit-backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--navline)}
+ .topnav .inner{max-width:1080px;margin:0 auto;padding:13px 32px;display:flex;
+   justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+ .topnav a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;
+   color:var(--navmut);border-bottom:1px solid transparent;padding-bottom:2px}
+ .topnav a:hover{color:var(--navink);border-bottom-color:var(--navink)}
+ .topnav .home{color:var(--navink);font-weight:600}
+ .topnav nav{display:flex;gap:22px;flex-wrap:wrap}
+ @media(max-width:560px){.topnav .inner{padding:11px 20px}.topnav nav{gap:14px}}
 </style>
 <body>
+<div class="topnav"><div class="inner">
+  <a class="home" href="../">&larr;&nbsp; Jacob Gilliam</a>
+  <nav>
+    <a href="../momnem/">Mom &rsquo;n &rsquo;em</a>
+    <a href="https://myreturners.com" target="_blank" rel="noopener">myReturners</a>
+    <a href="../jacob-gilliam-resume.pdf" target="_blank" rel="noopener">R&eacute;sum&eacute;</a>
+    <a href="https://linkedin.com/in/jacogilliam" target="_blank" rel="noopener">LinkedIn</a>
+  </nav>
+</div></div>
+
 
 <header class="w">
   <div class="kick">Case study — lifecycle &amp; retention</div>
