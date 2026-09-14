@@ -4,6 +4,11 @@
  @media only screen and (max-width:620px){
    .stack{display:block!important;width:100%!important;max-width:100%!important;padding-bottom:16px!important}
    .pad{padding-left:26px!important;padding-right:26px!important}
+   /* product shots were capped at 244px while their stacked column is full width,
+      which left the overlapping SHOP NOW centred on the column, not on the image */
+   .stack img{max-width:100%!important;width:100%!important}
+   /* footer link row was wrapping WEBSITE onto its own line */
+   .soc a{padding:0 7px!important;font-size:11px!important}
  }
 </style>
 <body style="margin:0;padding:0;background:#FBF5E3;">
@@ -161,7 +166,7 @@
 
     <!-- social. text links, not icons: no image needed, works with images off, and
          nothing to host. Swap for 24px icons later if you want. VERIFY the handles. -->
-    <div style="padding-bottom:22px;">
+    <div class="soc" style="padding-bottom:22px;">
       <a href="https://instagram.com/momnemcoffee" style="display:inline-block;padding:0 10px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#FBF5E3;text-decoration:none;">Instagram</a>
       <span style="color:#A8564E;">&middot;</span>
       <a href="https://facebook.com/momnemcoffee" style="display:inline-block;padding:0 10px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#FBF5E3;text-decoration:none;">Facebook</a>
