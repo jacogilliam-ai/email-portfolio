@@ -12,17 +12,17 @@
  a{color:inherit}
  img{display:block;width:100%}
 
- header{padding:96px 0 44px}
+ header{padding:130px 0 56px}
  .kick{font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--mut);margin-bottom:30px}
  h1{font:400 clamp(62px,12.5vw,152px)/0.88 Georgia,'Times New Roman',serif;margin:0;letter-spacing:-.045em}
  .meta{display:flex;flex-wrap:wrap;gap:8px 30px;margin-top:34px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
 
- .bleed{margin:56px auto 0;max-width:1140px;padding:0 34px}
- .lede{font:400 clamp(24px,3.3vw,34px)/1.42 Georgia,serif;letter-spacing:-.02em;margin:84px 0 0}
+ .bleed{margin:64px auto 0;max-width:1140px;padding:0 34px}
+ .lede{font:400 clamp(24px,3.3vw,34px)/1.42 Georgia,serif;letter-spacing:-.02em;margin:96px 0 0}
  .fine{font-size:14.5px;color:var(--mut);margin-top:24px;letter-spacing:.01em}
 
  /* numbered sections, Meuze-style rhythm */
- section{padding:104px 0 0}
+ section{padding:124px 0 0}
  .hd{display:grid;grid-template-columns:64px 1fr;gap:0;align-items:baseline;margin-bottom:38px;border-top:1px solid var(--line);padding-top:22px}
  .hd .no{font-size:11px;letter-spacing:.2em;color:var(--mut);padding-top:4px}
  .hd h2{font:400 clamp(27px,3.8vw,40px)/1.1 Georgia,serif;margin:0;letter-spacing:-.028em}
@@ -30,9 +30,9 @@
  .mut{color:var(--mut)}
 
  /* stats: the one dark band */
- .band{background:var(--dark);color:var(--light);margin-top:92px}
+ .band{background:var(--dark);color:var(--light);margin-top:112px}
  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
- .stat{padding:58px 26px 52px;border-left:1px solid #221F1D}
+ .stat{padding:80px 26px 74px;border-left:1px solid #221F1D}
  .stat:first-child{border-left:none}
  .stat .v{font:400 clamp(50px,7vw,80px)/1 Georgia,serif;letter-spacing:-.05em}
  .stat .v i{font-style:normal;font-size:.4em;color:#6C665F;letter-spacing:0}
@@ -72,7 +72,7 @@
 
  .duo{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:34px}
  .pull{font:400 clamp(21px,2.7vw,28px)/1.48 Georgia,serif;border-left:2px solid var(--ink);padding-left:28px;margin:42px 0}
- footer{padding:110px 0 92px;margin-top:104px;border-top:1px solid var(--line);font-size:13.5px;color:var(--mut);letter-spacing:.04em}
+ footer{padding:120px 0 130px;margin-top:124px;border-top:1px solid var(--line);font-size:13.5px;color:var(--mut);letter-spacing:.04em}
  @media(max-width:860px){.showcase{grid-template-columns:1fr;gap:40px;justify-items:center}.duo{grid-template-columns:1fr}}
  @media(max-width:600px){.w{padding:0 22px}.hd{grid-template-columns:44px 1fr}.step{grid-template-columns:54px 1fr}.split{grid-template-columns:1fr}.phone{width:300px;height:620px}}
 </style>
@@ -208,27 +208,34 @@
 
 <script>
 (function(){
+  var band=document.querySelector('.stats');
   var els=[].slice.call(document.querySelectorAll('[data-to]'));
-  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.textContent=fmt(e,+e.dataset.to)});return}
+  if(!band||!els.length) return;
   function fmt(el,v){
-    if(el.dataset.fmt==='c') return Math.round(v).toLocaleString('en-US');
-    return v.toFixed(+(el.dataset.dp||0));
+    return el.dataset.fmt==='c' ? Math.round(v).toLocaleString('en-US')
+                                : v.toFixed(+(el.dataset.dp||0));
   }
-  function run(el){
-    var to=+el.dataset.to, t0=null, D=1400;
-    function step(ts){
-      if(!t0) t0=ts;
-      var p=Math.min((ts-t0)/D,1);
-      p=1-Math.pow(1-p,3);                   // ease out
-      el.textContent=fmt(el,to*p);
-      if(p<1) requestAnimationFrame(step); else el.textContent=fmt(el,to);
-    }
-    requestAnimationFrame(step);
+  els.forEach(function(el){ el.textContent = fmt(el,0); });
+  var done=false;
+  function go(){
+    if(done) return; done=true;
+    els.forEach(function(el){
+      var to=+el.dataset.to, t0=null, D=1500;
+      requestAnimationFrame(function step(ts){
+        if(!t0) t0=ts;
+        var p=Math.min((ts-t0)/D,1);
+        el.textContent=fmt(el,to*(1-Math.pow(1-p,3)));
+        if(p<1) requestAnimationFrame(step); else el.textContent=fmt(el,to);
+      });
+    });
   }
+  if(!('IntersectionObserver' in window)){ go(); return; }
+  // rootMargin pulls the trigger line up from the bottom edge, so it fires
+  // only once the band is genuinely on screen, never during initial layout.
   var io=new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ run(e.target); io.unobserve(e.target);} });
-  },{threshold:.4});
-  els.forEach(function(e){ io.observe(e); });
+    es.forEach(function(e){ if(e.isIntersecting){ go(); io.disconnect(); } });
+  },{ threshold:0, rootMargin:'0px 0px -22% 0px' });
+  requestAnimationFrame(function(){ io.observe(band); });
 })();
 </script>
 </body>
