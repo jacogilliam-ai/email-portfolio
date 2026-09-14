@@ -1,203 +1,89 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Throwdown v9 - with footer</title>
+<title>Latte Art Throwdown — campaign</title>
 <style>
- @media only screen and (max-width:620px){
-   .stack{display:block!important;width:100%!important;max-width:100%!important;padding-bottom:16px!important}
-   .pad{padding-left:26px!important;padding-right:26px!important}
+ :root{--bg:#FBF5E3;--ink:#3D3226;--mut:#8A8068;--maroon:#7C1512;--red:#E5281C}
+ *{box-sizing:border-box}
+ body{margin:0;background:var(--bg);color:var(--ink);
+      font:16px/1.65 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+ .w{max-width:1080px;margin:0 auto;padding-left:32px;padding-right:32px}
+ a{color:var(--maroon)}
+ header{padding-top:86px;padding-bottom:0}
+ .kick{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--mut);margin-bottom:24px}
+ h1{font:400 clamp(38px,6.4vw,72px)/1.04 Georgia,'Times New Roman',serif;margin:0;letter-spacing:-.032em}
+ .meta{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:26px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+
+ .stage{display:grid;grid-template-columns:360px 1fr;gap:70px;align-items:start;padding-top:74px;padding-bottom:96px}
+ .phone{width:360px;height:740px;background:#211C16;border-radius:48px;padding:13px;
+        box-shadow:0 34px 74px rgba(61,50,38,.24)}
+ .bar{height:22px;display:flex;align-items:center;justify-content:center}
+ .bar i{width:66px;height:5px;border-radius:3px;background:#4A423A;display:block}
+ .screen{height:calc(100% - 22px);border-radius:36px;overflow:hidden;background:#fff}
+ .screen iframe{width:100%;height:100%;border:0;display:block}
+ .hint{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);text-align:center;margin-top:16px}
+
+ h2{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--maroon);margin:0 0 16px;font-weight:600}
+ .blk{margin-bottom:40px}
+ p{margin:0 0 15px;max-width:52ch}
+ .seq{border-top:1px solid #E2D7BC;margin-top:6px}
+ .row{display:grid;grid-template-columns:82px 1fr;gap:18px;padding:16px 0;border-bottom:1px solid #E2D7BC;align-items:start}
+ .row .d{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding-top:3px}
+ .row .s{font-weight:600}
+ .row .j{font-size:14.5px;color:var(--mut);margin-top:2px}
+ .note{font-size:14px;color:var(--mut);border-left:2px solid #E2D7BC;padding-left:18px;margin-top:26px}
+ footer{padding-top:44px;padding-bottom:96px;border-top:1px solid #E2D7BC;font-size:13px;color:var(--mut)}
+ @media(max-width:900px){
+   .stage{grid-template-columns:1fr;gap:48px;justify-items:center;padding-top:52px}
+   .copy{max-width:600px}
+ }
+ @media(max-width:560px){
+   .w{padding-left:20px;padding-right:20px}
+   header{padding-top:56px}
+   .phone{width:300px;height:640px;border-radius:40px}
  }
 </style>
-<body style="margin:0;padding:0;background:#FBF5E3;">
-<div style="display:none;font-size:0;line-height:0;max-height:0;overflow:hidden;">A Fellow Series 1 is on the line. Plus smashburgers, Nati wine, and a DJ.</div>
+<body>
 
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FBF5E3;"><tr><td align="center">
-<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:600px;background:#FBF5E3;">
+<header class="w">
+  <div class="kick">Concept — unsolicited</div>
+  <h1>Latte Art Throwdown</h1>
+  <div class="meta"><span>Mom 'n 'em Coffee</span><span>Cincinnati</span><span>Event campaign</span></div>
+</header>
 
-  <tr><td align="center" style="padding:10px 44px 12px;font-family:Helvetica,Arial,sans-serif;font-size:11px;color:#B6AA8E;">
-    <a href="#" style="color:#B6AA8E;text-decoration:none;">View in browser</a>
-  </td></tr>
+<div class="w stage">
+  <div>
+    <div class="phone">
+      <div class="bar"><i></i></div>
+      <div class="screen"><iframe src="email.html" title="Latte Art Throwdown announcement email" loading="lazy"></iframe></div>
+    </div>
+    <div class="hint">scroll inside &darr;</div>
+  </div>
 
-  <!-- [1] PHOTO, cropped 3:2, logo + LATTE ART THROWDOWN baked in. ~400px tall.
-       Whole thing wrapped in a link. Export 1200 x 800, FLATTENED to cream. -->
-  <tr><td style="font-size:0;line-height:0;">
-    <a href="https://maps.google.com/?q=4310+Whetsel+Ave+Cincinnati+OH+45227" style="text-decoration:none;">
-      <img src="hero.jpg" alt="The Summer Classic Latte Art Throwdown. Friday, September 25th 2026 at 5:30PM. Open to public. Mom 'n 'em Coffee Madisonville, 4310 Whetsel Ave." width="600" style="display:block;width:100%;max-width:600px;height:auto;border:0;">
-    </a>
-  </td></tr>
-
-
-  <!-- [4] PRIMARY CTA, immediately after the details. ~700px from the top. -->
-  <tr><td align="center" style="padding:18px 44px 0;">
-    <table role="presentation" cellpadding="0" cellspacing="0"><tr><td bgcolor="#E5281C" align="center" style="background:#E5281C;">
-      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Latte+Art+Throwdown+at+Mom+%27n+%27em&dates=20260925T213000Z/20260926T003000Z&location=4310+Whetsel+Ave%2C+Cincinnati%2C+OH+45227" style="display:inline-block;padding:16px 44px;font-family:Helvetica,Arial,sans-serif;font-size:17px;font-weight:800;color:#FBF5E3;text-decoration:none;">Add it to your calendar</a>
-    </td></tr></table>
-  </td></tr>
-
-  <!-- [5] pitcher graphic. moved BELOW the CTA: it is a mid-scroll breather,
-       not something standing between "what" and "when". Crop tight to the rosetta. -->
-  <tr><td style="font-size:0;line-height:0;">
-    <img src="pitcher.png" alt="" width="600" style="display:block;width:100%;max-width:600px;height:auto;border:0;">
-  </td></tr>
-
-  <!-- one sentence. "free and open" already appears in the maroon block above as
-       "Open to public", so the second paragraph was repeating itself at full weight.
-       Georgia because it is already in this email (logo, signoff) and Helvetica was
-       the one place a system font was visible against their display type. -->
-  <tr><td class="pad" align="center" style="padding:34px 54px 0;">
-    <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:23px;line-height:34px;color:#3D3226;">
-      Cincy's coffee people go head to head pouring latte art until one of them wins.
-    </p>
-    <p style="margin:16px 0 0;font-family:Helvetica,Arial,sans-serif;font-size:17px;line-height:28px;color:#3D3226;">
-      Free and open to everybody. Come watch, or sign up and pour.
-    </p>
-  </td></tr>
-
-  <!-- three parallel facts, so they get a row and not a sentence. same shape as
-       kitFacts in the myReturners kit. -->
-  <tr><td class="pad" style="padding:30px 44px 0;font-family:Helvetica,Arial,sans-serif;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-      <tr><td colspan="5" style="border-top:1px solid #E2D7BC;font-size:0;line-height:0;">&nbsp;</td></tr>
-      <tr>
-        <td class="stack" width="32%" valign="top" align="center" style="width:32%;padding-top:18px;text-align:center;">
-          <div style="font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#E5281C;">Food</div>
-          <div style="font-size:15.5px;line-height:23px;color:#3D3226;padding-top:5px;">Smashburgers<br>by Sydney</div>
-        </td>
-        <td class="stack" width="2%" style="width:2%;font-size:0;">&nbsp;</td>
-        <td class="stack" width="32%" valign="top" align="center" style="width:32%;padding-top:18px;text-align:center;">
-          <div style="font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#E5281C;">Drink</div>
-          <div style="font-size:15.5px;line-height:23px;color:#3D3226;padding-top:5px;">Nati wine<br>from Voyager</div>
-        </td>
-        <td class="stack" width="2%" style="width:2%;font-size:0;">&nbsp;</td>
-        <td class="stack" width="32%" valign="top" align="center" style="width:32%;padding-top:18px;text-align:center;">
-          <div style="font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#E5281C;">Music</div>
-          <div style="font-size:15.5px;line-height:23px;color:#3D3226;padding-top:5px;">DJ Stoned<br>Soul Picnic</div>
-        </td>
-      </tr>
-    </table>
-  </td></tr>
-
-  <!-- THE PRIZE. the screaming-guy photo does the job two bordered boxes were doing,
-       and it is the funniest asset they have. full bleed, 1200 x 900. -->
-  <tr><td style="font-size:0;line-height:0;padding-top:36px;">
-    <img src="prize.jpg" alt="The grand prize, a Fellow Series 1 espresso machine" width="600" style="display:block;width:100%;max-width:600px;height:auto;border:0;">
-  </td></tr>
-
-  <!-- two paid actions. Buttons sit in a SECOND table row so they stay level even
-       though the paragraphs are different lengths. -->
-  <tr><td class="pad" style="padding:30px 44px 0;font-family:Helvetica,Arial,sans-serif;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-      <tr>
-        <td class="stack" width="48%" valign="top" style="width:48%;">
-          <div style="font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#E5281C;">Want to compete?</div>
-          <p style="margin:8px 0 0;font-size:15.5px;line-height:24px;color:#5A4F3D;">$15 to enter, open to anyone. Winner takes the machine, plus goods from Moccamaster, Dona Chai and Minor Figures.</p>
-        </td>
-        <td class="stack" width="4%" style="width:4%;font-size:0;">&nbsp;</td>
-        <td class="stack" width="48%" valign="top" style="width:48%;">
-          <div style="font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#E5281C;">There's a second one</div>
-          <p style="margin:8px 0 0;font-size:15.5px;line-height:24px;color:#5A4F3D;">We're raffling off a second Fellow. Tickets are $10, online or at the door, and you have to be there to win it.</p>
-        </td>
-      </tr>
-      <tr>
-        <td class="stack" valign="top" style="padding-top:14px;">
-          <table role="presentation" cellpadding="0" cellspacing="0"><tr><td bgcolor="#E5281C" style="background:#E5281C;">
-            <a href="REPLACE_WITH_COMPETITOR_SIGNUP" style="display:inline-block;padding:11px 20px;font-size:14px;font-weight:800;color:#FBF5E3;text-decoration:none;">Reserve your spot &rarr;</a>
-          </td></tr></table>
-        </td>
-        <td class="stack" style="font-size:0;">&nbsp;</td>
-        <td class="stack" valign="top" style="padding-top:14px;">
-          <table role="presentation" cellpadding="0" cellspacing="0"><tr><td bgcolor="#E5281C" style="background:#E5281C;">
-            <a href="REPLACE_WITH_RAFFLE_LINK" style="display:inline-block;padding:11px 20px;font-size:14px;font-weight:800;color:#FBF5E3;text-decoration:none;">Get raffle tickets &rarr;</a>
-          </td></tr></table>
-        </td>
-      </tr>
-    </table>
-  </td></tr>
-
-
-
-  <tr><td class="pad" style="padding:36px 44px 0;"><div style="border-top:1px solid #E6DCC2;font-size:0;line-height:0;">&nbsp;</div></td></tr>
-  <tr><td class="pad" align="center" style="padding:20px 44px 0;font-family:Helvetica,Arial,sans-serif;font-size:15.5px;line-height:25px;color:#6E644E;">
-    Can't make it? The coffee's still here.
-  </td></tr>
-
-  <!-- two product shots, 600x600 each, image itself is the link. one button, not three. -->
-  <tr><td class="pad" style="padding:22px 44px 0;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td class="stack" width="244" valign="top" style="width:244px;">
-        <a href="https://momnemcoffee.com/collections/coffee"><img src="product-1.jpg" alt="Nati Blend" width="244" style="display:block;width:100%;max-width:244px;height:auto;border:0;"></a>
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:-26px;position:relative;"><tr>
-          <td align="center" style="padding-top:0;">
-            <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-              <td bgcolor="#E5281C" align="center" style="background:#E5281C;">
-                <a href="https://momnemcoffee.com/collections/coffee" style="display:inline-block;padding:11px 30px;font-family:Helvetica,Arial,sans-serif;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#FBF5E3;text-decoration:none;">Shop now</a>
-              </td>
-            </tr></table>
-          </td>
-        </tr></table>
-      </td>
-      <td class="stack" width="28" style="width:28px;font-size:0;">&nbsp;</td>
-      <td class="stack" width="244" valign="top" style="width:244px;">
-        <a href="https://momnemcoffee.com/collections/coffee"><img src="product-2.jpg" alt="Ferrari Blend" width="244" style="display:block;width:100%;max-width:244px;height:auto;border:0;"></a>
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:-26px;position:relative;"><tr>
-          <td align="center" style="padding-top:0;">
-            <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-              <td bgcolor="#E5281C" align="center" style="background:#E5281C;">
-                <a href="https://momnemcoffee.com/collections/coffee" style="display:inline-block;padding:11px 30px;font-family:Helvetica,Arial,sans-serif;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#FBF5E3;text-decoration:none;">Shop now</a>
-              </td>
-            </tr></table>
-          </td>
-        </tr></table>
-      </td>
-    </tr></table>
-  </td></tr>
-  <tr><td align="center" style="padding:20px 44px 44px;">
-    <table role="presentation" cellpadding="0" cellspacing="0"><tr><td bgcolor="#E5281C" style="background:#E5281C;">
-      <a href="https://momnemcoffee.com/collections/coffee" style="display:inline-block;padding:15px 40px;font-family:Helvetica,Arial,sans-serif;font-size:15px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#FBF5E3;text-decoration:none;">Shop all</a>
-    </td></tr></table>
-  </td></tr>
-
-  <tr><td bgcolor="#7C1512" style="background:#7C1512;padding:34px 40px 30px;font-family:Helvetica,Arial,sans-serif;text-align:center;">
-
-    <img src="logo.png" alt="Mom 'n 'em Coffee" width="180" style="display:block;width:180px;max-width:60%;height:auto;border:0;margin:0 auto 18px;">
-
-    <!-- social. text links, not icons: no image needed, works with images off, and
-         nothing to host. Swap for 24px icons later if you want. VERIFY the handles. -->
-    <div style="padding-bottom:22px;">
-      <a href="https://instagram.com/momnemcoffee" style="display:inline-block;padding:0 10px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#FBF5E3;text-decoration:none;">Instagram</a>
-      <span style="color:#A8564E;">&middot;</span>
-      <a href="https://facebook.com/momnemcoffee" style="display:inline-block;padding:0 10px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#FBF5E3;text-decoration:none;">Facebook</a>
-      <span style="color:#A8564E;">&middot;</span>
-      <a href="https://momnemcoffee.com" style="display:inline-block;padding:0 10px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#FBF5E3;text-decoration:none;">Website</a>
+  <div class="copy">
+    <div class="blk">
+      <h2>The brief I gave myself</h2>
+      <p>Mom 'n 'em announced a latte art throwdown on Facebook with a Fellow Series 1 espresso machine as the grand prize, a $15 competitor entry, a raffle, smashburgers and a DJ.</p>
+      <p>Everything in the email comes from that post. Nobody asked for this.</p>
     </div>
 
-    <!-- BOTH locations. their current footer lists one, and they have two. -->
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td class="stack" width="50%" valign="top" align="center" style="width:50%;padding:0 18px 8px;text-align:center;">
-        <div style="font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#FBF5E3;">Camp Washington</div>
-        <div style="font-size:14px;line-height:21px;color:#FBF5E3;padding-top:4px;">3128 Colerain Ave<br>Cincinnati, OH 45225</div>
-      </td>
-      <td class="stack" width="50%" valign="top" align="center" style="width:50%;padding:0 18px 8px;text-align:center;">
-        <div style="font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#FBF5E3;">Madisonville</div>
-        <div style="font-size:14px;line-height:21px;color:#FBF5E3;padding-top:4px;">4310 Whetsel Ave<br>Cincinnati, OH 45227</div>
-      </td>
-    </tr></table>
-
-    <div style="border-top:1px solid #96382F;margin-top:22px;padding-top:20px;">
-      <!-- why they are getting this. costs one line, measurably reduces complaints,
-           because "I never signed up for this" is the most common reason people
-           hit spam instead of unsubscribe. -->
-      <div style="font-size:12.5px;line-height:20px;color:#D3A9A3;">
-        You're getting this because you signed up for Mom 'n 'em emails,<br>
-        either online or in one of our shops.
+    <div class="blk">
+      <h2>One email is an announcement. Three is a campaign.</h2>
+      <div class="seq">
+        <div class="row"><div class="d">Mon 15th</div><div><div class="s">Latte art throwdown, Friday the 25th</div><div class="j">Announce. Full detail, calendar add.</div></div></div>
+        <div class="row"><div class="d">Tue 22nd</div><div><div class="s">Three days out: burgers, wine, and a bracket</div><div class="j">Remind. Leads with the food, not the coffee.</div></div></div>
+        <div class="row"><div class="d">Fri 25th</div><div><div class="s">Tonight at 5:30 in Madisonville</div><div class="j">Show up. Two sentences and directions.</div></div></div>
       </div>
-      <div style="padding-top:14px;font-size:12.5px;line-height:20px;">
-        <a href="{% unsubscribe %}" style="color:#FBF5E3;text-decoration:underline;">Unsubscribe</a>
-        <span style="color:#96382F;padding:0 6px;">&middot;</span>
-        <a href="{% manage_preferences %}" style="color:#FBF5E3;text-decoration:underline;">Manage preferences</a>
-      </div>
-      <div style="padding-top:16px;font-size:11.5px;color:#A8564E;">&copy; 2026 Mom 'n 'em Coffee</div>
+      <p class="note">The second email leads with smashburgers and wine because the list is mostly not baristas. A bracket is the draw for a tenth of them. Giving up a Friday night needs a different reason.</p>
     </div>
 
-  </td></tr>
-</table>
-</td></tr></table>
+    <div class="blk">
+      <h2>Decisions worth defending</h2>
+      <p><strong>The prize leads.</strong> A $1,500 machine is the hook for everyone who does not care about latte art, which is most of the list.</p>
+      <p><strong>Date and address stay as live text</strong> in a maroon block rather than baked into artwork, so the two facts that matter survive images-off, dark mode and a screen reader.</p>
+      <p><strong>Competing and the raffle are quiet.</strong> Small audiences, paid actions. Making them loud would invert the hierarchy against the free primary CTA.</p>
+      <p><strong>There is a path for people who cannot come.</strong> Most of the list will not attend on a Friday. Without a shop link they reach the bottom with nothing to do.</p>
+    </div>
+  </div>
+</div>
+
+<footer class="w">Concept work. Not commissioned, not a client. &nbsp;·&nbsp; <a href="../">Back to portfolio</a></footer>
 </body>
