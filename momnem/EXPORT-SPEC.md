@@ -80,3 +80,17 @@ Nothing links to it, so it is not published until they say yes.
    will be gone, which is the tradeoff for keeping them in the designed box.
    That is why `hero.jpg` has the full date and address in its alt text.
 3. Click every link. Two `REPLACE_WITH_` placeholders are still in there.
+
+---
+
+# After you replace ANY image
+
+    cd ~/job-search/portfolio/web/momnem
+    python3 stamp.py
+    cd .. && git add -A momnem && git commit -m "new art" && git push
+
+`stamp.py` rewrites every asset URL with a short hash of that file's bytes.
+Filenames stay the same, so your Figma export target does not change, but the
+URL changes the instant the image does. Without it a replaced `hero.jpg` keeps
+serving the old picture from browser and CDN cache and it looks like nothing
+happened.
