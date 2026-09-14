@@ -19,7 +19,7 @@
  .bar i{width:66px;height:5px;border-radius:3px;background:#4A423A;display:block}
  .screen{height:calc(100% - 22px);border-radius:36px;overflow:hidden;background:#fff}
  .screen iframe{width:100%;height:100%;border:0;display:block}
- .hint{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;
+ .hint{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 14px;
    padding:10px 14px;border:1px solid #E2D7BC;background:#fff;
    font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--maroon);font-weight:700}
  .hint span{display:inline-block;animation:nudge 1.8s ease-in-out infinite}
@@ -104,6 +104,7 @@
 
 <div class="w stage">
   <div>
+    <div class="hint">Scroll inside the phone <span>&darr;</span></div>
     <div class="phone">
       <div class="bar"><i></i></div>
       <div class="screen"><iframe src="email.html?v=baa275fb" title="Latte Art Throwdown announcement email" loading="lazy"></iframe></div>
@@ -113,63 +114,75 @@
         <button role="tab" aria-selected="false" data-src="email-2.html?v=083ee180">2 · Reminder</button>
         <button role="tab" aria-selected="false" data-src="email-3.html?v=96e5aa8b">3 · Day-of</button>
       </div>
-      <div class="hint">Scroll inside the phone <span>&darr;</span></div>
   </div>
 
   <div class="copy">
     <div class="blk">
-      <h2>The brief I gave myself</h2>
-      <p>Mom 'n 'em announced a latte art throwdown on Facebook with a Fellow Series 1 espresso machine as the grand prize, a $15 competitor entry, a raffle, smashburgers and a DJ.</p>
-      <p>Everything in the email comes from that post. Nobody asked for this.</p>
+      <h2>What this is</h2>
+      <p>You announced the throwdown on Facebook. I turned it into three emails. Nobody asked me to and there is nothing attached to it.</p>
+      <p>Everything factual in here came straight from that post: the Fellow, the $15 entry, the raffle, Sydney on the griddle, Voyager, the DJ. I never confirmed any of it with you, so read it once before it goes anywhere.</p>
     </div>
 
     <div class="blk">
-      <h2>One email is an announcement. Three is a campaign.</h2>
+      <h2>Why three emails and not one</h2>
+      <p>One email is an announcement. Three is a campaign, and the difference is usually most of the attendance.</p>
       <p class="openhint">Click any send to open it full screen &#8599;</p>
       <div class="seq">
-        <div class="row"><div class="d">Mon 15th</div><div><div class="s"><a href="email.html" target="_blank" rel="noopener" style="color:inherit;border-bottom:1px solid #E2D7BC;">Latte art throwdown, Friday the 25th</a></div><div class="j">Announce. Full detail, calendar add.</div></div></div>
-        <div class="row"><div class="d">Tue 22nd</div><div><div class="s"><a href="email-2.html" target="_blank" rel="noopener" style="color:inherit;border-bottom:1px solid #E2D7BC;">Three days out: burgers, wine, and a bracket</a></div><div class="j">Remind. Leads with the food, not the coffee.</div></div></div>
-        <div class="row"><div class="d">Fri 25th</div><div><div class="s"><a href="email-3.html" target="_blank" rel="noopener" style="color:inherit;border-bottom:1px solid #E2D7BC;">Tonight at 5:30 in Madisonville</a></div><div class="j">Show up. Two sentences and directions.</div></div></div>
+        <div class="row"><div class="d">Mon 15th</div><div><div class="s"><a href="email.html" target="_blank" rel="noopener">Latte art throwdown, Friday the 25th</a></div><div class="j">The announcement. Everything in it, plus a calendar add.</div></div></div>
+        <div class="row"><div class="d">Tue 22nd</div><div><div class="s"><a href="email-2.html" target="_blank" rel="noopener">Three days out: burgers, wine, and a bracket</a></div><div class="j">The reminder. Opens on the food, not the coffee.</div></div></div>
+        <div class="row"><div class="d">Fri 25th</div><div><div class="s"><a href="email-3.html" target="_blank" rel="noopener">Tonight at 5:30 in Madisonville</a></div><div class="j">The nudge. Two sentences and directions.</div></div></div>
       </div>
-      <p class="note">The second email leads with smashburgers and wine because the list is mostly not baristas. A bracket is the draw for a tenth of them. Giving up a Friday night needs a different reason.</p>
+      <p class="note">Each one assumes the reader never opened the one before it, so the date and the address repeat every time. What changes is the opening line, because the question in someone&rsquo;s head changes: what is this, then am I giving up a Friday, then what am I doing tonight.</p>
     </div>
 
     <div class="blk">
-      <h2>Decisions worth defending</h2>
-      <p><strong>The prize leads, not the competition.</strong> A grand-prize espresso machine is the hook for everyone who does not care about latte art, which is most of the list. The bracket is the draw for maybe a tenth of them.</p>
-      <p><strong>The artwork carries the date and address, so the alt text has to.</strong> Baking them into the maroon block gives the brand its own display type, which live HTML cannot do. The cost is that a reader with images off gets nothing, so the full date, time and street address sit in the image&rsquo;s alt attribute. It is a trade, and it is the one place in this campaign where design won over resilience.</p>
-      <p><strong>Competing and the raffle are quiet.</strong> Small audiences, paid actions. Making them loud would invert the hierarchy against the free primary CTA, which is what the other 95% of the list is deciding about.</p>
-      <p><strong>Only the announce gets a shop link.</strong> Most of a coffee shop&rsquo;s list will not give up a Friday, so the first send ends with somewhere for them to go. The reminder and the day-of deliberately do not repeat it. Their job is attendance, and a second call to action on a day-of email is a leak.</p>
-      <p><strong>The raffle is the strongest mechanic in the event.</strong> &ldquo;You have to be there to win&rdquo; makes a $10 ticket a firmer commitment to attend than any calendar add. That is why it gets a block rather than a line.</p>
-      <p><strong>Each send assumes the reader never opened the last one.</strong> Date, time and address repeat in all three. What changes is the lead, because the question changes: what is this, then am I giving up a Friday, then what am I doing tonight.</p>
+      <h2>Why each piece is where it is</h2>
+
+      <p><strong>The prize opens the first email, not the competition.</strong> A throwdown is the draw for maybe a tenth of your list. An espresso machine somebody is walking out with is the draw for the rest.</p>
+
+      <p><strong>The second email leads with smashburgers and wine.</strong> By then they know what the event is. The question has become whether to give up a Friday night, and food and a DJ answer that better than a bracket does.</p>
+
+      <p><strong>The day-of has one button and it is directions.</strong> A calendar add at 3pm on the day is useless. That email is built to be read in about five seconds on a phone while somebody decides what to do tonight.</p>
+
+      <p><strong>Competing and the raffle are kept quiet.</strong> They are paid actions for small audiences. If they shouted, they would pull attention from the free thing the other 95% of your list is actually deciding about.</p>
+
+      <p><strong>Only the first email links to the shop.</strong> Most of your list will not come out on a Friday, so the announcement ends with somewhere else for them to go. The other two do not repeat it on purpose, because a second ask on a day-of email just splits the one thing you want.</p>
+
+      <p><strong>The raffle is the best mechanic you have.</strong> &ldquo;You have to be there to win&rdquo; turns a $10 ticket into a firmer commitment to show up than any calendar reminder. That is why it gets its own block.</p>
+
+      <p><strong>One trade you should know about.</strong> Your date and address live inside the maroon artwork rather than as text, which is what lets them use your display type. The cost is that anyone reading with images turned off sees nothing there, so I put the full date, time and street address into the image&rsquo;s alt text as a backstop. If you would rather be safe than styled, that block can be rebuilt as plain text in about ten minutes.</p>
     </div>
 
     <div class="blk">
-      <h2>What I measured</h2>
-      <p>Opinions are cheap in a portfolio. These are numbers off the built files.</p>
+      <h2>What I checked before sending you this</h2>
       <table class="mx">
-        <tr><th>Send</th><th class="r">Primary CTA</th><th class="r">Total height</th></tr>
+        <tr><th>Send</th><th class="r">Button appears at</th><th class="r">Full height</th></tr>
         <tr><td>1 &middot; Announce</td><td class="r">559px</td><td class="r">3,532px</td></tr>
         <tr><td>2 &middot; Reminder</td><td class="r">703px</td><td class="r">1,663px</td></tr>
         <tr><td>3 &middot; Day-of</td><td class="r">702px</td><td class="r">1,242px</td></tr>
       </table>
-      <p><strong>Every primary CTA lands above the mobile fold</strong>, which sits near 740px on an iPhone after mail-app chrome. Email 2 first put its calendar button at 1,142px because the artwork sat between the copy and the ask. Moving the artwork below the CTA and tightening four paddings brought it to 703.</p>
-      <p><strong>Length falls as urgency rises.</strong> 3,532 to 1,663 to 1,242. By the third email a reader can tell at a glance that this one is quick, which is what you want at 3pm on a Friday.</p>
-      <p><strong>The CTA changes with the clock.</strong> Add-to-calendar on the announce and the reminder, directions on the day-of. A calendar add at 3pm on the day is worthless.</p>
-      <p><strong>Every image is under 400KB</strong> and each asset URL carries a content hash, so a replaced file cannot serve stale from a CDN or a browser cache.</p>
+      <p><strong>The main button is visible without scrolling on every one.</strong> A phone screen runs out around 740px once the mail app takes its share. All three land under that.</p>
+      <p><strong>They get shorter as the date gets closer.</strong> By the third email somebody can tell at a glance that it is quick, which is what you want on a Friday afternoon.</p>
+      <p><strong>Rendered and read at phone and desktop width</strong>, with images switched off, and every link clicked. Images are all under 400KB so they load on a phone on data.</p>
+      <p><strong>The unsubscribe links use Klaviyo&rsquo;s tags</strong> and resolve on send. Notes in the download cover what to do if you rebuild it in the drag-and-drop editor instead.</p>
     </div>
 
     <div class="blk">
-      <h2>Want to run it?</h2>
-      <p>It is yours. The whole campaign packages into one download: three HTML files, every image, and a page of setup notes for Klaviyo.</p>
+      <h2>Take it</h2>
+      <p>It is yours, free, and I will not follow up about it. Everything is in one download: the three emails, every image, and a page of setup notes written for Klaviyo.</p>
       <p><a class="dl" href="latte-art-throwdown-campaign.zip">Download the campaign &darr;</a></p>
-      <p class="fine">Each email is a single HTML file. Paste it into a Klaviyo Custom HTML block, or rebuild it in the drag-and-drop editor so your team can edit it later without me. Notes for both are in the download.</p>
+      <p class="fine">Two links in there are blank because I could not find them: the competitor signup and the raffle tickets. Search the files for REPLACE_WITH. If any of it is wrong, or you want a hand getting it in, my email is at the bottom.</p>
     </div>
-    </div>
+
   </div>
 </div>
 
-<footer class="w">Concept work. Not commissioned, not a client. &nbsp;·&nbsp; <a href="../">Back to portfolio</a></footer>
+<footer class="w">
+  Made by Jacob Gilliam &middot; Cincinnati &middot;
+  <a href="mailto:jacogilliam@gmail.com" style="border-bottom:1px solid #E2D7BC">jacogilliam@gmail.com</a>
+  &nbsp;&middot;&nbsp; <a href="../" style="border-bottom:1px solid #E2D7BC">More of my work</a>
+  <br><span style="opacity:.75">Concept work. Not commissioned, not a client.</span>
+</footer>
 
 <script>
 (function(){
