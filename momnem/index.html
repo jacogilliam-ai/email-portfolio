@@ -35,6 +35,11 @@
  .row .d{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding-top:3px}
  .row .s{font-weight:600}
  .row .j{font-size:14.5px;color:var(--mut);margin-top:2px}
+ .row .s a{text-decoration:none;border-bottom:1px solid #D9C9A8}
+ .row:hover .s a{border-bottom-color:var(--maroon)}
+ .row .s a:after{content:" \2197";font-size:.82em;color:var(--mut)}
+ .row:hover .s a:after{color:var(--maroon)}
+ .openhint{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:0 0 12px}
  .note{font-size:14px;color:var(--mut);border-left:2px solid #E2D7BC;padding-left:18px;margin-top:26px}
  footer{padding-top:44px;padding-bottom:96px;border-top:1px solid #E2D7BC;font-size:13px;color:var(--mut)}
  @media(max-width:900px){
@@ -59,12 +64,12 @@
   <div>
     <div class="phone">
       <div class="bar"><i></i></div>
-      <div class="screen"><iframe src="email.html?v=2a431961" title="Latte Art Throwdown announcement email" loading="lazy"></iframe></div>
+      <div class="screen"><iframe src="email.html?v=93918f91" title="Latte Art Throwdown announcement email" loading="lazy"></iframe></div>
     </div>
     <div class="tabs" role="tablist">
-        <button role="tab" aria-selected="true"  data-src="email.html?v=2a431961">1 · Announce</button>
-        <button role="tab" aria-selected="false" data-src="email-2.html?v=93e3ebb6">2 · Reminder</button>
-        <button role="tab" aria-selected="false" data-src="email-3.html?v=7a28b3b3">3 · Day-of</button>
+        <button role="tab" aria-selected="true"  data-src="email.html?v=93918f91">1 · Announce</button>
+        <button role="tab" aria-selected="false" data-src="email-2.html?v=a5014a83">2 · Reminder</button>
+        <button role="tab" aria-selected="false" data-src="email-3.html?v=ae199feb">3 · Day-of</button>
       </div>
       <div class="hint">scroll inside &darr;</div>
   </div>
@@ -78,10 +83,11 @@
 
     <div class="blk">
       <h2>One email is an announcement. Three is a campaign.</h2>
+      <p class="openhint">Click any send to open it full screen &#8599;</p>
       <div class="seq">
-        <div class="row"><div class="d">Mon 15th</div><div><div class="s"><a href="email.html" style="color:inherit;border-bottom:1px solid #E2D7BC;">Latte art throwdown, Friday the 25th</a></div><div class="j">Announce. Full detail, calendar add.</div></div></div>
-        <div class="row"><div class="d">Tue 22nd</div><div><div class="s"><a href="email-2.html" style="color:inherit;border-bottom:1px solid #E2D7BC;">Three days out: burgers, wine, and a bracket</a></div><div class="j">Remind. Leads with the food, not the coffee.</div></div></div>
-        <div class="row"><div class="d">Fri 25th</div><div><div class="s"><a href="email-3.html" style="color:inherit;border-bottom:1px solid #E2D7BC;">Tonight at 5:30 in Madisonville</a></div><div class="j">Show up. Two sentences and directions.</div></div></div>
+        <div class="row"><div class="d">Mon 15th</div><div><div class="s"><a href="email.html" target="_blank" rel="noopener" style="color:inherit;border-bottom:1px solid #E2D7BC;">Latte art throwdown, Friday the 25th</a></div><div class="j">Announce. Full detail, calendar add.</div></div></div>
+        <div class="row"><div class="d">Tue 22nd</div><div><div class="s"><a href="email-2.html" target="_blank" rel="noopener" style="color:inherit;border-bottom:1px solid #E2D7BC;">Three days out: burgers, wine, and a bracket</a></div><div class="j">Remind. Leads with the food, not the coffee.</div></div></div>
+        <div class="row"><div class="d">Fri 25th</div><div><div class="s"><a href="email-3.html" target="_blank" rel="noopener" style="color:inherit;border-bottom:1px solid #E2D7BC;">Tonight at 5:30 in Madisonville</a></div><div class="j">Show up. Two sentences and directions.</div></div></div>
       </div>
       <p class="note">The second email leads with smashburgers and wine because the list is mostly not baristas. A bracket is the draw for a tenth of them. Giving up a Friday night needs a different reason.</p>
     </div>
