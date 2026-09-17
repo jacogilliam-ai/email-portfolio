@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Payload, a demo page and the lifecycle behind it</title>
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="description" content="A concept build for payload.com: a demo page with a real URL, inline booking, and the seven emails that follow. By Jacob Gilliam.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Payload, a demo page and the lifecycle behind it">
+<meta property="og:description" content="Their highest value page did not exist. So I built it, plus the seven emails behind it.">
+<meta property="og:image" content="https://jacobgilliam.co/payload/img/demo.png">
+<meta property="og:url" content="https://jacobgilliam.co/payload/">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+ :root{--bg:#FAFAF8;--ink:#141312;--mut:#6F6960;--line:#DFDCD5;--panel:#F1EFEA;
+       --dark:#141312;--light:#FAFAF8;--rule:#D2CEC6;
+       --navbg:rgba(250,250,248,.93);--navhov:rgba(20,19,18,.07);--navline:#DFDCD5;--navink:#141312}
+ *{box-sizing:border-box}
+ html{scroll-behavior:smooth}
+ @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+ body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.68 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+ .w{max-width:1100px;margin:0 auto;padding-left:34px;padding-right:34px}
+ .n{max-width:640px}
+ a{color:inherit}
+ img{display:block;width:100%}
+ :where(a,button):focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
+
+ /* the site's shared masthead, same component as the other case studies */
+ .topnav{position:sticky;top:0;z-index:50;background:var(--navbg);
+   backdrop-filter:saturate(150%) blur(10px);-webkit-backdrop-filter:saturate(150%) blur(10px);
+   border-bottom:1px solid var(--navline)}
+ .topnav .inner{max-width:1080px;margin:0 auto;padding:6px 30px;display:flex;
+   justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+ /* 44px minimum touch target, per the responsive rules */
+ .topnav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;
+   font-size:13px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+   color:var(--navink);font-weight:600;border-radius:3px;line-height:1}
+ .topnav a:hover{background:var(--navhov)}
+ .topnav .home{margin-left:-12px}
+ .topnav nav{display:flex;gap:2px;flex-wrap:wrap;margin-right:-12px}
+
+ header{padding-top:92px;padding-bottom:60px}
+ .kick{font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--mut);margin-bottom:30px}
+ h1{font:400 clamp(58px,11.5vw,132px)/0.9 Georgia,'Times New Roman',serif;margin:0;letter-spacing:-.045em}
+ .meta{display:flex;flex-wrap:wrap;gap:8px 30px;margin-top:34px;font-size:12px;
+   letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+ .lede{font:400 clamp(23px,3.1vw,32px)/1.44 Georgia,serif;letter-spacing:-.02em;margin:0;max-width:20ch}
+ .deck{margin-top:28px;max-width:640px}
+ .deck a{font-weight:600}
+
+ section{padding-top:112px}
+ .hd{display:grid;grid-template-columns:64px 1fr;align-items:baseline;margin-bottom:38px;
+   border-top:1px solid var(--line);padding-top:22px}
+ .hd .no{font-size:11px;letter-spacing:.2em;color:var(--mut);padding-top:5px}
+ .hd h2{font:400 clamp(26px,3.6vw,38px)/1.12 Georgia,serif;margin:0;letter-spacing:-.028em;max-width:22ch}
+ p{margin:0 0 21px}
+ .mut{color:var(--mut)}
+ .fine{font-size:14.5px;color:var(--mut);margin-top:22px}
+
+ /* evidence block, the terminal output that started it */
+ .ev{background:var(--dark);color:#DCD8D1;border-radius:3px;padding:30px 32px;margin:0 0 26px;
+   overflow-x:auto;font:13.5px/1.85 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+ .ev b{color:#fff;font-weight:600}
+ .ev i{color:#8C857B;font-style:normal}
+ .ev-cap{font-size:13.5px;color:var(--mut);margin:0 0 34px}
+
+ figure{margin:0}
+ .shot{margin-top:14px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+   box-shadow:0 18px 44px rgba(20,19,18,.09)}
+ figcaption{font-size:13.5px;color:var(--mut);margin-top:14px;max-width:640px}
+ .wide{margin-top:48px}
+
+ /* decisions */
+ .dec{display:grid;grid-template-columns:repeat(2,1fr);gap:52px 60px;margin-top:8px}
+ .dec article{border-top:1px solid var(--rule);padding-top:20px}
+ .dec .no{font-size:11px;letter-spacing:.2em;color:var(--mut);display:block;margin-bottom:12px}
+ .dec h3{font:400 23px/1.28 Georgia,serif;margin:0 0 12px;letter-spacing:-.02em}
+ .dec p{font-size:15.5px;line-height:1.66;margin:0}
+
+ /* the flow table */
+ table{width:100%;border-collapse:collapse;font-size:15.5px;margin-top:6px}
+ th{text-align:left;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);
+   font-weight:600;padding:0 16px 13px 0;border-bottom:1px solid var(--line)}
+ td{padding:16px 16px 16px 0;border-bottom:1px solid var(--line);vertical-align:top}
+ td b{font-weight:600;white-space:nowrap}
+ td em{font-style:normal;color:var(--mut);font-size:14px;display:block;margin-top:4px}
+ code{font:13px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+   background:var(--panel);padding:2px 6px;border-radius:2px}
+
+ /* email pair */
+ .duo{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:8px;align-items:start}
+ .duo .shot{margin-top:0;max-height:640px;overflow:hidden;position:relative}
+ /* the crop is deliberate, so it dissolves rather than stopping mid sentence */
+ .duo .shot::after{content:"";position:absolute;left:0;right:0;bottom:0;height:96px;
+   background:linear-gradient(to bottom,rgba(250,250,248,0),var(--bg));pointer-events:none}
+ .duo a{text-decoration:none;display:block}
+ .duo a .shot{transition:box-shadow .16s,transform .16s}
+ .duo a:hover .shot{box-shadow:0 22px 52px rgba(20,19,18,.16);transform:translateY(-2px)}
+ .open{display:inline-block;margin-top:14px;font-size:13px;letter-spacing:.14em;
+   text-transform:uppercase;color:var(--mut);border-bottom:1px solid var(--line);padding-bottom:2px}
+ .duo a:hover .open{color:var(--ink);border-bottom-color:var(--ink)}
+
+ /* dark band */
+ .band{background:var(--dark);color:var(--light);margin-top:104px}
+ .band .w{padding-top:86px;padding-bottom:86px}
+ .band .hd{border-top-color:#2C2A27}
+ .band .hd .no{color:#8C857B}
+ .band .measures{display:grid;grid-template-columns:repeat(2,1fr);gap:44px 60px;margin-top:4px}
+ .band .measures article{border-top:1px solid #2C2A27;padding-top:20px}
+ .band h3{font:400 21px/1.3 Georgia,serif;margin:0 0 11px;letter-spacing:-.02em}
+ .band p{font-size:15.5px;line-height:1.66;color:#A9A29A;margin:0}
+ .band code{background:#232120;color:#DCD8D1}
+
+ /* next + footer */
+ .next{padding-top:104px}
+ .next a{display:grid;grid-template-columns:1fr auto;gap:26px;align-items:center;
+   text-decoration:none;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+   padding:36px 0;transition:padding-left .16s}
+ .next a:hover{padding-left:10px}
+ .next .lbl{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--mut);
+   display:block;margin-bottom:12px}
+ .next h3{font:400 clamp(24px,3vw,32px)/1.2 Georgia,serif;margin:0 0 8px;letter-spacing:-.025em}
+ .next p{font-size:15.5px;color:var(--mut);margin:0}
+ .next .arr{font-size:26px;color:var(--mut)}
+
+ footer{padding:68px 0 76px;margin-top:64px;border-top:1px solid var(--line);
+   font-size:13.5px;color:var(--mut)}
+ .foot-id{display:flex;gap:10px 26px;flex-wrap:wrap;justify-content:space-between;align-items:baseline}
+ footer a{border-bottom:1px solid var(--line);text-decoration:none}
+ footer a:hover{border-bottom-color:var(--mut)}
+ .scope{margin:0 0 34px;max-width:640px}
+
+ @media (max-width:880px){
+   .dec,.duo,.band .measures{grid-template-columns:1fr;gap:38px}
+   section{padding-top:84px}
+   .hd{grid-template-columns:44px 1fr}
+   .duo .shot{max-height:none}
+ }
+ @media (max-width:620px){
+   .w{padding-left:22px;padding-right:22px}
+   /* three columns of prose will not fit 320px, so the rows become blocks */
+   table,tbody,tr,td{display:block;width:100%}
+   thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+   tr{border-bottom:1px solid var(--line);padding:22px 0}
+   tr:last-child{border-bottom:none}
+   td{border-bottom:none;padding:0 0 12px}
+   td:last-child{padding-bottom:0}
+   td:first-child b{font-size:19px}
+   td:first-child b::before{content:"Path ";font-weight:400;color:var(--mut)}
+   .topnav .inner{padding:4px 14px;gap:0}
+   .topnav a{font-size:12px;padding:0 9px;letter-spacing:.06em}
+   .topnav .home{margin-left:-9px}
+   .ev{padding:22px 20px;font-size:12px}
+   footer a{display:inline-block;padding-block:10px}
+ }
+</style>
+</head>
+<body>
+
+<div class="topnav"><div class="inner">
+  <a class="home" href="../">&larr;&nbsp; Jacob Gilliam</a>
+  <nav>
+    <a href="../aurean/">Aurean</a>
+    <a href="https://myreturners.com" target="_blank" rel="noopener">myReturners</a>
+    <a href="../jacob-gilliam-resume.pdf" target="_blank" rel="noopener">R&eacute;sum&eacute;</a>
+    <a href="https://linkedin.com/in/jacogilliam" target="_blank" rel="noopener">LinkedIn</a>
+  </nav>
+</div></div>
+
+<header><div class="w">
+  <p class="kick">Concept &middot; unsolicited</p>
+  <h1>Payload</h1>
+  <div class="meta"><span>Landing page</span><span>Lifecycle</span><span>Sept 2026</span><span>Hand coded</span></div>
+</div></header>
+
+<div class="w">
+  <p class="lede">Their highest value page did not exist, so I built it.</p>
+  <div class="deck">
+    <p>Payload is a Cincinnati embedded payments company that moves about $500M a month. In August 2026 they took their first outside capital, from Fifth Third, and started pushing out of real estate into legal, insurance and professional services.</p>
+    <p>That expansion runs on demand generation. Demand generation runs on knowing which page produced the meeting. I spent a week finding out whether their site could answer that question, then built the part that was missing: a demo page with a real address, the booking screen behind it, and the seven emails that follow.</p>
+    <p><a href="https://jacogilliam-ai.github.io/pl-concept-7k2f/" target="_blank" rel="noopener">Open the working build</a> &nbsp;&middot;&nbsp; <span class="mut">three pages, all of it clickable</span></p>
+  </div>
+</div>
+
+<section><div class="w">
+  <div class="hd"><span class="no">01</span><h2>One finding produced all of it</h2></div>
+  <div class="n">
+    <p>A teardown of thirty pages turned up thirty one items. This case study only covers the one that mattered, because it is the one everything else hangs off.</p>
+    <p><b>Every conversion action on payload.com is a modal with no URL.</b> I clicked all five in a real browser and watched the address bar.</p>
+  </div>
+
+  <div class="ev">SIGN IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>&rarr;</i> url=<b>https://payload.com/</b>&nbsp;&nbsp; opens "Please sign in"<br>
+START BUILDING&nbsp;&nbsp;&nbsp; <i>&rarr;</i> url=<b>https://payload.com/</b>&nbsp;&nbsp; opens "Enter your information"<br>
+TALK TO OUR TEAM <i>&rarr;</i> url=<b>https://payload.com/</b>&nbsp;&nbsp; opens "Contact Us"<br>
+GET STARTED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>&rarr;</i> url=<b>https://payload.com/</b>&nbsp;&nbsp; opens "Contact Us"<br>
+CONTACT US&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>&rarr;</i> url=<b>https://payload.com/</b>&nbsp;&nbsp; opens "Contact Us"</div>
+  <p class="ev-cap">All five are <code>&lt;button&gt;</code> elements that open an overlay. <code>/demo</code>, <code>/contact</code> and <code>/pricing</code> all return 404.</p>
+
+  <div class="n">
+    <p>That one decision cascades. No landing page to point an ad at. No thank you URL to fire a conversion on. No link a salesperson can paste into an email. No step in analytics between "visited" and "became a lead."</p>
+    <p>It is also not a design problem, which is what makes it worth raising. Nobody chose it. It is a page that does not exist yet.</p>
+  </div>
+</div></section>
+
+<section><div class="w">
+  <div class="hd"><span class="no">02</span><h2>So the first thing it needed was an address</h2></div>
+  <div class="n">
+    <p>The form asks two questions before it asks for anything typed. Both are one click, and both come straight off Payload's own solutions nav, so the answers map onto pages and content that already exist.</p>
+  </div>
+  <figure class="wide">
+    <div class="shot"><img src="img/demo.png" alt="The demo page: headline, credentials, customer logo marquee, and a four screen form panel" width="2160" height="1215" loading="lazy"></div>
+    <figcaption>The first screen. Card, credentials and the customer marquee all clear the fold at 869px, which is the viewport I built against rather than a round number.</figcaption>
+  </figure>
+</div></section>
+
+<section><div class="w">
+  <div class="hd"><span class="no">03</span><h2>Four decisions worth arguing about</h2></div>
+  <div class="dec">
+    <article>
+      <span class="no">01</span>
+      <h3>Booking happens on the page, not in an email</h3>
+      <p>Every email you make somebody open is a place to lose them, and intent peaks in the seconds after they submit. The calendar sits on the thank you page, so it acts on that peak instead of posting a letter to it. Email becomes the safety net underneath, which is a job it is good at.</p>
+    </article>
+    <article>
+      <span class="no">02</span>
+      <h3>Not every submission earns a calendar slot</h3>
+      <p>Finix, Moov and CargoWise all collect details and promise a reply rather than exposing a calendar, and their reasons are sound. So this gates instead of choosing. Pre-launch and still deciding gets a written answer and sandbox credentials, and the page says why out loud. The button relabels itself so it never promises a calendar it is about to withhold.</p>
+    </article>
+    <article>
+      <span class="no">03</span>
+      <h3>The qualifier costs one click and comes first</h3>
+      <p>Typing is the expensive part of a form, so the first screen asks for none. It also means an abandon on screen four still reports who they were, because the industry fired before a character was typed.</p>
+    </article>
+    <article>
+      <span class="no">04</span>
+      <h3>The calendar refuses dates too far out</h3>
+      <p>The longer the gap between booking and the call, the more chances there are to forget it or double book it. The picker caps at five business days and shows the soonest first. Saying that on the page turns a constraint into a reason to trust the person on the other end.</p>
+    </article>
+  </div>
+
+  <figure class="wide">
+    <div class="shot"><img src="img/booking.png" alt="The booking screen with a confirmed slot and the path indicator band below it" width="2160" height="1350" loading="lazy"></div>
+    <figcaption>The booking screen after a slot is picked.</figcaption>
+  </figure>
+
+  <figure style="margin-top:44px">
+    <div class="shot"><img src="img/pathband.png" alt="A dark band reading: this submission is on path A, booked a slot and showed up" width="2200" height="198" loading="lazy"></div>
+    <figcaption>The band underneath it reads the same signals the flow does, and rewrites itself the moment a slot is confirmed. Pre-launch answers never see a calendar, so they land on D before the page finishes loading. It exists because a flow diagram is easy to nod at and hard to believe. This puts the branch on screen at the moment a real person would enter it, and links straight to that path in the builder.</figcaption>
+  </figure>
+</div></section>
+
+<section><div class="w">
+  <div class="hd"><span class="no">04</span><h2>Then the half that most demo pages forget</h2></div>
+  <div class="n">
+    <p>A page that converts and hands the lead to nobody has generated a to do item. Seven emails, four paths, and every path terminates. None of them loops.</p>
+  </div>
+
+  <table>
+    <thead><tr><th>Path</th><th>What sends</th><th>How it ends</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>A</b><em>Booked, showed up</em></td>
+        <td>Confirmation now, reminder at <code>T-24h</code>, the written estimate one business day after the call, a close at day fourteen.</td>
+        <td><code>closed_lost</code><em>after fourteen silent days</em></td>
+      </tr>
+      <tr>
+        <td><b>B</b><em>Booked, no show</em></td>
+        <td>Same first two, then a recovery email <b>inside the hour</b>. Same day rebooking is the only kind that converts.</td>
+        <td><code>no_show_lapsed</code><em>no estimate ever sends</em></td>
+      </tr>
+      <tr>
+        <td><b>C</b><em>Never picked a time</em></td>
+        <td>One nudge at <code>+24h</code>, which says out loud that it is the only one.</td>
+        <td><code>no_booking</code><em>to a quarterly human list</em></td>
+      </tr>
+      <tr>
+        <td><b>D</b><em>Never shown a calendar</em></td>
+        <td>One email inside a business day, naming the two decisions that come before a demo is useful.</td>
+        <td><code>too_early</code><em>any reply re enters at booking</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="fine">The cadence also compresses. A sequence built for a meeting nine days out is wrong for a meeting tomorrow, so under 24 hours the confirmation is the reminder and nothing else sends.</p>
+
+  <figure class="wide">
+    <div class="shot"><img src="img/flow.png" alt="The flow diagram: trigger, time delay and email nodes down a vertical spine with the reasoning beside it" width="2160" height="1500" loading="lazy"></div>
+    <figcaption>Built the way it would be built. A pill is a wait, a card is an email you can open, and the last node says what the record becomes.</figcaption>
+  </figure>
+
+  <div class="n" style="margin-top:56px">
+    <p><b>Two of the seven branch by industry.</b> Not just their reading, but the question they lead with. A title company gets asked which side of the close it starts on. A legal practice gets asked whether trust funds ever touch its balance. A platform gets asked who holds the funds.</p>
+    <p>The other five are identical across every industry, so the generator writes no variants for them. Eight variant files rather than thirty five. Personalising everything is how a sequence stops sounding like a person.</p>
+  </div>
+
+  <div class="duo">
+    <figure>
+      <a href="https://jacogilliam-ai.github.io/pl-concept-7k2f/emails/01-request-received.html" target="_blank" rel="noopener">
+    <div class="shot"><img src="img/email-01.png" alt="The confirmation email, with the meeting details inside the branded header" width="1360" height="2200" loading="lazy"></div>
+    <span class="open">Open email 01 &nearr;</span>
+    </a>
+      <figcaption>01, the confirmation. Seven blocks. The meeting details live inside the header so the email opens with one object that answers every logistics question.</figcaption>
+    </figure>
+    <figure>
+      <a href="https://jacogilliam-ai.github.io/pl-concept-7k2f/emails/07-not-yet.html" target="_blank" rel="noopener">
+    <div class="shot"><img src="img/email-07.png" alt="The review route email, naming the two decisions that come before a demo" width="1360" height="2508" loading="lazy"></div>
+    <span class="open">Open email 07 &nearr;</span>
+    </a>
+      <figcaption>07, the one the gate sends. The hardest to write: the form just declined to show someone a calendar, so this has to be worth more than the meeting it withheld.</figcaption>
+    </figure>
+  </div>
+
+  <p class="fine">All seven are hand coded table based HTML with plain text alternates, built from one shell in a generator rather than seven copy pasted files. They hold up with images blocked, which is the real first impression for a chunk of any B2B list.</p>
+</div></section>
+
+<div class="band"><div class="w">
+  <div class="hd"><span class="no">05</span><h2>What it would let them report</h2></div>
+  <div class="measures">
+    <article>
+      <h3>Which campaign produced a meeting</h3>
+      <p>Not which campaign produced a session. Step one fires <code>form_step_complete</code> with the industry before anyone types, <code>booking_complete</code> carries the meeting. Join those two and paid search has a numerator it did not have.</p>
+    </article>
+    <article>
+      <h3>A no show rate at all</h3>
+      <p>Bookings minus completed calls. On the current site neither end of that subtraction is recorded, so the number does not exist and nobody can be asked to improve it.</p>
+    </article>
+    <article>
+      <h3>Whether the page is telling the truth</h3>
+      <p>The page promises a written estimate in one business day. <code>estimate_delivered</code> minus <code>call_completed</code> answers that per engineer, every week. A promise nobody measures is one that quietly stops being kept.</p>
+    </article>
+    <article>
+      <h3>A closed lost reason that fills itself in</h3>
+      <p>The last email offers three answers and names the third, no, out loud. Most pipelines are full of deals nobody wants to mark dead. Asking plainly is cheaper than guessing.</p>
+    </article>
+  </div>
+</div></div>
+
+<div class="next"><div class="w">
+  <a href="../aurean/">
+    <span>
+      <span class="lbl">Next</span>
+      <h3>Aurean</h3>
+      <p>A sterling silver brand from zero to launch. Seventeen campaigns, ten flows, and the numbers behind them.</p>
+    </span>
+    <span class="arr" aria-hidden="true">&rarr;</span>
+  </a>
+</div></div>
+
+<footer>
+  <div class="w"><p class="scope">Concept work. Not commissioned by Payload and not affiliated with Payload, LLC. Customer logos are Payload's own published assets, and the quote is Bridgit Chayt's from Payload's August 2026 Fifth Third announcement. Both are used to illustrate a layout, not to imply endorsement. Recipient names and availability in the build are sample data. Nothing here shipped, so there are no results to report.</p></div>
+  <div class="w foot-id">
+    <span>Jacob Gilliam &middot; Cincinnati &middot; <a href="mailto:jacogilliam@gmail.com">jacogilliam@gmail.com</a></span>
+    <span><a href="../">Back to portfolio</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Latte Art Throwdown — campaign</title>
+<title>Latte Art Throwdown, a campaign</title>
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="../favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <meta name="description" content="A three-email campaign built for Mom &#39;n &#39;em Coffee&#39;s latte art throwdown. Concept work by Jacob Gilliam.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Latte Art Throwdown — a three-email campaign">
+<meta property="og:title" content="Latte Art Throwdown, a three-email campaign">
 <meta property="og:description" content="A three-email campaign built for Mom &#39;n &#39;em Coffee&#39;s latte art throwdown. Concept work by Jacob Gilliam.">
 <meta property="og:image" content="https://jacobgilliam.co/momnem/share.jpg?v=3075b4d2">
 <meta property="og:url" content="https://jacobgilliam.co/momnem/">
@@ -97,6 +97,19 @@
    .topnav a{font-size:12px;padding:0 9px;letter-spacing:.06em}
    .topnav .home{margin-left:-9px}
  }
+
+ /* end of piece: one specific next step, never a dead end */
+ .next{max-width:1080px;margin:104px auto 0;padding-left:30px;padding-right:30px}
+ .next a{display:grid;grid-template-columns:1fr auto;gap:26px;align-items:center;
+   text-decoration:none;border-top:1px solid #E2D7BC;border-bottom:1px solid #E2D7BC;
+   padding:36px 0;transition:padding-left .16s}
+ .next a:hover{padding-left:10px}
+ .next .lbl{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--mut);
+   display:block;margin-bottom:12px}
+ .next h3{font:400 clamp(24px,3vw,32px)/1.2 Georgia,serif;margin:0 0 8px;letter-spacing:-.025em}
+ .next p{font-size:15.5px;color:var(--mut);margin:0;max-width:52ch}
+ .next .arr{font-size:26px;color:var(--mut)}
+ @media(max-width:620px){.next{padding-left:22px;padding-right:22px}}
 </style>
 </head>
 <body>
@@ -104,6 +117,7 @@
   <a class="home" href="../">&larr;&nbsp; Jacob Gilliam</a>
   <nav>
     <a href="../aurean/">Aurean</a>
+    <a href="../payload/">Payload</a>
     <a href="https://myreturners.com" target="_blank" rel="noopener">myReturners</a>
     <a href="../jacob-gilliam-resume.pdf" target="_blank" rel="noopener">R&eacute;sum&eacute;</a>
     <a href="https://linkedin.com/in/jacogilliam" target="_blank" rel="noopener">LinkedIn</a>
@@ -112,7 +126,7 @@
 
 
 <header class="w">
-  <div class="kick">Concept — unsolicited</div>
+  <div class="kick">Concept &middot; unsolicited</div>
   <h1>Latte Art Throwdown</h1>
   <div class="meta"><span>Mom 'n 'em Coffee</span><span>Cincinnati</span><span>Event campaign</span></div>
 </header>
@@ -192,6 +206,17 @@
     </div>
 
   </div>
+</div>
+
+<div class="next">
+  <a href="../aurean/">
+    <span>
+      <span class="lbl">More work</span>
+      <h3>Aurean</h3>
+      <p>Founder of a DTC jewelry brand. A list from zero to 375, seventeen campaigns, and ten Klaviyo flows.</p>
+    </span>
+    <span class="arr" aria-hidden="true">&rarr;</span>
+  </a>
 </div>
 
 <footer class="w">
