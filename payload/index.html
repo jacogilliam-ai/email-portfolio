@@ -25,7 +25,7 @@
  .w{max-width:1100px;margin:0 auto;padding-left:34px;padding-right:34px}
  .n{max-width:640px}
  a{color:inherit}
- img{display:block;width:100%}
+ img{display:block;width:100%;height:auto}
  :where(a,button):focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
 
  /* the site's shared masthead, same component as the other case studies */
@@ -72,6 +72,13 @@
    box-shadow:0 18px 44px rgba(20,19,18,.09)}
  figcaption{font-size:13.5px;color:var(--mut);margin-top:14px;max-width:640px}
  .wide{margin-top:48px}
+ /* screenshots break out past the prose column on wide screens.
+    100% here resolves against .w's content box, so the margin goes negative. */
+ @media (min-width:1100px){
+   .figw{--W:min(1500px,calc(100vw - 68px));width:var(--W);
+     margin-inline:calc((100% - var(--W))/2)}
+   .figw figcaption{max-width:760px}
+ }
 
  /* decisions */
  .dec{display:grid;grid-template-columns:repeat(2,1fr);gap:52px 60px;margin-top:8px}
@@ -92,7 +99,7 @@
 
  /* email pair */
  .duo{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:8px;align-items:start}
- .duo .shot{margin-top:0;max-height:640px;overflow:hidden;position:relative}
+ .duo .shot{margin-top:0;max-height:760px;overflow:hidden;position:relative}
  /* the crop is deliberate, so it dissolves rather than stopping mid sentence */
  .duo .shot::after{content:"";position:absolute;left:0;right:0;bottom:0;height:96px;
    background:linear-gradient(to bottom,rgba(250,250,248,0),var(--bg));pointer-events:none}
@@ -173,7 +180,7 @@
 <header><div class="w">
   <p class="kick">Concept &middot; unsolicited</p>
   <h1>Payload</h1>
-  <div class="meta"><span>Landing page</span><span>Lifecycle</span><span>Sept 2026</span><span>Hand coded</span></div>
+  <div class="meta"><span>Landing page</span><span>Lifecycle</span><span>Sept 2026</span><span>Seven emails</span></div>
 </div></header>
 
 <div class="w">
@@ -210,7 +217,7 @@ CONTACT US&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>&rarr;</i> url=<b>https:
   <div class="n">
     <p>The form asks two questions before it asks for anything typed. Both are one click, and both come straight off Payload's own solutions nav, so the answers map onto pages and content that already exist.</p>
   </div>
-  <figure class="wide">
+  <figure class="wide figw">
     <div class="shot"><img src="img/demo.png" alt="The demo page: headline, credentials, customer logo marquee, and a four screen form panel" width="2160" height="1215" loading="lazy"></div>
     <figcaption>The first screen. Card, credentials and the customer marquee all clear the fold at 869px, which is the viewport I built against rather than a round number.</figcaption>
   </figure>
@@ -241,12 +248,12 @@ CONTACT US&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>&rarr;</i> url=<b>https:
     </article>
   </div>
 
-  <figure class="wide">
+  <figure class="wide figw">
     <div class="shot"><img src="img/booking.png" alt="The booking screen with a confirmed slot and the path indicator band below it" width="2160" height="1350" loading="lazy"></div>
     <figcaption>The booking screen after a slot is picked.</figcaption>
   </figure>
 
-  <figure style="margin-top:44px">
+  <figure class="figw" style="margin-top:44px">
     <div class="shot"><img src="img/pathband.png" alt="A dark band reading: this submission is on path A, booked a slot and showed up" width="2200" height="198" loading="lazy"></div>
     <figcaption>The band underneath it reads the same signals the flow does, and rewrites itself the moment a slot is confirmed. Pre-launch answers never see a calendar, so they land on D before the page finishes loading. It exists because a flow diagram is easy to nod at and hard to believe. This puts the branch on screen at the moment a real person would enter it, and links straight to that path in the builder.</figcaption>
   </figure>
@@ -286,7 +293,7 @@ CONTACT US&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>&rarr;</i> url=<b>https:
 
   <p class="fine">The cadence also compresses. A sequence built for a meeting nine days out is wrong for a meeting tomorrow, so under 24 hours the confirmation is the reminder and nothing else sends.</p>
 
-  <figure class="wide">
+  <figure class="wide figw">
     <div class="shot"><img src="img/flow.png" alt="The flow diagram: trigger, time delay and email nodes down a vertical spine with the reasoning beside it" width="2160" height="1500" loading="lazy"></div>
     <figcaption>Built the way it would be built. A pill is a wait, a card is an email you can open, and the last node says what the record becomes.</figcaption>
   </figure>
@@ -296,7 +303,7 @@ CONTACT US&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>&rarr;</i> url=<b>https:
     <p>The other five are identical across every industry, so the generator writes no variants for them. Eight variant files rather than thirty five. Personalising everything is how a sequence stops sounding like a person.</p>
   </div>
 
-  <div class="duo">
+  <div class="duo figw">
     <figure>
       <a href="https://jacogilliam-ai.github.io/pl-concept-7k2f/emails/01-request-received.html" target="_blank" rel="noopener">
     <div class="shot"><img src="img/email-01.png" alt="The confirmation email, with the meeting details inside the branded header" width="1360" height="2200" loading="lazy"></div>
@@ -313,7 +320,7 @@ CONTACT US&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>&rarr;</i> url=<b>https:
     </figure>
   </div>
 
-  <p class="fine">All seven are hand coded table based HTML with plain text alternates, built from one shell in a generator rather than seven copy pasted files. They hold up with images blocked, which is the real first impression for a chunk of any B2B list.</p>
+  <p class="fine">All seven are table based HTML with plain text alternates, written as code rather than assembled in a drag and drop editor, and generated from one shared shell rather than seven copy pasted files. They hold up with images blocked, which is the real first impression for a chunk of any B2B list.</p>
 </div></section>
 
 <div class="band"><div class="w">
