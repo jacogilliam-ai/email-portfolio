@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Payload, a demo page and the lifecycle behind it</title>
+<title>Payload, two funnels and the lifecycle behind them</title>
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="../favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
-<meta name="description" content="A concept build for payload.com: a demo page with a real URL, inline booking, and the seven emails that follow. By Jacob Gilliam.">
+<meta name="description" content="A concept build for payload.com: the demo page they did not have, the revenue model for the readers who are not ready yet, and ten emails across two funnels. By Jacob Gilliam.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Payload, a demo page and the lifecycle behind it">
-<meta property="og:description" content="Their highest value page did not exist. So I built it, plus the seven emails behind it.">
+<meta property="og:title" content="Payload, two funnels and the lifecycle behind them">
+<meta property="og:description" content="Two pages they were missing, ten emails, and the rules about when not to send any of them.">
 <meta property="og:image" content="https://jacobgilliam.co/payload/img/demo.png">
 <meta property="og:url" content="https://jacobgilliam.co/payload/">
 <meta name="twitter:card" content="summary_large_image">
@@ -72,6 +72,9 @@
    box-shadow:0 18px 44px rgba(20,19,18,.09)}
  figcaption{font-size:13.5px;color:var(--mut);margin-top:14px;max-width:640px}
  .wide{margin-top:48px}
+ /* a small UI detail scaled to column width looks soft and reads as a mistake.
+    Cap it at its own pixel size and let the caption run wider. */
+ .detail .shot{max-width:600px}
  /* screenshots break out past the prose column on wide screens.
     100% here resolves against .w's content box, so the margin goes negative. */
  @media (min-width:1100px){
@@ -180,15 +183,16 @@
 <header><div class="w">
   <p class="kick">Concept &middot; unsolicited</p>
   <h1>Payload</h1>
-  <div class="meta"><span>Landing page</span><span>Lifecycle</span><span>Sept 2026</span><span>Seven emails</span></div>
+  <div class="meta"><span>Two funnels</span><span>Lifecycle</span><span>Sept 2026</span><span>Ten emails</span></div>
 </div></header>
 
 <div class="w">
-  <p class="lede">Their highest value page did not exist, so I built it.</p>
+  <p class="lede">Two pages they were missing, and the reason to send almost nothing.</p>
   <div class="deck">
     <p>Payload is a Cincinnati embedded payments company that moves about $500M a month. In August 2026 they took their first outside capital, from Fifth Third, and started pushing out of real estate into legal, insurance and professional services.</p>
-    <p>That expansion runs on demand generation. Demand generation runs on knowing which page produced the meeting. I spent a week finding out whether their site could answer that question, then built the part that was missing: a demo page with a real address, the booking screen behind it, and the seven emails that follow.</p>
-    <p><a href="https://jacogilliam-ai.github.io/pl-concept-7k2f/" target="_blank" rel="noopener">Open the working build</a> &nbsp;&middot;&nbsp; <span class="mut">three pages, all of it clickable</span></p>
+    <p>That expansion runs on demand generation, and demand generation runs on knowing which page produced the meeting. I spent a week finding out whether their site could answer that, then built what was missing at both ends of it.</p>
+    <p>One end is the visitor who is ready today and has nowhere to land. The other is the reader who is three quarters away, finishes a good article, and is offered a sales call or nothing. Six pages, ten emails, and a set of rules about when not to send any of them.</p>
+    <p><a href="https://jacogilliam-ai.github.io/pl-concept-7k2f/" target="_blank" rel="noopener">Open the working build</a> &nbsp;&middot;&nbsp; <span class="mut">six pages, all of it clickable</span></p>
   </div>
 </div>
 
@@ -323,8 +327,90 @@ CONTACT US&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>&rarr;</i> url=<b>https:
   <p class="fine">All seven are table based HTML with plain text alternates, written as code rather than assembled in a drag and drop editor, and generated from one shared shell rather than seven copy pasted files. They hold up with images blocked, which is the real first impression for a chunk of any B2B list.</p>
 </div></section>
 
+<section><div class="w">
+  <div class="hd"><span class="no">05</span><h2>The demo page only catches the people who are already ready</h2></div>
+  <div class="n">
+    <p>Which is a small share of anyone reading. The rest are six to eighteen months out, and the site does the same thing to all of them.</p>
+    <p>Payload publishes genuinely good work on a roughly twice monthly cadence. Construction platforms, senior living platforms, title companies, trust accounting for law firms. The September piece on construction runs about 1,700 words and is strategic rather than promotional.</p>
+    <p><b>There is no way to subscribe. Anywhere.</b> No signup, no content offer, no gated download, not even a related articles link. Every article ends on the same two words.</p>
+  </div>
+
+  <div class="ev">GET IN TOUCH<br><span style="color:#8C857B">&nbsp;&nbsp;&rarr;</span> <b>Contact Us</b> &nbsp;<span style="color:#8C857B">(the same modal, still no URL)</span></div>
+  <p class="ev-cap">Sorted by vertical, their 17 articles run nine for real estate, six for platforms, two for legal, and none for insurance. They are expanding into legal, insurance and professional services.</p>
+
+  <div class="n">
+    <p>So somebody spends eight minutes on a strategic piece about embedding payments into construction software, finishes it interested, and the only thing on offer is talk to sales. They paid to produce the thinking, they rank for it, and then they hand the reader back to Google.</p>
+    <p>That is the same shape as the first finding. Not a design problem. A thing that does not exist.</p>
+  </div>
+</div></section>
+
+<section><div class="w">
+  <div class="hd"><span class="no">06</span><h2>What a platform lead actually needs is a number</h2></div>
+  <div class="n">
+    <p>A software platform deciding to embed payments is not one person clicking a demo button. It is a product lead, a CTO and a CFO, arguing about build versus buy, revenue share and compliance liability, across two or three quarters. Nobody reads one article and books a call.</p>
+    <p>What moves it is the thing the product lead carries into the room. So I built that instead of a newsletter box.</p>
+  </div>
+
+  <figure class="wide figw">
+    <div class="shot"><img src="img/model.png" alt="The revenue model: nine inputs on the left, results on a dark panel on the right" width="1638" height="1346" loading="lazy"></div>
+    <figcaption>Nine inputs, and not one supplied figure. Payload publishes no rate card and <code>/pricing</code> returns 404, so every number on the panel came from a field the visitor filled in. The fee structures are quoted from their own <code>/capabilities/facilitate</code>.</figcaption>
+  </figure>
+
+  <div class="n" style="margin-top:56px">
+    <p><b>Fee ownership is the input that makes it theirs.</b> Payload's own page leads with it: the platform absorbs the fee, passes it to the payer, or splits it. Rainforest, their closest competitor, has an ROI calculator in its primary navigation and no such control. It matters more than anything else on the panel, because in earnest money and legal trust payments the payer routinely carries a convenience fee, which means the platform's revenue is not a spread on interchange at all.</p>
+    <p>It also produced the decision I would defend hardest.</p>
+  </div>
+
+  <div class="duo figw" style="align-items:center">
+    <figure>
+      <div class="shot" style="max-height:none"><img src="img/model-absorb.png" alt="The results panel reading Annual cost of bundling payments instead of revenue" width="834" height="1049" loading="lazy"></div>
+    </figure>
+    <div class="n" style="max-width:none">
+      <p><b>When the platform absorbs the fee, there is no payment revenue, so the panel refuses to show any.</b> The headline flips to annual cost, and a note says the return is retention and a simpler price rather than a number.</p>
+      <p>A calculator that prints an encouraging figure the model did not produce is lying, and most of them do. A second guard fires whenever the charged rate sits below the cost rate, in any mode.</p>
+      <p class="fine" style="margin-top:0">Defaults give 250 merchants at $40k a month, so $120M of volume and a net of $640,941. That is 53.4 basis points, which lands inside the 50 to 100 range embedded payments actually runs at.</p>
+    </div>
+  </div>
+
+  <div class="n" style="margin-top:56px">
+    <p>The tool is ungated. What costs an email is the spreadsheet, because the person who ran the model is not the person who approves it, and a figure on a web page does not survive that room. One question comes with it, and it is the same vertical the demo form asks on screen one, so one person is one record across both.</p>
+  </div>
+
+  <figure class="wide detail">
+    <div class="shot"><img src="img/consent.png" alt="An unticked checkbox offering articles for the visitor's industry, with the scope written underneath" width="564" height="216" loading="lazy"></div>
+    <figcaption>Payload publishes RE/MAX Canada and the Alberta Real Estate Association as customers, so Canadian recipients exist and CASL applies. Asking for a spreadsheet is not permission to send articles. The box stays unticked because one somebody did not tick is not consent, the label names the vertical they just picked rather than saying newsletter, and the scope sits next to the box rather than in a policy, because the scope is the part people are agreeing to.</figcaption>
+  </figure>
+</div></section>
+
+<section><div class="w">
+  <div class="hd"><span class="no">07</span><h2>Then the part that is mostly deciding not to send</h2></div>
+  <div class="n">
+    <p>Three emails exist behind that download. The most any one person receives is two, and exactly one of them sends without a signal the reader created.</p>
+    <p>A drip assumes everyone who downloads something wants a relationship. Most of them wanted a spreadsheet.</p>
+  </div>
+
+  <figure class="wide figw">
+    <div class="shot"><img src="img/nurture.png" alt="The flow after the model: four paths shown as tabs, with the reasoning beside the nodes" width="2160" height="1500" loading="lazy"></div>
+    <figcaption>Four paths, all terminating. The one where the sheet never opened is a deliverability problem rather than a lost lead, so it exits to a report grouped by recipient domain: one unreachable person is noise, eleven at one company is a blocklist.</figcaption>
+  </figure>
+
+  <div class="n" style="margin-top:56px">
+    <p><b>The path that earns a demo offer does not send an email.</b> Two signals the reader created, on two different days, and then the record goes to a person with both signals and the figures attached. They write one real email in their own words. An automated "ready for a demo?" to somebody who read two articles is the move that makes a good sequence feel like a machine, and if nobody acts inside two business days the record closes rather than escalating. A sequence that cannot be staffed should stop.</p>
+    <p>And underneath both flows, the half that never appears in a flow diagram.</p>
+  </div>
+
+  <figure class="wide">
+    <div class="shot"><img src="img/stops.png" alt="A table of six signals that cancel a queued send" width="1188" height="1344" loading="lazy"></div>
+    <figcaption>The load bearing line is the one underneath: suppression is checked when the email sends, not when the person enrols. Enrolment is a snapshot. Getting it backwards is exactly why somebody who spoke to a rep on Tuesday still receives "still want the thirty minutes?" on Friday.</figcaption>
+  </figure>
+
+  <div class="n" style="margin-top:56px">
+    <p>Where it would live is answered from their DNS rather than guessed. Their sending domain already authorises HubSpot alongside SendGrid, Zendesk and Google Workspace, so these are properties on a contact record that already exists. Nothing here needs a new tool. It needs the send step to read five properties before it fires.</p>
+  </div>
+</div></section>
+
 <div class="band"><div class="w">
-  <div class="hd"><span class="no">05</span><h2>What it would let them report</h2></div>
+  <div class="hd"><span class="no">08</span><h2>What all of it would let them report</h2></div>
   <div class="measures">
     <article>
       <h3>Which campaign produced a meeting</h3>
@@ -337,6 +423,10 @@ CONTACT US&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>&rarr;</i> url=<b>https:
     <article>
       <h3>Whether the page is telling the truth</h3>
       <p>The page promises a written estimate in one business day. <code>estimate_delivered</code> minus <code>call_completed</code> answers that per engineer, every week. A promise nobody measures is one that quietly stops being kept.</p>
+    </article>
+    <article>
+      <h3>Whether the content is worth its cost</h3>
+      <p>Not pageviews. <code>form_step_complete</code> on the model page carries the vertical, so an article's value is the qualified addresses it produced, per vertical, against the two it has for legal and the none it has for insurance.</p>
     </article>
     <article>
       <h3>A closed lost reason that fills itself in</h3>
@@ -357,7 +447,7 @@ CONTACT US&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>&rarr;</i> url=<b>https:
 </div></div>
 
 <footer>
-  <div class="w"><p class="scope">Concept work. Not commissioned by Payload and not affiliated with Payload, LLC. Customer logos are Payload's own published assets, and the quote is Bridgit Chayt's from Payload's August 2026 Fifth Third announcement. Both are used to illustrate a layout, not to imply endorsement. Recipient names and availability in the build are sample data. Nothing here shipped, so there are no results to report.</p></div>
+  <div class="w"><p class="scope">Concept work. Not commissioned by Payload and not affiliated with Payload, LLC. Customer logos are Payload's own published assets, and the quote is Bridgit Chayt's from Payload's August 2026 Fifth Third announcement. Both are used to illustrate a layout, not to imply endorsement. Recipient names and availability in the build are sample data, and the revenue model supplies no figures of its own because Payload publishes no rates. Nothing here shipped, so there are no results to report.</p></div>
   <div class="w foot-id">
     <span>Jacob Gilliam &middot; Cincinnati &middot; <a href="mailto:jacogilliam@gmail.com">jacogilliam@gmail.com</a></span>
     <span><a href="../">Back to portfolio</a></span>
