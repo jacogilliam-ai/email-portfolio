@@ -51,6 +51,22 @@
  .deck{margin-top:28px;max-width:640px}
  .deck a{font-weight:600}
 
+
+ /* the whole argument in three lines, for the reader deciding whether to read on.
+    Borrowed from the ASK/INSIGHT/CONCEPT block every ad portfolio opens with. */
+ .brief{margin:64px 0 0;border-top:1px solid var(--ink);padding-top:26px;max-width:900px}
+ .brief dl{display:grid;grid-template-columns:130px 1fr;gap:20px 28px;margin:0}
+ .brief dt{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--mut);
+   padding-top:6px}
+ .brief dd{margin:0;font:400 19px/1.5 Georgia,serif;letter-spacing:-.011em;color:var(--ink)}
+ .brief dd b{font-weight:400;background:linear-gradient(transparent 62%,var(--panel) 62%)}
+ .brief .howlong{margin:22px 0 0 158px;font-size:14px;line-height:1.6;color:var(--mut)}
+ @media (max-width:700px){
+   .brief dl{grid-template-columns:1fr;gap:4px 0}
+   .brief dt{padding-top:16px}
+   .brief dd{font-size:18px}
+   .brief .howlong{margin-left:0}
+ }
  section{padding-top:112px}
  .hd{display:grid;grid-template-columns:64px 1fr;align-items:baseline;margin-bottom:38px;
    border-top:1px solid var(--line);padding-top:22px}
@@ -191,9 +207,21 @@
   <div class="deck">
     <p>Payload is a Cincinnati embedded payments company that moves about $500M a month. In August 2026 they took their first outside capital, from Fifth Third, and started pushing out of real estate into legal, insurance and professional services.</p>
     <p>That expansion runs on demand generation, and demand generation runs on knowing which page produced the meeting. I spent a week finding out whether their site could answer that, then built what was missing at both ends of it.</p>
-    <p>One end is the visitor who is ready today and has nowhere to land. The other is the reader who is three quarters away, finishes a good article, and is offered a sales call or nothing. Six pages, ten emails, and a set of rules about when not to send any of them.</p>
     <p><a href="https://jacogilliam-ai.github.io/pl-concept-7k2f/" target="_blank" rel="noopener">Open the working build</a> &nbsp;&middot;&nbsp; <span class="mut">six pages, all of it clickable</span></p>
   </div>
+
+  <div class="brief">
+    <dl>
+      <dt>The gap</dt>
+      <dd>Five conversion buttons, <b>one address bar that never changes</b>, and every article ending on the same overlay. No page to advertise to, no moment a conversion could be counted, no link to send anybody.</dd>
+      <dt>What I built</dt>
+      <dd>The two pages that were missing and the <b>ten emails behind them</b>: one funnel for the visitor who is ready today, one for the reader who is three quarters away.</dd>
+      <dt>The call I would defend</dt>
+      <dd><b>Almost none of it sends.</b> Across both funnels exactly one email goes out unprompted, the highest intent path hands to a human rather than automating, and the revenue model shows a cost rather than inventing a number.</dd>
+    </dl>
+    <p class="howlong">That is the argument. Everything below is the evidence for it, and it runs about ten minutes.</p>
+  </div>
+
 </div>
 
 <section><div class="w">
