@@ -203,116 +203,103 @@
 </div></header>
 
 <div class="w">
-  <p class="lede">Producing more is the easy half.</p>
+  <p class="lede">The output was never the hard part.</p>
   <div class="deck">
-    <p>Every marketer now has the same leverage, so output stopped being the interesting number about a year ago. What separates one AI workflow from another is whether anybody has to read the output twice before it ships.</p>
-    <p>This is the part of my work that does not appear in a case study: the generator that writes the files, the checks that refuse to let them out, and the log of everything that got caught on the way.</p>
+    <p>Every marketer has the same leverage now, so producing more stopped being interesting about a year ago. What actually separates one AI workflow from another is whether anybody catches it when the output is wrong, because it is wrong often and it is never uncertain about it.</p>
+    <p>So this page is not a list of tools. It is what I do inside one.</p>
   </div>
 
   <div class="brief">
     <dl>
-      <dt>What I do not do</dt>
-      <dd>Type most of it. <b>I decide what it does and I own every decision in it</b>, which is a different claim and the only one worth making.</dd>
-      <dt>What I built instead</dt>
-      <dd>An <b>892 line generator</b> that produces 52 email files from one shell, a <b>14 check harness</b> that blocks a deploy, and <b>1,135 lines of written rules</b> so the same mistake cannot happen twice.</dd>
+      <dt>What I do</dt>
+      <dd>Decide what gets built, then <b>reject it until it is right.</b> I do not write the Python and I am not going to pretend otherwise.</dd>
+      <dt>Where the value is</dt>
+      <dd>Every decision in the Payload build is mine and <b>so is every catch below.</b> A model will hand you a fabricated statistic and a stretched image with exactly the same confidence it hands you good work.</dd>
       <dt>Why it matters</dt>
-      <dd>Volume without verification is just a faster way to ship something wrong. <b>Everything below was caught by the system rather than by a person reading carefully.</b></dd>
+      <dd>This is what running a team looks like now. Brief it, read what comes back, <b>know which part is wrong</b>, and write down the reason so it does not come back.</dd>
     </dl>
   </div>
 </div>
 
 <section><div class="w">
-  <div class="hd"><span class="no">01</span><h2>The generator, never the file</h2></div>
+  <div class="hd"><span class="no">01</span><h2>What I actually caught</h2></div>
   <div class="n">
-    <p>Ten emails exist for the Payload build. Fifty two files exist on disk, because two of them branch across five industries. Nobody edits those files. They are output.</p>
-    <p>One Python file holds the shell, the components and the copy. Change the button helper and every button in all fifty two files changes. Change a subject line and the flow page that previews it fails its own check until it agrees.</p>
-    <p>The alternative is fifty two files that drift, which is not hypothetical. Four subject lines on a preview page went stale over about a dozen edits, and one of them was still displaying a raw merge token on a page whose entire claim was that it did not use them.</p>
-  </div>
-  <div class="ev"><b>$</b> python3 build-emails.py<br><br>
-FILE                     SUBJECT                                    BYTES  VARIANTS<br>
-01-request-received      Confirmed: Thursday 10:30 with Payload      8047         0<br>
-03-day-before            Tomorrow at 10:30: what we will cover      12796         4<br>
-07-not-yet               No call yet, and what I would decide first 12355         4<br>
-08-revenue-model         Your payments revenue model                11067         4<br>
-<i>... 10 emails, 24 variants, 52 files</i></div>
-  <p class="ev-cap">Six assertions run inside the generator itself. It will not write a file containing an unrendered token, an em dash, or an unreplaced sample key, because each of those has shipped before and each now has a line of code preventing it.</p>
-</div></section>
-
-<section><div class="w">
-  <div class="hd"><span class="no">02</span><h2>Fourteen things that stop a deploy</h2></div>
-  <div class="n">
-    <p>A Playwright harness runs against every page before anything is pushed. Not a linter. It opens a real browser, scrolls the whole page, and measures what actually rendered.</p>
-  </div>
-
-  <table>
-    <thead><tr><th>Check</th><th>What it catches</th></tr></thead>
-    <tbody>
-      <tr><td><b>Contrast</b></td><td>Every text node against its resolved background, including gradient fills, at 4.5:1 or 3:1 by size</td></tr>
-      <tr><td><b>Type scale</b></td><td>Any rendered font size that is not one of the nine tokens</td></tr>
-      <tr><td><b>Overflow</b></td><td>Horizontal scroll at 320, 375, 390, 768, 1024 and 1512</td></tr>
-      <tr><td><b>Image integrity</b></td><td>Declared aspect against the real file header, plus anything rendering above 1.0x and going soft</td></tr>
-      <tr><td><b>Copy drift</b></td><td>Every subject line in the generator must appear on the page that previews it, both directions</td></tr>
-      <tr><td><b>Unsourced claims</b></td><td>Greps customer copy for invented statistics: "nine times out of ten", "studies show", "N% of"</td></tr>
-      <tr><td><b>Unstyled classes</b></td><td>Any class in the markup with no matching rule, which catches invented names and edits that silently failed</td></tr>
-      <tr><td><b>Dead anchors</b></td><td>Resolves every <code>#fragment</code> against a real id in the target file, not just the path</td></tr>
-      <tr><td><b>Consent default</b></td><td>Fails the build if an opt in checkbox ever ships pre ticked</td></tr>
-      <tr><td><b>Repeated phrases</b></td><td>A 6-gram counter over the body text, so a summary summarises instead of pasting</td></tr>
-    </tbody>
-  </table>
-  <p class="fine">Plus em dashes, dead file references, tag balance and console errors. The target is zero, not few.</p>
-</div></section>
-
-<section><div class="w">
-  <div class="hd"><span class="no">03</span><h2>What it actually caught</h2></div>
-  <div class="n">
-    <p>This is the part that matters. A checklist nobody fails is decoration.</p>
+    <p>These are from one project, over about two weeks. None of them were flagged by anything automated at the time. They were flagged by reading the output and knowing it was wrong.</p>
   </div>
 
   <div class="dec">
     <article>
       <span class="no">01</span>
-      <h3>A merge token, in the one build that claimed not to use them</h3>
-      <p>The plain text version of an email was shipping a literal <code>{eng}</code> where a name belonged. The generator asserted on two other token shapes and neither catches a brace. Both renderers now assert on every sample key by name.</p>
+      <h3>A qualification gate that did not gate</h3>
+      <p>I answered the form as a pre-launch company and still reached the calendar. The routing logic was correct; the button had never been told to change. A gate that lets the wrong people through is worse than no gate, because now the page is lying.</p>
     </article>
     <article>
       <span class="no">02</span>
-      <h3>Every image on a page, stretched 2.1x</h3>
-      <p><code>width:100%</code> with an HTML height attribute and no <code>height:auto</code> means the height attribute wins. A 2160x1215 screenshot was drawing at 1030x1215 and the CSS looked correct. Now measured against the PNG header.</p>
+      <h3>Every image on a page, stretched</h3>
+      <p>The case study looked wrong to me before I could say why. Each screenshot was drawing at roughly twice its correct height because of one missing CSS line. The files were fine, the markup looked fine, and nothing reported an error.</p>
     </article>
     <article>
       <span class="no">03</span>
-      <h3>A statistic I made up</h3>
-      <p>An email opened "nine times out of ten that is not disinterest." Nobody can source that. It is the same failure as a fabricated credential, in a package whose whole argument is that every figure is checkable.</p>
+      <h3>A statistic that was invented</h3>
+      <p>An email opened "nine times out of ten that is not disinterest." Nobody can source that. It sat inside a package whose entire argument is that every number in it is checkable, and it read perfectly well, which is the problem.</p>
     </article>
     <article>
       <span class="no">04</span>
-      <h3>Two CSS blocks that were never inserted</h3>
-      <p>A build script matched an anchor with a leading space the file did not have. <code>str.replace</code> returns the string unchanged on a miss, so it reported success and the styles simply were not there. Every replace is asserted now.</p>
+      <h3>Copy that quietly argued against me</h3>
+      <p>A disclaimer said the findings were "things anyone can reproduce." Technically true, and it hands away the work. What I found had been public the whole time and nobody had gone looking, which is the opposite point.</p>
+    </article>
+    <article>
+      <span class="no">05</span>
+      <h3>A person's surname, made up</h3>
+      <p>A draft email referenced a friend by a last name that is not his. It was one word in a message headed for a real inbox at a company I want to work for, and it was presented with total confidence.</p>
+    </article>
+    <article>
+      <span class="no">06</span>
+      <h3>412 subscribers, when it was 375</h3>
+      <p>From earlier work. My own LinkedIn and my own resume disagreed about my own list size, because one counted everyone ever added and the other counted the peak. I would rather find that than have an interviewer find it.</p>
     </article>
   </div>
 </div></section>
 
 <section><div class="w">
-  <div class="hd"><span class="no">04</span><h2>So it cannot happen twice</h2></div>
+  <div class="hd"><span class="no">02</span><h2>Then the reason gets written down</h2></div>
   <div class="n">
-    <p>Each of those is now a numbered entry in a written rule file that loads before any work on that project starts. Forty entries across 1,135 lines, and every one of them exists because something went wrong once.</p>
-    <p>That is the actual difference between running a lot of agents and getting a lot out of them. The model does not remember last Tuesday. The rules do.</p>
-    <p>It is also why the same mistake does not appear in two places. The image stretching bug was found on a portfolio page, and the rule that came out of it is why the same pattern was caught on the next build before it shipped.</p>
+    <p>A catch that only happens once is luck. What turns it into a system is that every one of those becomes a written rule, in a file that loads before any work on that project starts.</p>
+    <p>There are <b>forty of them now, across 1,135 lines</b>, and every single one exists because something went wrong first. The stretched images produced a rule. The invented statistic produced a rule and a check that greps for that exact phrasing. The surname produced a rule about names in outreach.</p>
+    <p>That is the actual difference between using these tools a lot and getting something out of them. The model does not remember last Tuesday. The written rules do.</p>
   </div>
-  <div class="ev"><i># from the project rule file</i><br><br>
-<b>25.</b> An unasserted <code>str.replace</code> fails silently. It returns the string<br>
-&nbsp;&nbsp;&nbsp;&nbsp;unchanged when the pattern misses, so the script reports success and<br>
-&nbsp;&nbsp;&nbsp;&nbsp;the edit is simply absent. <b>Assert every replace.</b><br><br>
-<b>27.</b> Invented class names render as nothing and QA did not catch it.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;The harness now fails on any class used in markup with no matching<br>
-&nbsp;&nbsp;&nbsp;&nbsp;rule in that page's CSS.</div>
-  <p class="ev-cap">Written in the second person, to the next session, by the one that got it wrong.</p>
+  <div class="ev"><i># from the project rule file, written to the next session</i><br><br>
+<b>24.</b> Internal reasoning is not customer copy. If a line explains our<br>
+&nbsp;&nbsp;&nbsp;&nbsp;thinking rather than telling the reader what happened and what to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;do, cut it.<br><br>
+<b>31.</b> Prose tells to hunt before shipping: a paragraph that restates a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;later section, a setup line that announces something good is coming<br>
+&nbsp;&nbsp;&nbsp;&nbsp;instead of saying it, a number more precise than its source.</div>
+  <p class="ev-cap">I did not write these files by hand. I caused them, by rejecting the same kind of work enough times that the reason had to be recorded.</p>
+</div></section>
+
+<section><div class="w">
+  <div class="hd"><span class="no">03</span><h2>And the checks come last, not first</h2></div>
+  <div class="n">
+    <p>There is a script that runs against every page before anything is published. It opens a real browser, scrolls the whole thing, and measures what actually rendered: colour contrast on every piece of text, horizontal scroll at six screen widths, images against their real file dimensions, and whether any subject line on a preview page has drifted from the email it claims to show.</p>
+    <p><b>Every check on that list is there because something got past me once.</b> It greps for invented statistics because of number three above. It compares image dimensions because of number two. It fails the build if a consent checkbox ever ships pre-ticked, because that is the kind of thing nobody notices until it is a legal problem.</p>
+    <p>I could not write that script from scratch. I know exactly what it needs to look for, which is the part that took a year.</p>
+  </div>
+</div></section>
+
+<section><div class="w">
+  <div class="hd"><span class="no">04</span><h2>Why this is the job now</h2></div>
+  <div class="n">
+    <p>A marketing manager's relationship with output has not really changed. You set the brief, you hold the standard, you send work back, and you make sure the same note never has to be given twice.</p>
+    <p>That is what I have been doing every day for eighteen months. The difference is only in how fast the work comes back and how confidently it is wrong when it is wrong.</p>
+    <p>What I would bring to a team is not that I can produce a lot. Everybody can now. It is that I have spent a year building the judgment to tell which of it is worth sending, and the habit of writing the reason down so nobody relearns it.</p>
+  </div>
 </div></section>
 
 <div class="next"><div class="w">
   <a href="../payload/">
     <span>
-      <span class="lbl">The work this produced</span>
+      <span class="lbl">What this produced</span>
       <h3>Payload</h3>
       <p>Two funnels, ten emails, and the rules about when not to send any of them.</p>
     </span>
@@ -321,7 +308,7 @@ FILE                     SUBJECT                                    BYTES  VARIA
 </div></div>
 
 <footer>
-  <div class="w"><p class="scope">The systems described here are mine and the work they produced is mine. I direct the build, make every decision in it, and own everything that ships. I do not type most of the markup, which is a distinction worth stating plainly rather than leaving for somebody to wonder about.</p></div>
+  <div class="w"><p class="scope">Stated plainly so nobody has to wonder: I work in Claude Code daily and have for about eighteen months. I direct the build, make every decision in it, and own everything that ships. I do not write the code. Every catch on this page is mine, and every rule in those files exists because I sent something back.</p></div>
   <div class="w foot-id">
     <span>Jacob Gilliam &middot; Cincinnati &middot; <a href="mailto:jacogilliam@gmail.com">jacogilliam@gmail.com</a></span>
     <span><a href="../">Back to portfolio</a></span>
