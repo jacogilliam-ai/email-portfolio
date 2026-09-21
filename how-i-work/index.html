@@ -199,100 +199,105 @@
 <header><div class="w">
   <p class="kick">Method</p>
   <h1>How the work gets made</h1>
-  <div class="meta"><span>Claude Code</span><span>Daily, 18 months</span><span>Sept 2026</span></div>
+  <div class="meta"><span>Claude Code</span><span>Daily, about a year</span><span>Sept 2026</span></div>
 </div></header>
 
 <div class="w">
-  <p class="lede">The output was never the hard part.</p>
+  <p class="lede">I spent a year building the way I work.</p>
   <div class="deck">
-    <p>Every marketer has the same leverage now, so producing more stopped being interesting about a year ago. What actually separates one AI workflow from another is whether anybody catches it when the output is wrong, because it is wrong often and it is never uncertain about it.</p>
-    <p>So this page is not a list of tools. It is what I do inside one.</p>
+    <p>Not a tool and not a codebase. A workflow, in Claude Code, that I have used every day for about a year and that gets sharper every time something in it goes wrong.</p>
+    <p>Everybody has the same leverage now, so producing more stopped being the interesting number a while ago. What separates one setup from another is whether the person running it can tell which part of the output is wrong, and whether that ever has to be explained twice.</p>
   </div>
 
   <div class="brief">
     <dl>
-      <dt>What I do</dt>
-      <dd>Decide what gets built, then <b>reject it until it is right.</b> I do not write the Python and I am not going to pretend otherwise.</dd>
-      <dt>Where the value is</dt>
-      <dd>Every decision in the Payload build is mine and <b>so is every catch below.</b> A model will hand you a fabricated statistic and a stretched image with exactly the same confidence it hands you good work.</dd>
-      <dt>Why it matters</dt>
-      <dd>This is what running a team looks like now. Brief it, read what comes back, <b>know which part is wrong</b>, and write down the reason so it does not come back.</dd>
+      <dt>What I built</dt>
+      <dd>A workflow, not software. The centre of it is a set of <b>written rule files that load automatically</b> when I open a project, each one holding what went wrong before and the exact fix.</dd>
+      <dt>What I use it for</dt>
+      <dd>Two things. <b>Finding what is broken inside a system</b> somebody else built, and <b>steering a build after it exists</b>, which is where most of the real work happens.</dd>
+      <dt>What I do not do</dt>
+      <dd>Write the code. I decide what gets built, I own every decision in it, and <b>every catch on this page is mine.</b></dd>
     </dl>
   </div>
 </div>
 
 <section><div class="w">
-  <div class="hd"><span class="no">01</span><h2>What I actually caught</h2></div>
+  <div class="hd"><span class="no">01</span><h2>A year of writing down what went wrong</h2></div>
   <div class="n">
-    <p>These are from one project, over about two weeks. None of them were flagged by anything automated at the time. They were flagged by reading the output and knowing it was wrong.</p>
+    <p>The thing I actually built is a habit with a file behind it. Every time something ships wrong, or nearly does, the reason gets written into a rule file for that project. Next time I start work there, it loads before anything else does.</p>
+    <p>There are <b>forty of those rules now across two projects</b>, and not one of them is theoretical. Each exists because something specific broke.</p>
+    <p>That is the whole mechanism. A model has no memory of last Tuesday, so the same mistake will arrive again with full confidence unless somebody makes it impossible. Writing the reason down is what turns a correction into a system.</p>
   </div>
-
-  <div class="dec">
-    <article>
-      <span class="no">01</span>
-      <h3>A qualification gate that did not gate</h3>
-      <p>I answered the form as a pre-launch company and still reached the calendar. The routing logic was correct; the button had never been told to change. A gate that lets the wrong people through is worse than no gate, because now the page is lying.</p>
-    </article>
-    <article>
-      <span class="no">02</span>
-      <h3>Every image on a page, stretched</h3>
-      <p>The case study looked wrong to me before I could say why. Each screenshot was drawing at roughly twice its correct height because of one missing CSS line. The files were fine, the markup looked fine, and nothing reported an error.</p>
-    </article>
-    <article>
-      <span class="no">03</span>
-      <h3>A statistic that was invented</h3>
-      <p>An email opened "nine times out of ten that is not disinterest." Nobody can source that. It sat inside a package whose entire argument is that every number in it is checkable, and it read perfectly well, which is the problem.</p>
-    </article>
-    <article>
-      <span class="no">04</span>
-      <h3>Copy that quietly argued against me</h3>
-      <p>A disclaimer said the findings were "things anyone can reproduce." Technically true, and it hands away the work. What I found had been public the whole time and nobody had gone looking, which is the opposite point.</p>
-    </article>
-    <article>
-      <span class="no">05</span>
-      <h3>A person's surname, made up</h3>
-      <p>A draft email referenced a friend by a last name that is not his. It was one word in a message headed for a real inbox at a company I want to work for, and it was presented with total confidence.</p>
-    </article>
-    <article>
-      <span class="no">06</span>
-      <h3>412 subscribers, when it was 375</h3>
-      <p>From earlier work. My own LinkedIn and my own resume disagreed about my own list size, because one counted everyone ever added and the other counted the peak. I would rather find that than have an interviewer find it.</p>
-    </article>
-  </div>
-</div></section>
-
-<section><div class="w">
-  <div class="hd"><span class="no">02</span><h2>Then the reason gets written down</h2></div>
-  <div class="n">
-    <p>A catch that only happens once is luck. What turns it into a system is that every one of those becomes a written rule, in a file that loads before any work on that project starts.</p>
-    <p>There are <b>forty of them now, across 1,135 lines</b>, and every single one exists because something went wrong first. The stretched images produced a rule. The invented statistic produced a rule and a check that greps for that exact phrasing. The surname produced a rule about names in outreach.</p>
-    <p>That is the actual difference between using these tools a lot and getting something out of them. The model does not remember last Tuesday. The written rules do.</p>
-  </div>
-  <div class="ev"><i># from the project rule file, written to the next session</i><br><br>
+  <div class="ev"><i># from a project rule file, written to whoever opens it next</i><br><br>
 <b>24.</b> Internal reasoning is not customer copy. If a line explains our<br>
 &nbsp;&nbsp;&nbsp;&nbsp;thinking rather than telling the reader what happened and what to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;do, cut it.<br><br>
 <b>31.</b> Prose tells to hunt before shipping: a paragraph that restates a<br>
 &nbsp;&nbsp;&nbsp;&nbsp;later section, a setup line that announces something good is coming<br>
 &nbsp;&nbsp;&nbsp;&nbsp;instead of saying it, a number more precise than its source.</div>
-  <p class="ev-cap">I did not write these files by hand. I caused them, by rejecting the same kind of work enough times that the reason had to be recorded.</p>
+  <p class="ev-cap">These read like notes to a colleague because that is what they are. They also mean a project I have not touched in a month starts where I left it rather than where I started.</p>
 </div></section>
 
 <section><div class="w">
-  <div class="hd"><span class="no">03</span><h2>And the checks come last, not first</h2></div>
+  <div class="hd"><span class="no">02</span><h2>Finding what is broken in somebody else's system</h2></div>
   <div class="n">
-    <p>There is a script that runs against every page before anything is published. It opens a real browser, scrolls the whole thing, and measures what actually rendered: colour contrast on every piece of text, horizontal scroll at six screen widths, images against their real file dimensions, and whether any subject line on a preview page has drifted from the email it claims to show.</p>
-    <p><b>Every check on that list is there because something got past me once.</b> It greps for invented statistics because of number three above. It compares image dimensions because of number two. It fails the build if a consent checkbox ever ships pre-ticked, because that is the kind of thing nobody notices until it is a legal problem.</p>
-    <p>I could not write that script from scratch. I know exactly what it needs to look for, which is the part that took a year.</p>
+    <p>This is the half that has nothing to do with producing anything. Before I built a single page for the Payload concept, I spent a week taking their site apart.</p>
+    <p>Thirty pages read. Every conversion button clicked in a real browser with the address bar watched. The URL structure mapped. Their DNS records pulled to see which tools are authorised to send mail. Their site loaded with the network tab open to see which advertising tags actually fire. Their entire article archive sorted by industry to see which verticals have content and which have none.</p>
+    <p>That produced thirty one findings, and the one that mattered turned into the whole project: <b>every conversion action on the site opens an overlay and never changes the address bar</b>, so there is nothing to advertise to and no moment that registers as a conversion.</p>
+    <p>None of that is production work. It is the part that decides whether the production work is aimed at anything.</p>
   </div>
+</div></section>
+
+<section><div class="w">
+  <div class="hd"><span class="no">03</span><h2>Then steering it, which is most of the job</h2></div>
+  <div class="n">
+    <p>The first version of anything is rarely right. Knowing what specifically to change, and saying it precisely enough to get a different result, is the part that actually takes practice.</p>
+    <p>On this project I rejected the design three times before it was right, and the note that finally worked was not "make it better." It was that the page had no identity of its own, so the fix was structural rather than cosmetic. On another pass I said there was too much text, which turned out to be wrong: the problem was the ratio of text to white space, not the word count.</p>
+    <p>Alongside that, these are things I caught in output that looked completely fine and was not. None of them were flagged by anything automated.</p>
+  </div>
+
+  <div class="dec">
+    <article>
+      <span class="no">01</span>
+      <h3>A qualification gate that did not gate</h3>
+      <p>I answered the form as a pre-launch company and still reached the calendar. The routing was correct. The button had never been told to change its label, so the page promised something it was about to withhold.</p>
+    </article>
+    <article>
+      <span class="no">02</span>
+      <h3>Every image on a page, stretched</h3>
+      <p>The case study looked wrong to me before I could say why. Each screenshot was drawing at roughly twice its correct height from one missing CSS line. Files fine, markup fine, no error anywhere.</p>
+    </article>
+    <article>
+      <span class="no">03</span>
+      <h3>A statistic that was invented</h3>
+      <p>An email opened "nine times out of ten that is not disinterest." Nobody can source that. It sat inside a package whose whole argument is that every number in it is checkable, and it read perfectly well.</p>
+    </article>
+    <article>
+      <span class="no">04</span>
+      <h3>Copy that argued against me</h3>
+      <p>A disclaimer described my findings as "things anyone can reproduce." Technically true and it gives the work away. It had been public the whole time and nobody went looking, which is the opposite point.</p>
+    </article>
+    <article>
+      <span class="no">05</span>
+      <h3>A person's surname, made up</h3>
+      <p>A draft referenced a friend by a last name that is not his. One word, in a message headed for a real inbox at a company I want to work for, delivered with total confidence.</p>
+    </article>
+    <article>
+      <span class="no">06</span>
+      <h3>412 subscribers, when it was 375</h3>
+      <p>From earlier work. My own LinkedIn and my own resume disagreed about my own list, because one counted everyone ever added and the other counted the peak. Better that I find it than an interviewer.</p>
+    </article>
+  </div>
+
+  <p class="fine">Each of those is now a rule, and several are automated checks that run before anything publishes. The checks exist because I caught the thing first, not the other way round.</p>
 </div></section>
 
 <section><div class="w">
   <div class="hd"><span class="no">04</span><h2>Why this is the job now</h2></div>
   <div class="n">
     <p>A marketing manager's relationship with output has not really changed. You set the brief, you hold the standard, you send work back, and you make sure the same note never has to be given twice.</p>
-    <p>That is what I have been doing every day for eighteen months. The difference is only in how fast the work comes back and how confidently it is wrong when it is wrong.</p>
-    <p>What I would bring to a team is not that I can produce a lot. Everybody can now. It is that I have spent a year building the judgment to tell which of it is worth sending, and the habit of writing the reason down so nobody relearns it.</p>
+    <p>What changed is the speed the work comes back at, and how convincing it is when it is wrong. That makes the reviewing half more valuable than it used to be, not less.</p>
+    <p>What I would bring to a team is not volume. Everybody has volume now. It is a year of practice at spotting which part is wrong, saying precisely enough what to do about it, and writing the reason down so nobody has to learn it again.</p>
   </div>
 </div></section>
 
@@ -308,7 +313,7 @@
 </div></div>
 
 <footer>
-  <div class="w"><p class="scope">Stated plainly so nobody has to wonder: I work in Claude Code daily and have for about eighteen months. I direct the build, make every decision in it, and own everything that ships. I do not write the code. Every catch on this page is mine, and every rule in those files exists because I sent something back.</p></div>
+  <div class="w"><p class="scope">Stated plainly so nobody has to wonder. I work in Claude Code daily and have for about a year. I direct the build, make every decision in it, and own everything that ships. I do not write the code. The six failures listed above were found by reading output that looked right, and every rule in those files exists because I sent something back.</p></div>
   <div class="w foot-id">
     <span>Jacob Gilliam &middot; Cincinnati &middot; <a href="mailto:jacogilliam@gmail.com">jacogilliam@gmail.com</a></span>
     <span><a href="../">Back to portfolio</a></span>
