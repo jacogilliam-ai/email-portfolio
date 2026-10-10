@@ -43,7 +43,17 @@ body{
 }
 img,video,svg{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:900px;margin:0 auto;padding:0 20px 56px}
+.wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 20px 56px}
+
+/* ---------- backdrop ---------- */
+/* The hill sits behind the lift and the ticket only, masked so it dissolves into
+   the page rather than ending on a seam. Everything below it stays on plain paper. */
+.backdrop{
+  position:absolute;top:0;left:0;right:0;height:560px;z-index:0;pointer-events:none;
+  background:url(media/hill.jpg) center 38% / cover no-repeat;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 48%,rgba(0,0,0,.45) 76%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 48%,rgba(0,0,0,.45) 76%,transparent 100%);
+}
 
 /* ---------- chairlift ---------- */
 /* Each chair is its own small absolutely positioned element with its own looping
@@ -53,10 +63,10 @@ a{color:inherit;text-decoration:none}
    so the chairs vanished on screen while the DOM said they were in place.
    Independent chairs keep every layer small, make the spacing exact at any width,
    and loop seamlessly without any track-length arithmetic. */
-.lift{position:relative;height:108px;overflow:hidden}
+.lift{position:relative;z-index:1;height:108px;overflow:hidden}
 .lift::before{
   content:"";position:absolute;left:0;right:0;top:17px;height:2px;
-  background:var(--navy);opacity:.45;
+  background:var(--navy);opacity:.6;
 }
 .lift-track{position:absolute;inset:0}
 .chair{
@@ -207,6 +217,7 @@ figcaption b{
 :focus-visible{outline:2px solid var(--navy);outline-offset:3px}
 
 @media (max-width:760px){
+  .backdrop{height:430px;background-position:center 42%}
   .lift{height:92px}
   .lift::before{top:15px}
   .chair{top:15px}
@@ -241,6 +252,8 @@ figcaption b{
 <body>
 
 <!-- ====================== CHAIRLIFT ====================== -->
+<div class="backdrop" aria-hidden="true"></div>
+
 <div class="lift" aria-hidden="true"><div class="lift-track" id="lift"></div></div>
 
 <div class="wrap">
