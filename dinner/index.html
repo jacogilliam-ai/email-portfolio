@@ -528,7 +528,7 @@ footer{padding:30px 0 20px;margin-top:40px;border-top:1px dashed var(--rule)}
     <p class="sub">Tap Text me and the message is already written. You just hit send.</p>
 
     <div class="msg" id="msgBox" hidden>
-      <p class="label">Your message</p>
+      <p class="label">Your order</p>
       <p class="copytext" id="copyText"></p>
       <button type="button" class="btn-ghost" id="copyBtn">Copy it</button>
     </div>
@@ -596,8 +596,8 @@ footer{padding:30px 0 20px;margin-top:40px;border-top:1px dashed var(--rule)}
     mac:{name:"BBQ chicken mac and cheese"}
   };
   var DRINKS={
-    wine:{short:"a glass of wine",say:"with a glass of wine"},
-    water:{short:"water",say:"with water"},
+    wine:{short:"a glass of wine"},
+    water:{short:"water"},
     other:{}
   };
   var PHONE="sms:+18123433262";
@@ -633,25 +633,21 @@ footer{padding:30px 0 20px;margin-top:40px;border-top:1px dashed var(--rule)}
     if(state.drink==="other") return state.other.trim();
     return DRINKS[state.drink].short;
   }
-  function drinkSay(){
-    if(!state.drink) return "";
-    if(state.drink==="other"){
-      var t=state.other.trim();
-      return t?"with "+t:"";
-    }
-    return DRINKS[state.drink].say;
-  }
-  function sentence(){
+  function orderText(){
     if(!state.dish) return "";
-    var s="I'll take the "+DISHES[state.dish].name.toLowerCase();
-    var d=drinkSay();
-    if(d) s+=", "+d;
+    var s=DISHES[state.dish].name;
+    var d=drinkShort();
+    if(d) s+=", and "+d;
     return s+".";
+  }
+  function textMessage(){
+    var o=orderText();
+    return o?o+" You're off to a good start.":"";
   }
   function smsHref(){
     if(!state.dish) return PHONE;
     var sep=/iP(hone|ad|od)|Macintosh/.test(navigator.userAgent)?"&":"?";
-    return PHONE+sep+"body="+encodeURIComponent(sentence());
+    return PHONE+sep+"body="+encodeURIComponent(textMessage());
   }
 
   function render(){
@@ -679,7 +675,7 @@ footer{padding:30px 0 20px;margin-top:40px;border-top:1px dashed var(--rule)}
       sendBtn.href=smsHref();
       sendBtn.removeAttribute("aria-disabled");
       msgBox.hidden=false;
-      copyText.textContent=sentence();
+      copyText.textContent=orderText();
     }else{
       trayPick.classList.add("empty");
       trayPick.textContent="Tap a dish above";
@@ -714,7 +710,7 @@ footer{padding:30px 0 20px;margin-top:40px;border-top:1px dashed var(--rule)}
   });
 
   copyBtn.addEventListener("click",function(){
-    var text=sentence();
+    var text=orderText();
     if(!text)return;
     function ok(){
       copyBtn.textContent="Copied";
