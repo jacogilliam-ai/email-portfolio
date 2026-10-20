@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Dinner</title>
+
+<!-- Link preview -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jacobgilliam.co/dinner/">
+<meta property="og:title" content="What do you want for dinner?">
+<meta property="og:description" content="Four options. Tap the one you want.">
+<meta property="og:image" content="https://jacobgilliam.co/dinner/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..800,0..100,0..1;1,9..144,400..800,0..100,0..1&family=Karla:wght@400;500;700&display=swap">
+
+<style>
+html,body{margin:0}
+img{max-width:100%}
+</style>
+<style>
+:root{
+  color-scheme:light;
+  --paper:#F7F2E6;
+  --paper-2:#EFE9D9;
+  --ink:#121110;
+  --ink-2:#3B372E;
+  --ink-soft:#5C5648;
+  --rule:#D5CCB6;
+  --plate:#FFFDF7;
+  --plate-line:#CCC3AC;
+  --shadow:rgba(28,24,14,.14);
+  --lift:0 10px 26px rgba(40,34,18,.10);
+}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Karla","Helvetica Neue",Arial,sans-serif;
+  font-size:17px;
+  line-height:1.55;
+  padding:0 0 108px;
+  -webkit-font-smoothing:antialiased;
+}
+.sheet{max-width:760px;margin:0 auto;padding:0 22px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.label{
+  font-family:"Courier Prime",ui-monospace,monospace;
+  font-weight:700;font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+h1{
+  font-family:"Fraunces",Georgia,serif;
+  font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 0;
+  font-weight:700;
+  font-size:clamp(2.4rem,7.6vw,3.9rem);
+  line-height:1.04;
+  letter-spacing:-.022em;
+  text-wrap:balance;
+  margin:12px 0 0;
+  color:var(--ink);
+}
+.sig{
+  font-family:"Fraunces",Georgia,serif;font-style:italic;font-weight:500;
+  font-variation-settings:"opsz" 36,"SOFT" 60,"WONK" 0;
+  font-size:1.26rem;margin-top:16px;color:var(--ink)
+}
+
+header{padding:54px 0 38px}
+.intro{max-width:44ch;margin:18px 0 0;color:var(--ink-2);font-size:1.06rem}
+
+fieldset{border:0;margin:0;padding:0;min-width:0}
+.menu{display:flex;flex-direction:column}
+.dish{
+  display:grid;
+  grid-template-columns:152px 1fr 28px;
+  gap:20px;
+  align-items:center;
+  padding:26px 0;
+  border-top:1px dashed var(--rule);
+  cursor:pointer;
+  transition:opacity .25s ease;
+}
+.dish:last-of-type{border-bottom:1px dashed var(--rule)}
+.menu.has-pick .dish:not(.is-picked){opacity:.45}
+.dish:has(input:focus-visible){outline:2.5px solid var(--ink);outline-offset:6px;border-radius:3px}
+
+.plate-wrap{position:relative;width:152px;height:152px;flex:none}
+.plate{
+  display:block;width:100%;height:100%;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  filter:drop-shadow(0 6px 14px var(--shadow));
+}
+.plate-wrap::after{
+  content:"";position:absolute;inset:3px;border-radius:50%;
+  border:2.5px solid var(--ink);
+  opacity:0;transform:scale(.88);
+  transition:opacity .2s ease,transform .3s cubic-bezier(.2,1.5,.4,1);
+}
+.is-picked .plate-wrap::after{opacity:1;transform:scale(1)}
+.dish:hover .plate{transform:translateY(-4px) rotate(-2deg)}
+.is-picked .plate{transform:translateY(-3px)}
+
+.tick{
+  width:28px;height:28px;border-radius:50%;
+  border:2px solid #C2B79E;
+  display:grid;place-items:center;
+  transition:background .2s ease,border-color .2s ease;
+}
+.tick svg{width:15px;height:15px;stroke:var(--paper);stroke-width:3.2;fill:none;opacity:0;transition:opacity .15s ease}
+.dish:hover .tick{border-color:var(--ink-soft)}
+.is-picked .tick{background:var(--ink);border-color:var(--ink)}
+.is-picked .tick svg{opacity:1}
+
+.dish-name{
+  font-family:"Fraunces",Georgia,serif;font-weight:600;
+  font-variation-settings:"opsz" 48,"SOFT" 50,"WONK" 0;
+  font-size:clamp(1.3rem,4.4vw,1.72rem);line-height:1.16;letter-spacing:-.012em;
+  margin:0;color:var(--ink);
+}
+.desc{margin:8px 0 0;color:var(--ink-2);max-width:40ch;font-size:1rem;line-height:1.5}
+.specs{display:flex;flex-wrap:wrap;align-items:center;gap:7px 16px;margin-top:12px}
+.heat{display:inline-flex;align-items:center;gap:6px}
+.heat i{width:7px;height:7px;border-radius:50%;background:var(--ink);display:block}
+.heat i.off{background:transparent;box-shadow:inset 0 0 0 1.5px #BDB29A}
+.stamp{
+  display:inline-block;margin-top:12px;
+  font-family:"Courier Prime",ui-monospace,monospace;font-weight:700;
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--paper);background:var(--ink);border-radius:2px;
+  padding:5px 11px;
+  opacity:0;transform:scale(.82);transform-origin:left center;
+  transition:opacity .18s ease,transform .3s cubic-bezier(.2,1.6,.4,1);
+}
+.is-picked .stamp{opacity:1;transform:scale(1)}
+
+.drinks{padding:36px 0 6px}
+.drinks h2,.send h2{
+  font-family:"Fraunces",Georgia,serif;font-weight:600;
+  font-variation-settings:"opsz" 48,"SOFT" 50,"WONK" 0;
+  font-size:1.46rem;margin:0;letter-spacing:-.012em;color:var(--ink);
+}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.pill{
+  display:inline-flex;align-items:center;min-height:46px;padding:0 20px;
+  border:1.5px solid var(--rule);border-radius:999px;cursor:pointer;
+  font-size:1rem;color:var(--ink);background:var(--paper);
+  transition:border-color .2s ease,background .2s ease,color .2s ease;
+}
+.pill:hover{border-color:var(--ink-soft)}
+.pill.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.pill:has(input:focus-visible){outline:2.5px solid var(--ink);outline-offset:3px}
+.other-wrap{margin-top:12px}
+.other-wrap input{
+  font:inherit;font-size:1rem;color:var(--ink);background:var(--paper-2);
+  border:1.5px solid var(--rule);border-radius:3px;
+  min-height:48px;padding:0 16px;width:min(100%,320px);
+}
+.other-wrap input::placeholder{color:var(--ink-soft)}
+.other-wrap input:focus-visible{outline:2.5px solid var(--ink);outline-offset:2px;border-color:var(--ink)}
+
+.send{margin-top:44px;padding-top:30px;border-top:2px solid var(--ink)}
+.send p.sub{margin:8px 0 0;color:var(--ink-2);max-width:46ch}
+.msg{
+  margin-top:20px;padding:18px 18px 16px;background:var(--paper-2);border-radius:3px;
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;
+}
+.msg .label{width:100%}
+.copytext{
+  flex:1 1 240px;min-width:0;margin:0;
+  font-family:"Courier Prime",ui-monospace,monospace;font-size:15px;line-height:1.5;
+  color:var(--ink);background:var(--paper);border-radius:2px;padding:12px 14px;
+  user-select:all;overflow-wrap:break-word;
+}
+.contact{margin-top:18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.c{
+  display:flex;align-items:center;gap:12px;min-height:68px;padding:12px 15px;
+  border:1px solid var(--rule);background:var(--paper-2);
+  color:inherit;text-decoration:none;
+  transition:border-color .15s ease,transform .15s ease;
+}
+.c svg{width:26px;height:26px;flex:none;color:var(--ink)}
+.c .txt{min-width:0}
+.c .k{
+  display:block;font-family:"Courier Prime",ui-monospace,monospace;font-weight:700;
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);
+}
+.c .v{display:block;font-size:15px;font-weight:500;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.c:hover{border-color:var(--ink);transform:translateY(-2px)}
+.c:focus-visible{outline:2.5px solid var(--ink);outline-offset:3px}
+
+button{font:inherit;cursor:pointer;border-radius:999px;border:1.5px solid transparent;transition:background .2s ease,color .2s ease,border-color .2s ease,opacity .2s ease}
+button:focus-visible,a:focus-visible{outline:2.5px solid var(--ink);outline-offset:3px}
+.btn-ghost{
+  min-height:44px;padding:0 18px;background:transparent;color:var(--ink);border-color:var(--rule);
+}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-send{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:48px;padding:0 22px;border-radius:999px;
+  background:var(--ink);color:var(--paper);text-decoration:none;
+  font-weight:700;white-space:nowrap;
+  transition:opacity .2s ease;
+}
+.btn-send svg{width:17px;height:17px;flex:none}
+.btn-send:hover{opacity:.84}
+.btn-send.is-off{opacity:.3;pointer-events:none}
+
+.tray{
+  position:fixed;left:0;right:0;bottom:0;z-index:5;
+  background:var(--paper-2);border-top:1px dashed var(--rule);
+  box-shadow:0 -8px 24px var(--shadow);
+}
+.tray-in{max-width:760px;margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:16px}
+.tray-copy{min-width:0;flex:1}
+.tray-pick{
+  font-family:"Fraunces",Georgia,serif;font-weight:600;
+  font-variation-settings:"opsz" 36,"SOFT" 50,"WONK" 0;
+  font-size:1.08rem;line-height:1.25;margin-top:2px;color:var(--ink);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.tray-pick.empty{font-family:"Karla",sans-serif;font-weight:400;color:var(--ink-soft);font-size:1rem}
+
+footer{padding:30px 0 20px;margin-top:40px;border-top:1px dashed var(--rule)}
+
+@media (max-width:560px){
+  .dish{grid-template-columns:112px 1fr 24px;gap:12px;padding:22px 0}
+  .plate-wrap{width:112px;height:112px}
+  .tick{width:24px;height:24px}
+  .tick svg{width:13px;height:13px}
+  header{padding:38px 0 28px}
+  .tray-in{gap:12px;padding:11px 18px}
+  .btn-send{padding:0 18px}
+  .contact{grid-template-columns:1fr;gap:10px}
+}
+
+@media (prefers-reduced-motion: no-preference){
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .reveal{animation:rise .62s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0) * 90ms)}
+}
+</style>
+</head>
+<body>
+
+<svg style="display:none" aria-hidden="true">
+  <defs>
+    <g id="taco">
+      <path d="M-34 -2 A34 34 0 0 0 34 -2 Z" fill="#E8A14F"/>
+      <path d="M-26 2 A26 26 0 0 0 26 2" fill="none" stroke="#C9802F" stroke-width="2.4" opacity=".55"/>
+      <ellipse cx="-14" cy="17" rx="7" ry="4" fill="#C9802F" opacity=".45"/>
+      <ellipse cx="12" cy="22" rx="5" ry="3" fill="#C9802F" opacity=".45"/>
+      <path d="M-34 -2 A34 34 0 0 0 34 -2 Z" fill="none" stroke="#B36B22" stroke-width="2.6" stroke-linejoin="round"/>
+      <path d="M-30 -2 C-28 -13 -18 -16 -12 -10 C-6 -18 4 -18 9 -10 C15 -17 26 -13 28 -2 Z" fill="#8E3C1E"/>
+      <path d="M-30 -2 C-28 -13 -18 -16 -12 -10 C-6 -18 4 -18 9 -10 C15 -17 26 -13 28 -2 Z" fill="none" stroke="#6B2810" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M-22 -6 C-16 -10 -10 -9 -6 -5" fill="none" stroke="#AB5329" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M4 -7 C10 -11 17 -10 21 -6" fill="none" stroke="#AB5329" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="-17" cy="-11" r="2.7" fill="#FBF3E7"/>
+      <circle cx="6" cy="-12" r="2.5" fill="#FBF3E7"/>
+      <circle cx="-4" cy="-8" r="2.5" fill="#4E7A46"/>
+      <circle cx="19" cy="-10" r="2.3" fill="#4E7A46"/>
+      <circle cx="-26" cy="-7" r="2.1" fill="#4E7A46"/>
+    </g>
+
+    <g id="elbow">
+      <path d="M-14 10 C-19 -12 19 -12 14 10" fill="none" stroke="#9C6A14" stroke-width="14" stroke-linecap="round"/>
+      <path d="M-14 10 C-19 -12 19 -12 14 10" fill="none" stroke="#F7D278" stroke-width="8.5" stroke-linecap="round"/>
+    </g>
+
+    <g id="pullchk">
+      <path d="M-17 -4 C-15 -13 -5 -17 4 -14 C11 -11 17 -5 15 2 C13 10 2 15 -7 12 C-14 9 -19 5 -17 -4 Z" fill="#8A3A1B" stroke="#53200A" stroke-width="2.3" stroke-linejoin="round"/>
+      <path d="M-11 -3 C-5 -7 2 -7 8 -3" fill="none" stroke="#B2602F" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M-9 5 C-4 2 3 2 8 5" fill="none" stroke="#5F2510" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <g id="shredA">
+      <path d="M-17 -1 C-15 -8 -4 -9 3 -6.5 C10 -9 17 -5 16.5 1 C14.5 7 4 9 -3 6.5 C-10 9 -16.5 5 -17 -1 Z" fill="#96441F" stroke="#56220A" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="M-10 -2.5 C-4 -5 4 -5 10 -2.5" fill="none" stroke="#BE6B34" stroke-width="2" stroke-linecap="round"/>
+      <path d="M-8 3.5 C-3 1.5 3 1.5 8 3.5" fill="none" stroke="#5E2812" stroke-width="1.7" stroke-linecap="round"/>
+    </g>
+    <g id="shredB">
+      <path d="M-16 0 C-14 -7 -3 -9 4 -6 C11 -9 16 -4 15 2 C12 8 2 9 -4 6 C-10 9 -16 5 -16 0 Z" fill="#7A3315" stroke="#4A1C08" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="M-9 -2 C-3 -4.5 4 -4.5 9 -2" fill="none" stroke="#A85828" stroke-width="1.9" stroke-linecap="round"/>
+    </g>
+
+    <g id="chkstrip">
+      <path d="M-21 -2 C-19 -9 -8 -11 0 -9 C9 -11 20 -8 21 -1 C21 6 9 10 0 8 C-9 10 -21 6 -21 -2 Z" fill="#C97F3C" stroke="#71430F" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M-12 -5 C-6 -7 2 -7 9 -5" fill="none" stroke="#5E360A" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M-10 3 C-4 1 3 1 9 3" fill="none" stroke="#5E360A" stroke-width="2.2" stroke-linecap="round"/>
+    </g>
+
+    <g id="romaine">
+      <path d="M0 0 C9 -14 30 -16 40 -4 C30 10 9 12 0 0 Z" fill="#5C9A3A" stroke="#3B6826" stroke-width="2"/>
+      <path d="M4 -1 C15 -4 27 -5 37 -4" fill="none" stroke="#3B6826" stroke-width="1.7"/>
+    </g>
+
+    <symbol id="d-birria" viewBox="0 0 200 200">
+      <ellipse cx="100" cy="182" rx="74" ry="8" fill="var(--shadow)"/>
+      <circle cx="100" cy="100" r="88" fill="var(--plate)" stroke="var(--plate-line)" stroke-width="2"/>
+      <circle cx="100" cy="100" r="71" fill="none" stroke="var(--plate-line)" stroke-width="1.2" stroke-dasharray="3 6"/>
+      <g transform="translate(144,52)">
+        <circle r="24" fill="var(--plate)" stroke="var(--plate-line)" stroke-width="2"/>
+        <circle r="18" fill="#A33A1E"/>
+        <circle r="18" fill="none" stroke="#762712" stroke-width="1.6"/>
+        <ellipse cx="-6" cy="-7" rx="7" ry="4" fill="#C9552E"/>
+        <circle cx="5" cy="6" r="2.4" fill="#E0813F"/>
+      </g>
+      <g transform="translate(44,146) rotate(-15)">
+        <path d="M0 0 L0 -22 A22 22 0 0 1 22 0 Z" fill="#B9D14F"/>
+        <path d="M0 0 L0 -22 A22 22 0 0 1 22 0 Z" fill="none" stroke="#7E9A2E" stroke-width="2"/>
+        <path d="M3 -3 L3 -16 M5 -4 L13 -12 M6 -3 L17 -3" stroke="#8FAE3A" stroke-width="1.4" fill="none"/>
+      </g>
+      <use href="#taco" transform="translate(60,92) rotate(-12) scale(.78)"/>
+      <use href="#taco" transform="translate(101,110) rotate(2) scale(.78)"/>
+      <use href="#taco" transform="translate(142,124) rotate(16) scale(.78)"/>
+    </symbol>
+
+    <symbol id="d-noodles" viewBox="0 0 200 200">
+      <ellipse cx="100" cy="182" rx="74" ry="8" fill="var(--shadow)"/>
+      <circle cx="100" cy="100" r="88" fill="var(--plate)" stroke="var(--plate-line)" stroke-width="2"/>
+      <circle cx="100" cy="100" r="76" fill="#2E3940" stroke="#1B2328" stroke-width="2"/>
+      <circle cx="100" cy="100" r="66" fill="#252E34"/>
+      <clipPath id="clip-noodle"><circle cx="100" cy="100" r="66"/></clipPath>
+      <g clip-path="url(#clip-noodle)" fill="none" stroke-linecap="round">
+        <path d="M30 80 C56 68 84 92 108 80 C132 68 156 84 172 74" stroke="#A87C33" stroke-width="10"/>
+        <path d="M30 80 C56 68 84 92 108 80 C132 68 156 84 172 74" stroke="#F0D89C" stroke-width="6.5"/>
+        <path d="M34 60 C62 66 78 84 96 92 C116 101 140 104 164 98" stroke="#A87C33" stroke-width="10"/>
+        <path d="M34 60 C62 66 78 84 96 92 C116 101 140 104 164 98" stroke="#F0D89C" stroke-width="6.5"/>
+        <path d="M40 160 C62 150 76 130 96 118 C118 105 142 104 166 112" stroke="#A87C33" stroke-width="10"/>
+        <path d="M40 160 C62 150 76 130 96 118 C118 105 142 104 166 112" stroke="#F0D89C" stroke-width="6.5"/>
+        <path d="M28 92 C52 108 82 82 106 96 C132 111 154 88 174 100" stroke="#A87C33" stroke-width="10"/>
+        <path d="M28 92 C52 108 82 82 106 96 C132 111 154 88 174 100" stroke="#F0D89C" stroke-width="6.5"/>
+        <path d="M30 112 C58 96 88 124 112 110 C134 97 158 114 172 100" stroke="#A87C33" stroke-width="10"/>
+        <path d="M30 112 C58 96 88 124 112 110 C134 97 158 114 172 100" stroke="#F0D89C" stroke-width="6.5"/>
+        <path d="M28 126 C58 140 86 110 110 126 C134 141 156 120 172 132" stroke="#A87C33" stroke-width="10"/>
+        <path d="M28 126 C58 140 86 110 110 126 C134 141 156 120 172 132" stroke="#F0D89C" stroke-width="6.5"/>
+        <path d="M34 142 C64 128 92 152 118 136 C140 123 158 140 170 132" stroke="#A87C33" stroke-width="10"/>
+        <path d="M34 142 C64 128 92 152 118 136 C140 123 158 140 170 132" stroke="#F0D89C" stroke-width="6.5"/>
+        <path d="M36 152 C64 142 96 158 120 148 C140 140 158 150 168 144" stroke="#A87C33" stroke-width="10"/>
+        <path d="M36 152 C64 142 96 158 120 148 C140 140 158 150 168 144" stroke="#F0D89C" stroke-width="6.5"/>
+      </g>
+      <g fill="#CC4A2C" stroke="#8C2A1A" stroke-width="1.9">
+        <rect x="-15" y="-3" width="30" height="6" rx="3" transform="translate(118,84) rotate(28)"/>
+        <rect x="-14" y="-3" width="28" height="6" rx="3" transform="translate(70,114) rotate(-24)"/>
+        <rect x="-11" y="-2.8" width="22" height="5.6" rx="2.8" transform="translate(104,142) rotate(10)"/>
+      </g>
+      <use href="#chkstrip" transform="translate(88,94) rotate(-16)"/>
+      <use href="#chkstrip" transform="translate(122,118) rotate(22) scale(.94)"/>
+      <use href="#chkstrip" transform="translate(74,132) rotate(6) scale(.9)"/>
+      <g fill="none" stroke="#8FC45E" stroke-width="3.2">
+        <circle cx="60" cy="118" r="4.8"/>
+        <circle cx="142" cy="106" r="4.4"/>
+        <circle cx="98" cy="154" r="4.4"/>
+        <circle cx="108" cy="66" r="4.2"/>
+        <circle cx="146" cy="150" r="4"/>
+      </g>
+      <g fill="#FBF2DC">
+        <ellipse cx="84" cy="76" rx="2.4" ry="1.6" transform="rotate(20 84 76)"/>
+        <ellipse cx="128" cy="96" rx="2.4" ry="1.6" transform="rotate(-30 128 96)"/>
+        <ellipse cx="68" cy="100" rx="2.4" ry="1.6" transform="rotate(10 68 100)"/>
+        <ellipse cx="134" cy="140" rx="2.4" ry="1.6" transform="rotate(40 134 140)"/>
+      </g>
+      <g transform="translate(138,120) rotate(-40)">
+        <rect x="-52" y="-9" width="104" height="7" rx="3.5" fill="#C98A5A" stroke="#8E5A2E" stroke-width="1.8"/>
+        <rect x="-52" y="3" width="104" height="7" rx="3.5" fill="#C98A5A" stroke="#8E5A2E" stroke-width="1.8"/>
+      </g>
+    </symbol>
+
+    <symbol id="d-wrap" viewBox="0 0 200 200">
+      <ellipse cx="100" cy="182" rx="74" ry="8" fill="var(--shadow)"/>
+      <circle cx="100" cy="100" r="88" fill="var(--plate)" stroke="var(--plate-line)" stroke-width="2"/>
+      <circle cx="100" cy="100" r="71" fill="none" stroke="var(--plate-line)" stroke-width="1.2" stroke-dasharray="3 6"/>
+      <use href="#romaine" transform="translate(36,150) rotate(-18) scale(.85)"/>
+      <use href="#romaine" transform="translate(126,166) rotate(12) scale(.62)"/>
+      <g transform="translate(100,104) rotate(-35)">
+        <rect x="-23" y="-62" width="46" height="124" rx="22" fill="#E8C584" stroke="#A87C35" stroke-width="2.8"/>
+        <path d="M-21 -30 C-8 -22 8 -36 21 -28" fill="none" stroke="#B8903F" stroke-width="2.6"/>
+        <path d="M-21 -4 C-8 4 8 -10 21 -2" fill="none" stroke="#B8903F" stroke-width="2.6"/>
+        <path d="M-21 20 C-8 28 8 14 21 22" fill="none" stroke="#B8903F" stroke-width="2.6"/>
+        <path d="M-19 42 C-7 50 7 36 19 44" fill="none" stroke="#B8903F" stroke-width="2.4"/>
+        <path d="M-11 -50 C-15 -20 -7 14 -13 46" fill="none" stroke="#CBA75E" stroke-width="2.2"/>
+        <ellipse cx="-13" cy="8" rx="4.4" ry="9" fill="#D6AC5F" opacity=".45"/>
+        <ellipse cx="0" cy="-62" rx="23" ry="11" fill="#F0D79F" stroke="#A87C35" stroke-width="2.8"/>
+        <ellipse cx="0" cy="-62" rx="16.5" ry="7.4" fill="#FBF2DA" stroke="#C9A75F" stroke-width="1.8"/>
+        <ellipse cx="-10" cy="-68" rx="11" ry="5.6" transform="rotate(-18 -10 -68)" fill="#5C9A3A" stroke="#3B6826" stroke-width="1.8"/>
+        <ellipse cx="9" cy="-64" rx="9.4" ry="4.8" transform="rotate(16 9 -64)" fill="#74B04C" stroke="#3B6826" stroke-width="1.7"/>
+        <ellipse cx="15" cy="-73" rx="7.4" ry="4" transform="rotate(-6 15 -73)" fill="#5C9A3A" stroke="#3B6826" stroke-width="1.6"/>
+        <ellipse cx="-18" cy="-59" rx="7" ry="3.6" transform="rotate(14 -18 -59)" fill="#74B04C" stroke="#3B6826" stroke-width="1.5"/>
+        <rect x="-6" y="-76" width="16" height="6.6" rx="3.3" fill="#D29C4E" stroke="#9A6A26" stroke-width="1.6"/>
+        <rect x="-20" y="-69" width="12" height="6" rx="3" fill="#D29C4E" stroke="#9A6A26" stroke-width="1.5"/>
+        <circle cx="-1" cy="-59" r="2.5" fill="#FFFCEF"/>
+        <circle cx="-14" cy="-74" r="2.2" fill="#FFFCEF"/>
+        <circle cx="7" cy="-71" r="2" fill="#FFFCEF"/>
+      </g>
+    </symbol>
+
+    <symbol id="d-mac" viewBox="0 0 200 200">
+      <ellipse cx="100" cy="182" rx="74" ry="8" fill="var(--shadow)"/>
+      <circle cx="100" cy="100" r="88" fill="var(--plate)" stroke="var(--plate-line)" stroke-width="2"/>
+      <circle cx="100" cy="100" r="80" fill="none" stroke="var(--plate-line)" stroke-width="1.6"/>
+      <circle cx="100" cy="100" r="72" fill="#E29A24" stroke="#A96D0B" stroke-width="2.2"/>
+      <clipPath id="clip-mac"><circle cx="100" cy="100" r="71"/></clipPath>
+      <g clip-path="url(#clip-mac)">
+        <use href="#elbow" transform="translate(70,80) rotate(-20)"/>
+        <use href="#elbow" transform="translate(104,70) rotate(16)"/>
+        <use href="#elbow" transform="translate(136,86) rotate(-30)"/>
+        <use href="#elbow" transform="translate(52,80) rotate(34)"/>
+        <use href="#elbow" transform="translate(60,112) rotate(44)"/>
+        <use href="#elbow" transform="translate(98,104) rotate(-6)"/>
+        <use href="#elbow" transform="translate(134,114) rotate(28)"/>
+        <use href="#elbow" transform="translate(72,142) rotate(22)"/>
+        <use href="#elbow" transform="translate(108,146) rotate(-18)"/>
+        <use href="#elbow" transform="translate(142,142) rotate(40)"/>
+      </g>
+      <use href="#shredB" transform="translate(124,94) rotate(-34)"/>
+      <use href="#shredA" transform="translate(80,110) rotate(-24)"/>
+      <use href="#shredB" transform="translate(112,86) rotate(14)"/>
+      <use href="#shredA" transform="translate(86,94) rotate(-16)"/>
+      <use href="#shredB" transform="translate(120,114) rotate(30)"/>
+      <use href="#shredA" transform="translate(100,106) rotate(4) scale(1.08)"/>
+      <use href="#shredB" transform="translate(84,128) rotate(20) scale(.92)"/>
+      <use href="#shredA" transform="translate(110,128) rotate(-12) scale(.95)"/>
+      <path d="M62 134 C74 124 80 142 92 134 C104 126 110 144 122 136 C134 128 146 142 156 132" fill="none" stroke="#50230F" stroke-width="2.9" stroke-linecap="round"/>
+      <path d="M72 84 C82 76 88 92 100 85 C110 79 116 92 126 86" fill="none" stroke="#50230F" stroke-width="2.6" stroke-linecap="round" opacity=".9"/>
+      <g fill="none" stroke="#7BB052" stroke-width="3">
+        <circle cx="70" cy="92" r="4.4"/>
+        <circle cx="136" cy="128" r="4.2"/>
+        <circle cx="102" cy="150" r="4.4"/>
+        <circle cx="148" cy="106" r="4"/>
+      </g>
+      <g fill="#3A2A1E">
+        <circle cx="90" cy="138" r="1.8"/>
+        <circle cx="128" cy="110" r="1.7"/>
+        <circle cx="110" cy="74" r="1.7"/>
+        <circle cx="64" cy="118" r="1.8"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="sheet">
+  <header>
+    <p class="label reveal" style="--i:0">For Olivia</p>
+    <h1 class="reveal" style="--i:1">What do you want for dinner?</h1>
+    <p class="intro reveal" style="--i:2">Four options. Tap the one you want, then send it to me. I'll take care of the rest.</p>
+    <p class="sig reveal" style="--i:3">Jacob</p>
+  </header>
+
+  <form id="menuForm">
+    <fieldset class="menu reveal" id="menu" style="--i:4">
+      <legend class="sr">Choose your dinner. Tap an option to pick it.</legend>
+
+      <label class="dish" data-dish="birria">
+        <input class="sr" type="radio" name="dish" value="birria">
+        <span class="plate-wrap"><svg class="plate" viewBox="0 0 200 200" role="img" aria-label="Illustration of three birria tacos with a cup of consome and a lime wedge"><use href="#d-birria"/></svg></span>
+        <span class="dish-copy">
+          <span class="dish-name">Birria Tacos</span>
+          <span class="desc" style="display:block">Slow cooked beef, crispy tortillas, consomé on the side for dipping.</span>
+          <span class="specs"><span class="label heat">Heat <i></i><i></i><i class="off"></i></span></span>
+          <span class="stamp">Picked</span>
+        </span>
+        <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5 L10 17.5 L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </label>
+
+      <label class="dish" data-dish="noodles">
+        <input class="sr" type="radio" name="dish" value="noodles">
+        <span class="plate-wrap"><svg class="plate" viewBox="0 0 200 200" role="img" aria-label="Illustration of a bowl of udon noodles with chicken, peppers and chopsticks"><use href="#d-noodles"/></svg></span>
+        <span class="dish-copy">
+          <span class="dish-name">Japanese Pan Noodles</span>
+          <span class="desc" style="display:block">Udon in a sweet soy glaze with chicken, shiitake, peppers and scallion.</span>
+          <span class="specs"><span class="label heat">Heat <i></i><i class="off"></i><i class="off"></i></span></span>
+          <span class="stamp">Picked</span>
+        </span>
+        <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5 L10 17.5 L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </label>
+
+      <label class="dish" data-dish="wrap">
+        <input class="sr" type="radio" name="dish" value="wrap">
+        <span class="plate-wrap"><svg class="plate" viewBox="0 0 200 200" role="img" aria-label="Illustration of a grilled chicken caesar wrap cut in half"><use href="#d-wrap"/></svg></span>
+        <span class="dish-copy">
+          <span class="dish-name">Grilled Chicken Caesar Wrap</span>
+          <span class="desc" style="display:block">Grilled chicken, romaine, parmesan and caesar dressing in a flour tortilla.</span>
+          <span class="specs"><span class="label heat">Heat <i class="off"></i><i class="off"></i><i class="off"></i></span></span>
+          <span class="stamp">Picked</span>
+        </span>
+        <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5 L10 17.5 L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </label>
+
+      <label class="dish" data-dish="mac">
+        <input class="sr" type="radio" name="dish" value="mac">
+        <span class="plate-wrap"><svg class="plate" viewBox="0 0 200 200" role="img" aria-label="Illustration of a bowl of macaroni and cheese topped with barbecue chicken"><use href="#d-mac"/></svg></span>
+        <span class="dish-copy">
+          <span class="dish-name">BBQ Chicken Mac and Cheese</span>
+          <span class="desc" style="display:block">Sharp cheddar mac with pulled chicken and barbecue sauce on top.</span>
+          <span class="specs"><span class="label heat">Heat <i></i><i></i><i class="off"></i></span></span>
+          <span class="stamp">Picked</span>
+        </span>
+        <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5 L10 17.5 L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </label>
+    </fieldset>
+
+    <fieldset class="drinks reveal" style="--i:5">
+      <legend class="sr">And to drink</legend>
+      <h2>And to drink</h2>
+      <div class="pills" id="pills">
+        <label class="pill"><input class="sr" type="radio" name="drink" value="wine">A glass of wine</label>
+        <label class="pill"><input class="sr" type="radio" name="drink" value="water">Water</label>
+        <label class="pill"><input class="sr" type="radio" name="drink" value="other">Something else</label>
+      </div>
+      <div class="other-wrap" id="otherWrap" hidden>
+        <label class="sr" for="otherInput">What would you like to drink?</label>
+        <input id="otherInput" type="text" maxlength="40" autocomplete="off" enterkeyhint="done" placeholder="Name it and I'll grab it">
+      </div>
+    </fieldset>
+  </form>
+
+  <section class="send">
+    <h2>Send it to me</h2>
+    <p class="sub">Tap Text me and the message is already written. You just hit send.</p>
+
+    <div class="msg" id="msgBox" hidden>
+      <p class="label">Your message</p>
+      <p class="copytext" id="copyText"></p>
+      <button type="button" class="btn-ghost" id="copyBtn">Copy it</button>
+    </div>
+
+    <div class="contact">
+      <a class="c" id="smsTile" href="sms:+18123433262">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21.3 16.6v2.8a2 2 0 0 1-2.2 2 19.6 19.6 0 0 1-8.6-3 19.3 19.3 0 0 1-6-6 19.6 19.6 0 0 1-3-8.7 2 2 0 0 1 2-2.2h2.8a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L7.4 9.3a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z"/>
+        </svg>
+        <span class="txt"><span class="k">Text me</span><span class="v">(812) 343-3262</span></span>
+      </a>
+
+      <a class="c" href="mailto:jacogilliam@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2.6" y="4.6" width="18.8" height="14.8" rx="2.2"/>
+          <path d="m3.4 6.4 8.6 6.2 8.6-6.2"/>
+        </svg>
+        <span class="txt"><span class="k">Email me</span><span class="v">jacogilliam@gmail.com</span></span>
+      </a>
+
+      <a class="c" href="https://instagram.com/jacob.gilliam" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.2"/>
+          <circle cx="12" cy="12" r="4.1"/>
+          <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/>
+        </svg>
+        <span class="txt"><span class="k">Instagram</span><span class="v">@jacob.gilliam</span></span>
+      </a>
+
+      <a class="c" href="https://snapchat.com/add/jg_trece" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2.3c3 0 5 2.2 5 5.1 0 .7 0 1.4-.1 2.1.3.2.6.3 1 .3.5 0 1-.2 1.3-.3.2 0 .4 0 .5.2.2.2.3.5.2.8-.2.6-1.1 1-1.9 1.3-.3.1-.5.2-.5.4s.1.4.3.8c.7 1.6 2 2.7 3.3 3 .3.1.4.3.4.5 0 .5-1 .9-2.4 1.1-.2 0-.3.2-.3.4l-.2.7c0 .3-.3.4-.6.4-.5 0-1-.2-1.7-.2-.4 0-.8 0-1.2.1-.9.2-1.7 1.3-3.1 1.3s-2.2-1.1-3.1-1.3c-.4-.1-.8-.1-1.2-.1-.7 0-1.2.2-1.7.2-.3 0-.5-.1-.6-.4l-.2-.7c0-.2-.1-.3-.3-.4-1.4-.2-2.4-.6-2.4-1.1 0-.2.1-.4.4-.5 1.3-.3 2.6-1.4 3.3-3 .2-.4.3-.6.3-.8s-.2-.3-.5-.4c-.8-.3-1.7-.7-1.9-1.3-.1-.3 0-.6.2-.8.1-.2.3-.2.5-.2.3.1.8.3 1.3.3.4 0 .7-.1 1-.3-.1-.7-.1-1.4-.1-2.1 0-2.9 2-5.1 5-5.1z"/>
+        </svg>
+        <span class="txt"><span class="k">Snapchat</span><span class="v">jg_trece</span></span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p class="label">Table for Olivia</p>
+  </footer>
+</div>
+
+<div class="tray">
+  <div class="tray-in">
+    <div class="tray-copy">
+      <div class="label">Your order</div>
+      <div class="tray-pick empty" id="trayPick">Tap a dish above</div>
+    </div>
+    <a class="btn-send is-off" id="sendBtn" aria-disabled="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21.3 16.6v2.8a2 2 0 0 1-2.2 2 19.6 19.6 0 0 1-8.6-3 19.3 19.3 0 0 1-6-6 19.6 19.6 0 0 1-3-8.7 2 2 0 0 1 2-2.2h2.8a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L7.4 9.3a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z"/>
+      </svg>
+      Text it to me
+    </a>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DISHES={
+    birria:{name:"Birria tacos"},
+    noodles:{name:"Japanese pan noodles"},
+    wrap:{name:"Grilled chicken caesar wrap"},
+    mac:{name:"BBQ chicken mac and cheese"}
+  };
+  var DRINKS={
+    wine:{short:"a glass of wine",say:"with a glass of wine"},
+    water:{short:"water",say:"with water"},
+    other:{}
+  };
+  var PHONE="sms:+18123433262";
+  var KEY="olivia-menu-v1";
+  var state={dish:null,drink:null,other:"",locked:false};
+
+  var menu=document.getElementById("menu");
+  var pills=document.getElementById("pills");
+  var otherWrap=document.getElementById("otherWrap");
+  var otherInput=document.getElementById("otherInput");
+  var trayPick=document.getElementById("trayPick");
+  var sendBtn=document.getElementById("sendBtn");
+  var msgBox=document.getElementById("msgBox");
+  var copyText=document.getElementById("copyText");
+  var copyBtn=document.getElementById("copyBtn");
+  var smsTile=document.getElementById("smsTile");
+
+  try{
+    var saved=JSON.parse(localStorage.getItem(KEY)||"null");
+    if(saved&&DISHES[saved.dish]){
+      state.dish=saved.dish;
+      state.drink=DRINKS[saved.drink]?saved.drink:null;
+      state.other=typeof saved.other==="string"?saved.other.slice(0,40):"";
+    }
+  }catch(e){}
+
+  function save(){
+    try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
+  }
+
+  function drinkShort(){
+    if(!state.drink) return "";
+    if(state.drink==="other") return state.other.trim();
+    return DRINKS[state.drink].short;
+  }
+  function drinkSay(){
+    if(!state.drink) return "";
+    if(state.drink==="other"){
+      var t=state.other.trim();
+      return t?"with "+t:"";
+    }
+    return DRINKS[state.drink].say;
+  }
+  function sentence(){
+    if(!state.dish) return "";
+    var s="I'll take the "+DISHES[state.dish].name.toLowerCase();
+    var d=drinkSay();
+    if(d) s+=", "+d;
+    return s+".";
+  }
+  function smsHref(){
+    if(!state.dish) return PHONE;
+    var sep=/iP(hone|ad|od)|Macintosh/.test(navigator.userAgent)?"&":"?";
+    return PHONE+sep+"body="+encodeURIComponent(sentence());
+  }
+
+  function render(){
+    var labels=menu.querySelectorAll(".dish");
+    for(var i=0;i<labels.length;i++){
+      var on=labels[i].getAttribute("data-dish")===state.dish;
+      labels[i].classList.toggle("is-picked",on);
+      labels[i].querySelector("input").checked=on;
+    }
+    menu.classList.toggle("has-pick",!!state.dish);
+
+    var ps=pills.querySelectorAll(".pill");
+    for(var j=0;j<ps.length;j++){
+      var input=ps[j].querySelector("input");
+      var sel=input.value===state.drink;
+      ps[j].classList.toggle("on",sel);
+      input.checked=sel;
+    }
+    otherWrap.hidden=state.drink!=="other";
+
+    if(state.dish){
+      trayPick.classList.remove("empty");
+      trayPick.textContent=DISHES[state.dish].name+(drinkShort()?" + "+drinkShort():"");
+      sendBtn.classList.remove("is-off");
+      sendBtn.href=smsHref();
+      sendBtn.removeAttribute("aria-disabled");
+      msgBox.hidden=false;
+      copyText.textContent=sentence();
+    }else{
+      trayPick.classList.add("empty");
+      trayPick.textContent="Tap a dish above";
+      sendBtn.classList.add("is-off");
+      sendBtn.removeAttribute("href");
+      sendBtn.setAttribute("aria-disabled","true");
+      msgBox.hidden=true;
+    }
+    smsTile.href=smsHref();
+  }
+
+  menu.addEventListener("change",function(e){
+    if(e.target.name!=="dish")return;
+    state.dish=e.target.value;
+    save();
+    render();
+  });
+
+  pills.addEventListener("change",function(e){
+    if(e.target.name!=="drink")return;
+    state.drink=e.target.value;
+    save();
+    render();
+    if(state.drink==="other") otherInput.focus();
+  });
+
+  otherInput.value=state.other;
+  otherInput.addEventListener("input",function(){
+    state.other=otherInput.value.slice(0,40);
+    save();
+    render();
+  });
+
+  copyBtn.addEventListener("click",function(){
+    var text=sentence();
+    if(!text)return;
+    function ok(){
+      copyBtn.textContent="Copied";
+      setTimeout(function(){copyBtn.textContent="Copy it";},2200);
+    }
+    function manual(){
+      copyBtn.textContent="Select and copy";
+      try{
+        var r=document.createRange();
+        r.selectNodeContents(copyText);
+        var sel=window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(r);
+      }catch(e){}
+    }
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(ok,manual);
+    }else{
+      manual();
+    }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
