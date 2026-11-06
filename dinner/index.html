@@ -449,7 +449,7 @@ footer{padding:30px 0 20px;margin-top:40px;border-top:1px dashed var(--rule)}
 
 <div class="sheet">
   <header>
-    <p class="label reveal" style="--i:0">For Olivia</p>
+    <p class="label reveal" id="who" style="--i:0">Dinner</p>
     <h1 class="reveal" style="--i:1">What do you want for dinner?</h1>
     <p class="intro reveal" style="--i:2">Four options. Tap the one you want, then send it to me. I'll take care of the rest.</p>
     <p class="sig reveal" style="--i:3">Jacob</p>
@@ -568,7 +568,7 @@ footer{padding:30px 0 20px;margin-top:40px;border-top:1px dashed var(--rule)}
   </section>
 
   <footer>
-    <p class="label">Table for Olivia</p>
+    <p class="label">Dinner</p>
   </footer>
 </div>
 
@@ -601,7 +601,7 @@ footer{padding:30px 0 20px;margin-top:40px;border-top:1px dashed var(--rule)}
     other:{}
   };
   var PHONE="sms:+18123433262";
-  var KEY="olivia-menu-v1";
+  var KEY="dinner-menu-v1";
   var state={dish:null,drink:null,other:"",locked:false};
 
   var menu=document.getElementById("menu");
@@ -614,6 +614,12 @@ footer{padding:30px 0 20px;margin-top:40px;border-top:1px dashed var(--rule)}
   var copyText=document.getElementById("copyText");
   var copyBtn=document.getElementById("copyBtn");
   var smsTile=document.getElementById("smsTile");
+
+  try{
+    var raw=new URLSearchParams(window.location.search).get("name")||"";
+    var who=raw.replace(/[^A-Za-z '\-]/g,"").replace(/\s+/g," ").trim().slice(0,24);
+    if(who) document.getElementById("who").textContent="For "+who.charAt(0).toUpperCase()+who.slice(1);
+  }catch(e){}
 
   try{
     var saved=JSON.parse(localStorage.getItem(KEY)||"null");
